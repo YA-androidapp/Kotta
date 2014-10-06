@@ -1,0 +1,106 @@
+*** kirinlyric.js.old	Sat Oct  5 00:50:11 2013
+--- kirinlyric.js	Wed Oct 30 03:03:26 2013
+***************
+*** 13,22 ****
+  	// generate HTML
+  	var html = [];
+  	$.each(lrc, function(idx, row) {
+! 		if (/^raw/.test(row.time)) {
+! 			html.push(row.text);
+  		} else {
+! 			html.push('<span class="kirinlyric" data-time="' + row.time + '">' + row.text + '<br></span>');
+  		}
+  	});
+  	$target.append(html.join('')).append('<span class="kirinlyric blank-row"></span><span class="kirinlyric blank-row"></span>');
+--- 13,23 ----
+  	// generate HTML
+  	var html = [];
+  	$.each(lrc, function(idx, row) {
+! 		if (((row.text).indexOf('@')) == 0) {
+! 		} else if (/^raw/.test(row.time)) {
+! 			html.push((row.text).replace(/\[(\d{2}):(\d{2})[:.](\d{2})\]/g,''));
+  		} else {
+! 			html.push('<span class="kirinlyric" data-time="' + row.time + '">' + (row.text).replace(/\[(\d{2}):(\d{2})[:.](\d{2})\]/g,'') + '<br></span>');
+  		}
+  	});
+  	$target.append(html.join('')).append('<span class="kirinlyric blank-row"></span><span class="kirinlyric blank-row"></span>');
+***************
+*** 25,30 ****
+--- 26,33 ----
+  	function loop() {
+  		var currentTime = $audio.prop('currentTime');
+  		var $spans = $(cls);
++ 		var prePosition = 0;
++ 
+  		$spans.removeClass(prev).removeClass(current).removeClass(next).removeClass(farPrev).removeClass(farNext).each(function(idx, span) {
+  			var $farPrev = $(($spans[idx - 2]));
+  			var $prev    = $(($spans[idx - 1]));
+***************
+*** 34,45 ****
+  			var time     = $span.data('time');
+  			var nextTime = $next.data('time');
+  
+! 			if (currentTime > time && typeof nextTime == 'undefined' || currentTime < nextTime) {
+  				$farPrev.addClass(farPrev);
+  				$prev.addClass(prev);
+  				$span.addClass(current);
+  				$next.addClass(next);
+  				$farNext.addClass(farNext);
+  				return false;
+  			}
+  		});
+--- 37,59 ----
+  			var time     = $span.data('time');
+  			var nextTime = $next.data('time');
+  
+! 			if (currentTime > time && typeof nextTime == 'undefined' || currentTime < nextTime - 0.5) {
+  				$farPrev.addClass(farPrev);
+  				$prev.addClass(prev);
+  				$span.addClass(current);
+  				$next.addClass(next);
+  				$farNext.addClass(farNext);
++ 				if(jQuery('#checkbox_auto #enable_lyric').prop('checked')){
++ 					if (!$audio.paused) {
++ 						var position = ( ((jQuery($farPrev).position().top)>0) ? (jQuery($farPrev).position().top) : (jQuery($span).position().top) )
++ 								- (jQuery(cls+"[data-time]").position().top);
++ 						position = (position > 0) ? position : 0;
++ 						if (position > prePosition) {
++ 							prePosition = position;
++ 							jQuery('#lyrics').animate({scrollTop:position}, 10, 'swing');
++ 						}
++ 					}
++ 				}
+  				return false;
+  			}
+  		});
+***************
+*** 50,63 ****
+  	// convert lrc string to object
+  	function parseLRC(lrcStr) {
+  		var lrc = [];
+! 		var arr = lrcStr.split(/\r\n|\r|\n/);
+  		$.each(arr, function(idx, row) {
+! 			var time = row.match(/^\[(\d{2}):(\d{2})\.(\d{2})\](.*)$/);
+! 			if (time && time.length == 5) {
+! 				var sec = (Number(time[1]) * 60 + Number(time[2])) + Number(time[3]) / 100;
+  				lrc.push({
+  					time : sec,
+! 					text : time[4]
+  				});
+  			} else {
+  				lrc.push({
+--- 64,77 ----
+  	// convert lrc string to object
+  	function parseLRC(lrcStr) {
+  		var lrc = [];
+! 		var arr = lrcStr.split(/\r\n|\r|\n|　/);
+  		$.each(arr, function(idx, row) {
+! 			var time = row.match(/^([^\[]*)\[(\d{2}):(\d{2})[:.](\d{2})\](.*)$/);
+! 			if (time && time.length == 6) {
+! 				var sec = (Number(time[2]) * 60 + Number(time[3])) + Number(time[4]) / 100;
+  				lrc.push({
+  					time : sec,
+! 					text : time[1]+time[5]
+  				});
+  			} else {
+  				lrc.push({
