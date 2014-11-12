@@ -11,14 +11,14 @@ if ( $_REQUEST['pw'] != '' )       { $pw = $_REQUEST['pw'];
 } else                             { $pw = ''; }
 
 $pname = str_replace('.php', '', basename($_SERVER['SCRIPT_NAME']));
-require_once('conf/'.$pname.'_conf.php');
+require_once('conf/index.php');
 if ( $enable_autocomplete_favnum == 0 ) { die(''); }
-$pwdfile = 'pwd/'.$pname.'/'.$id.'.cgi';
+$pwdfile = 'pwd/'.$id.'.cgi';
 if ( file_exists($pwdfile) ) {
  $tpassword = file_get_contents($pwdfile);
  $tpassword = str_replace(array("\r\n","\n","\r"," "), '', $tpassword);
  if ( ($pw !== '') && ($pw === $tpassword) ) {
-  $base_dirfav = 'fav/'.$_REQUEST['pname']; // $favfile = 'fav/'.$pname.'/'.$id.'_'.$arguments['favnum'].'.cgi';
+  $base_dirfav = 'fav/'; // $favfile = 'fav/'.$pname.'/'.$id.'_'.$arguments['favnum'].'.cgi';
   $favnumarr = glob($base_dirfav.'/'.$id.'_*.cgi');
   $keywords = array();
   foreach ($favnumarr as $val) {

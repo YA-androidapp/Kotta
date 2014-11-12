@@ -2,9 +2,8 @@
   // ArtistName
 <?php if ( $enable_autocomplete_dir == 1 ) { ?>
   $("#dir").autocomplete({
-<?php  if ( stripos($_SERVER['SCRIPT_NAME'], 'music') !== FALSE ) { ?>
-   source: "lib_autocomplete_dir.php?bdir=media/musics&id=" + $("#id").val() + "&pw=" + $("#pw").val(),
-<?php   } ?>
+   // source: "lib_autocomplete_dir.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
+   source: "lib_autocomplete_dir.php?id=x0t1504&pw=todoroki",
    delay: 200,
    minLength: 3,
    select: function (e, ui) {

@@ -30,8 +30,7 @@ YA
        <a href="#" onClick="NoRefererRedirect('http://www.opensource.org/licenses/mit-license.php')">MIT License</a>:
        <a href="#" onClick="NoRefererRedirect('http://kolber.github.io/audiojs/')">kolber/audiojs</a> |
        <a href="#" onClick="NoRefererRedirect('https://github.com/kirinsan-org/kirinlyric')">kirinlyric</a> |
-       <a href="#" onClick="NoRefererRedirect('http://www.whoop.ee/posts/2013-04-05-the-resurrection-of-jquery-notify-bar/')">jQuery-Notify-bar</a> |
-       <a href="#" onClick="NoRefererRedirect('http://blueimp.github.io/jQuery-File-Upload/')">jQuery-File-Upload</a>
+       <a href="#" onClick="NoRefererRedirect('http://www.whoop.ee/posts/2013-04-05-the-resurrection-of-jquery-notify-bar/')">jQuery-Notify-bar</a>
       </li>
       <li>
        <a href="#" onClick="NoRefererRedirect('http://www.mozilla.org/MPL/2.0/')">Mozilla MPL</a>:

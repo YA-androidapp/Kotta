@@ -1,15 +1,17 @@
 <?php
 // Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 
-$arguments = array();
+ $arguments = array();
 
- if       ( $_REQUEST['dir'] != '' )             { $arguments['dir'] = $_REQUEST['dir'];
- } else                                          { $arguments['dir'] = ''; }
-
- $real_path = realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dir']);
-
- if (!file_exists($real_path))                                                         { die('引数が不正です getarg-2');
- } elseif (stripos($real_path.((mb_substr($real_path,-1)=='/')?'':'/'),$base_dir)!==0) { die('引数が不正です getarg-3');
+ if ($_REQUEST['dir']=='') {
+  $arguments['dir'] = '';
+  $real_path = '';
+ } else {
+  $arguments['dir'] = $_REQUEST['dir'];
+  $real_path = realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dir']);
+  if (!file_exists($real_path))                                                         { die('引数が不正です getarg-1');
+  } elseif (stripos($real_path.((mb_substr($real_path,-1)=='/')?'':'/'),$base_dir)!==0) { die('引数が不正です getarg-2');
+  }
  }
 
  if       ( $_REQUEST['favnum'] !== NULL )       { $arguments['favnum'] = $_REQUEST['favnum'];
@@ -21,11 +23,10 @@ $arguments = array();
  } else                                          { $arguments['mode'] = ''; }
 
  if ( $arguments['favnum'] != '' ) {
-  if ( !file_exists('fav/'.$pname.'/'.$id.'_'.$arguments['favnum'].'.cgi') ) {
+  if ( !file_exists('fav/'.$id.'_'.$arguments['favnum'].'.cgi') ) {
    if ( ($arguments['mode'] != 'favfadd')
-     && ($arguments['favnum'] != '_recently_played')
-     && ($arguments['favnum'] != '_recently_transferred') ) {
-    die('引数が不正です getarg-1 '.$arguments['mode']);
+     && ($arguments['favnum'] != '_recently_played') ) {
+    die('引数が不正です getarg-3 '.$arguments['mode']);
    }
   }
  }
@@ -81,7 +82,7 @@ $arguments = array();
  $arguments['m3uextended']                       = ($_REQUEST['m3uextended'] != '') ? $_REQUEST['m3uextended'] : '';
  $arguments['m3uuri']                            = ($_REQUEST['m3uuri'] != '')      ? $_REQUEST['m3uuri']      : '';
 
- $arguments['sns_format']                        = $confs['sns_format']; // ($_REQUEST['sns_format'] != '')  ? $_REQUEST['sns_format'] : $confs['sns_format'];
+ $arguments['sns_format']                        = ($_REQUEST['sns_format'] != '')  ? $_REQUEST['sns_format'] : $confs['sns_format'];
 
  $arguments['numlast']                           = ( ctype_digit($_REQUEST['numsince']) && ctype_digit($_REQUEST['numlast']) ) ? $_REQUEST['numlast'] : NULL;
  $arguments['numsince']                          = ( ctype_digit($_REQUEST['numsince']) && ctype_digit($_REQUEST['numlast']) ) ? $_REQUEST['numsince'] : NULL;

@@ -1,31 +1,32 @@
 <?php
 // Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 $pname = str_replace('.php', '', basename($_SERVER['SCRIPT_NAME']));
-require_once(dirname(__FILE__).'/conf/'.$pname.'_conf.php');
-$base_dirfav = 'fav/'.$pname;
+require_once(dirname(__FILE__).'/conf/index.php');
 
 if ( $_REQUEST['logout'] == '1' ) {
  require_once(dirname(__FILE__).'/req/lib_logout.php');
  die(' kotta-0');
 }
 
-if ( $_REQUEST['id'] != '' )        { $id = $_REQUEST['id']; $_SESSION['id'] = $id;
-} elseif ( $_SESSION['id'] != '' )  { $id = $_SESSION['id'];
-} else                              { require_once(dirname(__FILE__).'/req/lib_menu.php');die(' kotta-1'); }
-if ( $_REQUEST['pw'] != '' )        { $pw = $_REQUEST['pw']; $_SESSION['pw'] = $pw;
-} elseif ( $_SESSION['pw'] != '' )  { $pw = $_SESSION['pw'];
-} else                              { require_once(dirname(__FILE__).'/req/lib_menu.php');die(' kotta-2'); }
+if ( $_REQUEST['id'] != '' )         { $id = $_REQUEST['id']; $_SESSION['id'] = $id;
+} elseif ( $_SESSION['id'] != '' )   { $id = $_SESSION['id'];
+} else                               { require_once(dirname(__FILE__).'/req/lib_menu.php');die(' kotta-1');  }
+if ( $_REQUEST['pw'] != '' )         { $pw = $_REQUEST['pw']; $_SESSION['pw'] = $pw;
+} elseif ( $_SESSION['pw'] != '' )   { $pw = $_SESSION['pw'];
+} else                               { require_once(dirname(__FILE__).'/req/lib_menu.php');die(' kotta-2'); }
+if ( $_REQUEST['pw2'] != '' )        { $pw2 = $_REQUEST['pw2']; $_SESSION['pw2'] = $pw2;
+} elseif ( $_SESSION['pw2'] != '' )  { $pw2 = $_SESSION['pw2'];                                              }
 
-$pwdfile = 'pwd/'.$pname.'/'.$id.'.cgi';
+$pwdfile = 'pwd/'.$id.'.cgi';
 
 if ( file_exists($pwdfile) ) {
  $tpassword = file_get_contents($pwdfile);
  $tpassword = str_replace(array("\r\n","\n","\r"," "), '', $tpassword);
 
  if ( $pw === $tpassword ) {
-  // $pw2 = sha1($pw);
- // } elseif ( $pw2 === sha1($tpassword) ) {
-  //
+  $pw2 = sha1($pw);
+ } elseif ( $pw2 === sha1($tpassword) ) {
+
  } else {
   require_once(dirname(__FILE__).'/req/lib_menu.php');die(' kotta-3');
  }
@@ -81,19 +82,12 @@ if ( $arguments['mode'] == 'favmenu' ) {
 $dirarr = array();
 $depth1 = 0;
 $depth2 = 0;
-if ( $arguments['m3uuri'] != '' ) {
- $line = file($arguments['m3uuri'], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
- $dirarr = array();
+if ( $arguments['favnum'] != '' ) {
+ $line = file('fav/'.$id.'_'.$arguments['favnum'].'.cgi', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
  foreach ($line as $val) {
   $dirarr[basename($val)] = $val;
  }
-} elseif ( $arguments['favnum'] != '' ) {
- $line = file('fav/'.$pname.'/'.$id.'_'.$arguments['favnum'].'.cgi', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
- $dirarr = array();
- foreach ($line as $val) {
-  $dirarr[basename($val)] = $val;
- }
-} else {
+} elseif( $arguments['dir'] != '' ) {
  $dirarr = getdirtree($base_dir.'/'.$arguments['dir']);
 }
 
@@ -109,6 +103,7 @@ if ( $arguments['mode'] == 'makem3u' ) {
 <?php
 require_once(dirname(__FILE__).'/req/common_js.php');
 require_once(dirname(__FILE__).'/req/m_js.php');
+require_once(dirname(__FILE__).'/req/pull_js.php');
 require_once(dirname(__FILE__).'/req/lib_style.php');
 ?>
  </head>
@@ -118,8 +113,10 @@ require_once(dirname(__FILE__).'/req/lib_header.php');
 ob_end_flush();
 ob_start();
 flush();
-$depth1 = 0;
-showdirtree($dirarr);
+if(!empty($dirarr)) {
+ $depth1 = 0;
+ showdirtree($dirarr);
+}
 require_once(dirname(__FILE__).'/req/lib_footer.php'); ?>
  </body>
 </html>

@@ -1,4 +1,4 @@
-﻿Kotta
+Kotta
 ====
 
 ## Overview
@@ -9,7 +9,7 @@ PHPで書かれたWebベースのオーディオプレーヤシステムです
 ## Install
 ---
 
-### pwd/*/<USERNAME>.php
+### pwd/<USERNAME>.php
 
 ファイル名がユーザ名，ファイルの中身がパスワードであるようなファイルを作成し，それぞれのディレクトリに設置する
 
@@ -28,7 +28,6 @@ Twitter開発者サイトからConsumer Key・Consumer Secretを取得し，書�
 
 * [audiojs](http://kolber.github.io/audiojs/)
 * [jQuery-Notify-bar](http://www.whoop.ee/posts/2013-04-05-the-resurrection-of-jquery-notify-bar/)
-* [jQuery-File-Upload](http://blueimp.github.io/jQuery-File-Upload/)
 * [kirinlyric](https://github.com/kirinsan-org/kirinlyric)
 
 ### [Mozilla MPL](http://www.mozilla.org/MPL/2.0/)

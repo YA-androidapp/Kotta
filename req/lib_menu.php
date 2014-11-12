@@ -68,7 +68,7 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
      <th border="1" colspan="2" onclick="jQuery('.source').toggle()">ソース</td>
     </tr>
     <tr class="source">
-     <td>ディレクトリ</td>
+     <td>ディレクトリ(autocomplete)</td>
      <td>
       <input type="text" id="dir" name="dir" onclick="jQuery('#dir').css('background-color','#fff');jQuery('#favnum,#m3uuri').css('background-color','#ccc')" value="<?php echo @str_replace($base_dir, '', @str_replace($base_dir.'/', '', $_REQUEST['dir'])); ?>" style="width:200px;" />
      </td>

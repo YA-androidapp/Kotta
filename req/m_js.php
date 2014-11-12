@@ -31,6 +31,10 @@
     jQuery('#lyrics').hide();
    }
   });
+
+  $("input").blur( function (e){
+<?php require('req/lib_menu_autocomplete.php'); ?>
+  });
   // ヘッダメニュー用 終わり
 
   // フィルタリング用
@@ -153,6 +157,17 @@
 
   // Load in a track on click
   jQuery('ol#sort_list li a[data-src]').click(function(e) {
+   e.preventDefault();
+   jQuery(this).parent().addClass('playing').siblings().removeClass('playing');
+   audio.load(jQuery(this).attr('data-src'));
+   kirinload();
+   audio.play();
+   if(jQuery('#checkbox_auto #enable_lyric').prop('checked') == false){
+    var position = jQuery('ol#sort_list li.playing').offset().top;
+    jQuery('html,body').animate({scrollTop:position}, 400, 'swing');
+   }
+  });
+  $(document).on('click','ol#sort_list li.appended a[data-src]',function(e){
    e.preventDefault();
    jQuery(this).parent().addClass('playing').siblings().removeClass('playing');
    audio.load(jQuery(this).attr('data-src'));

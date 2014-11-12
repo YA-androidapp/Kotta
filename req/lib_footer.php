@@ -29,37 +29,6 @@
    </a>
   </div>
 
-<?php if ( ($enable_upload==1) && ($arguments['favnum']=='') ) { ?>
-  <div id="uploadblock">
-   <form action="<?php echo 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']; ?>?mode=upload&dir=<?php echo htmlspecialchars(str_replace($base_dir.'/', '', $base_dir.'/'.$arguments['dir']), ENT_QUOTES); ?>&id=<?php echo $_SESSION['id']; ?>&pw=<?php echo $_SESSION['pw']; ?>">
-    <input id="fileupload" type="file" name="files[]" data-url="<?php echo 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']; ?>?mode=upload&dir=<?php echo htmlspecialchars(str_replace($base_dir.'/', '', $base_dir.'/'.$arguments['dir']), ENT_QUOTES); ?>&id=<?php echo $_SESSION['id']; ?>&pw=<?php echo $_SESSION['pw']; ?>" multiple>
-   </form>
-   <div id="progress">
-    <div class="bar" style="width: 0%; height: 18px; background: green;"></div>
-   </div>
-   <script src="js/jQuery-File-Upload/vendor/jquery.ui.widget.js"></script>
-   <script src="js/jQuery-File-Upload/jquery.iframe-transport.js"></script>
-   <script src="js/jQuery-File-Upload/jquery.fileupload.js"></script>
-   <script>
-    $(function () {
-     $('#fileupload').fileupload({
-      dataType: 'json',
-      done: function (e, data) {
-       $.each(data.result, function (index, file) {
-        $('<p/>').text(file.name).appendTo(document.body);
-       });
-      },
-      progressall: function (e, data) {
-       var progress = parseInt(data.loaded / data.total * 100, 10);
-       $('#progress .bar').css('width', progress + '%');
-      },
-      url: "<?php echo 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME']; ?>?mode=upload&dir=<?php echo htmlspecialchars(str_replace($base_dir.'/', '', $base_dir.'/'.$arguments['dir']), ENT_QUOTES); ?>&id=<?php echo $_SESSION['id']; ?>&pw=<?php echo $_SESSION['pw']; ?>"
-     });
-    });
-   </script>
-  </div>
-<?php } ?>
-
 <div id="footer_space">
 </div>
 
