@@ -96,7 +96,7 @@
    </form>
   </div>
   <div id="control4">
-   <?php require_once('req/copyrights.php'); ?>
+   <?php require_once(realpath(__DIR__).'/copyrights.php'); ?>
   </div>
  </div>
 <?php } ?>

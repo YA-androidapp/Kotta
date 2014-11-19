@@ -2,8 +2,7 @@
   // ArtistName
 <?php if ( $enable_autocomplete_dir == 1 ) { ?>
   $("#dir").autocomplete({
-   // source: "lib_autocomplete_dir.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
-   source: "lib_autocomplete_dir.php?id=x0t1504&pw=todoroki",
+   source: "lib_autocomplete_dir.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
    delay: 200,
    minLength: 3,
    select: function (e, ui) {
@@ -15,7 +14,7 @@
   // Favnum
 <?php if ( $enable_autocomplete_favnum == 1 ) { ?>
   $("#favnum").autocomplete({
-   source: "lib_autocomplete_favnum.php?id=" + $("#id").val() + "&pw=" + $("#pw").val() + "&pname=<?php echo $pname; ?>",
+   source: "lib_autocomplete_favnum.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
    delay: 200,
    minLength: 1,
    select: function (e, ui) {

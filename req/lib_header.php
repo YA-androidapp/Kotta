@@ -4,7 +4,10 @@
   <div id="wrapper_headerlist">
 <?php } ?>
    ||
-   [ User:<?php echo $id; ?> ]
+   [
+   User:<input type="text" id="id" name="id" title="User" value="<?php echo $id; ?>" style="width:100px;">
+   Password:<input type="password" id="pw" name="pw" title="Password" value="<?php echo $pw; ?>" style="width:100px;">
+   ]
    <br>
    ||
    <a href="<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?menu=1">Menu</a> ||
@@ -45,7 +48,7 @@
      <td>
       <select id="favnum" name="favnum" style="width:100px;">
        <option value="">-</option>
-       <?php foreach ($favnumarr2 as $val3) { echo '<option value="'.$val3.'" id="favmenu_'.$val3.'">'.$val3.'</option>'; } ?>
+       <?php if (count($favnumarr2)>0) { foreach ($favnumarr2 as $val3) { echo '<option value="'.$val3.'" id="favmenu_'.$val3.'">'.$val3.'</option>'; } } ?>
       </select>
 <?php
  echo '<a href="#" onClick="if(window.confirm($(\'select#favnum\').val()+\'を削除してよろしいですか？\')){ $(function(){ $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&pw2='.$pw2.'&mode=favfdel&favnum=\'+$(\'select#favnum\').val(), function(data){ var status = (data.indexOf(\'(!) \')==0) ? \'error\' : \'success\'; $.notifyBar({ html: data, delay: 1000, cls: status }); $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&pw2='.$pw2.'&header_menu=1\', function(data){$(\'div#wrapper_headerlist\').html(data);}); }); }); return false; }">Delete</a>';
@@ -57,7 +60,7 @@
   </div>
   <div style="clear:both;"></div>
 
-<?php if ( $arguments['mode'] == 'music' ) { ?>
+<?php if ( ($arguments['mode'] == '') || ($arguments['mode'] == 'music') ) { ?>
   <div id="wrapper">
    <audio preload="auto" autoplay="autoplay" id="audio"></audio>
   <div id="lyrics"></div>

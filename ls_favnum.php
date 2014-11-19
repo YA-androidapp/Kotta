@@ -4,17 +4,33 @@ session_start();
 error_reporting(0);
 require_once(dirname(__FILE__).'/conf/index.php');
 
-if ( $_REQUEST['id'] != '' )       { $id = $_REQUEST['id'];
-} elseif ( $_SESSION['id'] != '' ) { $id = $_SESSION['id'];
-} else                             { $id = ''; }
-if ( $_REQUEST['pw'] != '' )       { $pw = $_REQUEST['pw'];
-} elseif ( $_SESSION['pw'] != '' ) { $pw = $_SESSION['pw'];
-} else                             { $pw = ''; }
-if ( $_REQUEST['pw2'] != '' )       { $pw2 = $_REQUEST['pw2'];
-} elseif ( $_SESSION['pw2'] != '' ) { $pw2 = $_SESSION['pw2']; }
+if ( (isset($_SERVER['PHP_AUTH_USER'])) && ($_SERVER['PHP_AUTH_USER'] != '') ) {
+ $id = $_SERVER['PHP_AUTH_USER']; $_SESSION['id'] = $id;
+} elseif ( (isset($_REQUEST['id'])) && ($_REQUEST['id'] != '') ) {
+ $id = $_REQUEST['id']; $_SESSION['id'] = $id;
+} elseif ( (isset($_SESSION['id'])) && ($_SESSION['id'] != '') ) {
+ $id = $_SESSION['id'];
+} else {
+ $id = '';
+}
+if ( (isset($_SERVER['PHP_AUTH_PW'])) && ($_SERVER['PHP_AUTH_PW'] != '') ) {
+ $pw = $_SERVER['PHP_AUTH_PW']; $_SESSION['pw'] = $pw;
+} elseif ( (isset($_REQUEST['pw'])) && ($_REQUEST['pw'] != '') ) {
+ $pw = $_REQUEST['pw']; $_SESSION['pw'] = $pw;
+} elseif ( (isset($_SESSION['pw'])) && ($_SESSION['pw'] != '') ) {
+ $pw = $_SESSION['pw'];
+} else {
+ $pw = '';
+}
+if ( (isset($_REQUEST['pw2'])) && ($_REQUEST['pw2'] != '') ) {
+ $pw2 = $_REQUEST['pw2']; $_SESSION['pw2'] = $pw2;
+} elseif ( (isset($_SESSION['pw2'])) && ($_SESSION['pw2'] != '') ) {
+ $pw2 = $_SESSION['pw2'];
+} else {
+ $pw2 = '';
+}
 
-$pname = str_replace('.php', '', basename($_SERVER['SCRIPT_NAME']));
-require_once('conf/index.php');
+require_once(realpath(__DIR__).'/conf/index.php');
 $pwdfile = 'pwd/'.$id.'.cgi';
 if ( file_exists($pwdfile) ) {
  $tpassword = file_get_contents($pwdfile);

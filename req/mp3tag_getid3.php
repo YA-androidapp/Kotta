@@ -1,6 +1,6 @@
 <?php
 // Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
-require_once('js/getid3/getid3.php');
+require_once(dirname(__FILE__).'/../js/getid3/getid3.php');
 
 function getmp3info($mp3path){
  $getID3 = new getID3;

@@ -1,16 +1,12 @@
 <?php
-$allowedExtensions = array("mp3");
-$allowedSizeLimit = 10 * 1024 * 1024;
-set_time_limit(600);
+
+// 音楽ファイルが存在するディレクトリの指定
 $base_dir = '/path/to/musics/';
 $base_dirfav = 'fav/';
-// if(strpos($_SERVER["REMOTE_ADDR"], '192.168.11.', 0) === 0){
-//  // ネットワークの都合でURLを指定してのアクセスが弾かれる場合は
-//  // この部分を有効にしてローカルIPアドレスでアクセスする
-//  $base_uri = 'https://EXAMPLE.COM/musics/uri/';
-//  $base_uri = 'https://EXAMPLE.COM/kotta2/index.php?output_path=';
+// if(strpos($_SERVER["REMOTE_ADDR"], '192.168.1.', 0) === 0){
+//  $base_uri_s = 'https://EXAMPLE.COM/media/musics/';
 // }else{
-$base_uri = '/musics/uri/'; // Absolute path
+$base_uri = '/musics/';
 // }
 
 $enable_autocomplete_dir = 1;
@@ -23,8 +19,8 @@ $confs['filter_file'] = '';
 $confs['filter_album'] = '';
 $confs['filter_genre'] = '';
 
-// $confs['sns_format'] = '%t / %a [ %l ] #nowplaying %u';
-$confs['sns_format'] = '%t / %a [ %l ] #nowplaying';
+// $confs['sns_format'] = '@home %t / %a [ %l ] #nowplaying %u';
+$confs['sns_format'] = '@home %t / %a [ %l ] #nowplaying';
  // %a => artist
  // %g => genre
  // %l => album
@@ -32,3 +28,7 @@ $confs['sns_format'] = '%t / %a [ %l ] #nowplaying';
  // %n => number
  // %s => time_s
  // %t => title
+
+$allowedExtensions = array("mp3");
+$allowedSizeLimit = 10 * 1024 * 1024;
+set_time_limit(600);

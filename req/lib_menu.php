@@ -14,7 +14,7 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
  <head>
   <meta charset="utf-8">
   <title>Kotta Menu</title>
-<?php require_once('req/common_js.php'); ?>
+<?php require_once(realpath(__DIR__).'/req/common_js.php'); ?>
 <script type="text/javascript">
  $(function () {
 
@@ -26,7 +26,7 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
 
 </script>
 
-<?php require_once('req/lib_style.php'); ?>
+<?php require_once(realpath(__DIR__).'/req/lib_style.php'); ?>
   <style type="text/css">
    th { text-align:right;background-color:rgb(136, 170, 255); }
   </style>
