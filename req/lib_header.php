@@ -42,7 +42,7 @@
      <td>
        <input type="text" id="favnum" name="favnum" title="名前" style="width:100px;">
 <?php
- echo '<a href="#" onClick="$(function(){ $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&pw2='.$pw2.'&mode=favfadd&favnum=\'+$(\'input#favnum\').val(), function(data){ var status = (data.indexOf(\'(!) \')==0) ? \'error\' : \'success\'; $.notifyBar({ html: data, delay: 1000, cls: status }); $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&pw2='.$pw2.'&header_menu=1\', function(data){$(\'div#wrapper_headerlist\').html(data);}); }); });">Create</a>';
+ echo '<a href="#" onClick="$(function(){ $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&mode=favfadd&favnum=\'+$(\'input#favnum\').val(), function(data){ var status = (data.indexOf(\'(!) \')==0) ? \'error\' : \'success\'; $.notifyBar({ html: data, delay: 1000, cls: status }); $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&header_menu=1\', function(data){$(\'div#wrapper_headerlist\').html(data);}); }); });">Create</a>';
 ?>
      </td>
      <td>
@@ -51,7 +51,7 @@
        <?php if (count($favnumarr2)>0) { foreach ($favnumarr2 as $val3) { echo '<option value="'.$val3.'" id="favmenu_'.$val3.'">'.$val3.'</option>'; } } ?>
       </select>
 <?php
- echo '<a href="#" onClick="if(window.confirm($(\'select#favnum\').val()+\'を削除してよろしいですか？\')){ $(function(){ $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&pw2='.$pw2.'&mode=favfdel&favnum=\'+$(\'select#favnum\').val(), function(data){ var status = (data.indexOf(\'(!) \')==0) ? \'error\' : \'success\'; $.notifyBar({ html: data, delay: 1000, cls: status }); $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&pw2='.$pw2.'&header_menu=1\', function(data){$(\'div#wrapper_headerlist\').html(data);}); }); }); return false; }">Delete</a>';
+ echo '<a href="#" onClick="if(window.confirm($(\'select#favnum\').val()+\'を削除してよろしいですか？\')){ $(function(){ $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&mode=favfdel&favnum=\'+$(\'select#favnum\').val(), function(data){ var status = (data.indexOf(\'(!) \')==0) ? \'error\' : \'success\'; $.notifyBar({ html: data, delay: 1000, cls: status }); $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&header_menu=1\', function(data){$(\'div#wrapper_headerlist\').html(data);}); }); }); return false; }">Delete</a>';
 ?>
      </td>
     </tr>

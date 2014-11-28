@@ -6,28 +6,25 @@ require_once(dirname(__FILE__).'/conf/index.php');
 
 if ( (isset($_SERVER['PHP_AUTH_USER'])) && ($_SERVER['PHP_AUTH_USER'] != '') ) {
  $id = $_SERVER['PHP_AUTH_USER']; $_SESSION['id'] = $id;
-} elseif ( (isset($_REQUEST['id'])) && ($_REQUEST['id'] != '') ) {
- $id = $_REQUEST['id']; $_SESSION['id'] = $id;
 } elseif ( (isset($_SESSION['id'])) && ($_SESSION['id'] != '') ) {
  $id = $_SESSION['id'];
+} elseif ( (isset($_COOKIE['id'])) && ($_COOKIE['id'] != '') ) {
+ $id = $_COOKIE['id']; $_SESSION['id'] = $id;
+} elseif ( (isset($_REQUEST['id'])) && ($_REQUEST['id'] != '') ) {
+ $id = $_REQUEST['id']; $_SESSION['id'] = $id;
 } else {
  $id = '';
 }
 if ( (isset($_SERVER['PHP_AUTH_PW'])) && ($_SERVER['PHP_AUTH_PW'] != '') ) {
  $pw = $_SERVER['PHP_AUTH_PW']; $_SESSION['pw'] = $pw;
-} elseif ( (isset($_REQUEST['pw'])) && ($_REQUEST['pw'] != '') ) {
- $pw = $_REQUEST['pw']; $_SESSION['pw'] = $pw;
 } elseif ( (isset($_SESSION['pw'])) && ($_SESSION['pw'] != '') ) {
  $pw = $_SESSION['pw'];
+} elseif ( (isset($_COOKIE['pw'])) && ($_COOKIE['pw'] != '') ) {
+ $pw = $_COOKIE['pw']; $_SESSION['pw'] = $pw;
+} elseif ( (isset($_REQUEST['pw'])) && ($_REQUEST['pw'] != '') ) {
+ $pw = $_REQUEST['pw']; $_SESSION['pw'] = $pw;
 } else {
  $pw = '';
-}
-if ( (isset($_REQUEST['pw2'])) && ($_REQUEST['pw2'] != '') ) {
- $pw2 = $_REQUEST['pw2']; $_SESSION['pw2'] = $pw2;
-} elseif ( (isset($_SESSION['pw2'])) && ($_SESSION['pw2'] != '') ) {
- $pw2 = $_SESSION['pw2'];
-} else {
- $pw2 = '';
 }
 
 require_once(realpath(__DIR__).'/conf/index.php');
@@ -36,9 +33,7 @@ $pwdfile = 'pwd/'.$id.'.cgi';
 if ( file_exists($pwdfile) ) {
  $tpassword = file_get_contents($pwdfile);
  $tpassword = str_replace(array("\r\n","\n","\r"," "), '', $tpassword);
- if ( (($pw !== '') && ($pw === $tpassword)) || (($pw !== '') && ($pw2 === sha1($tpassword))) ) {
-  $pw2 = sha1($pw);
-
+ if ( ($pw !== '') && ($pw === $tpassword) ) {
   if ( $_REQUEST['favnum'] != '' )       { $favnum = $_REQUEST['favnum'];
   } elseif ( $_SESSION['favnum'] != '' ) { $favnum = $_SESSION['favnum'];
   } else                                 { $favnum = ''; }
@@ -70,7 +65,6 @@ if ( file_exists($pwdfile) ) {
       "favcheck" => urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))),
       "basename" => basename($value),
       "id" => $id,
-      "pw2" => $pw2,
       "favnum" => $favnum,
       "artistdirtmp" => str_replace(array($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '/'.basename($value)), array('', ''), realpath($value)),
       "artist" => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),

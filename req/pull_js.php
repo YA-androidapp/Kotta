@@ -37,14 +37,14 @@ function pullfavnum() {
 
 "<li id=\"favmenu_"
 +json.favnum
-+"\"><a href=\"?id=<?php echo $id; ?>&pw2=<?php echo $pw2; ?>&mode=simple&favnum="
++"\"><a href=\"?id=<?php echo $id; ?>&mode=simple&favnum="
 +json.favnum+"\">"
 +json.favnum
-+"</a><a href=\"?id=<?php echo $id; ?>&pw2=<?php echo $pw2; ?>&mode=music&favnum="
++"</a><a href=\"?id=<?php echo $id; ?>&mode=music&favnum="
 +json.favnum
 +"\">[music]</a>"
 +"<a href=\"#\" onClick=\"pullls('"+url+"');\">[Add]</a>"
-+"<a href=\"?id=<?php echo $id; ?>&pw2=<?php echo $pw2; ?>&mode=makem3u&favnum="
++"<a href=\"?id=<?php echo $id; ?>&mode=makem3u&favnum="
 +json.favnum
 +"\">[m3u]</a></li>"
 

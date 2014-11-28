@@ -92,6 +92,15 @@
   });
   // SNS用 終わり
 
+  // 認証用
+  jQuery('#id').click(function(e) {
+   jQuery.cookie("id", jQuery("#id").val());
+  });
+  jQuery('#pw').click(function(e) {
+   jQuery.cookie("pw", jQuery("#pw").val());
+  });
+  // 認証用 終わり
+
 <?php if ( $arguments['mode'] == 'music' ) { ?>
 
   if(jQuery('#checkbox_auto #enable_autotweet').prop('checked')){
@@ -118,7 +127,7 @@
 
     if(jQuery('#checkbox_auto #enable_recently_played').prop('checked')){
      jQuery.get(
-      '<?php echo $_SERVER['SCRIPT_NAME']; ?>?id=<?php echo $id; ?>&pw2=<?php echo $pw2; ?>&mode=rpadd&linkadd='+jQuery('ol#sort_list li.playing a[data-src]').attr('data-src').replace('<?php echo $baseuri; ?>/','')
+      '<?php echo $_SERVER['SCRIPT_NAME']; ?>?id=<?php echo $id; ?>&mode=rpadd&linkadd='+jQuery('ol#sort_list li.playing a[data-src]').attr('data-src').replace('<?php echo $baseuri; ?>/','')
      );
     }
 

@@ -6,4 +6,6 @@
 
 <script type="text/javascript" src="js/jQuery-Notify-bar/jquery.notifyBar.js"></script>
 
+<script type="text/javascript" src="js/jquery-cookie/jquery.cookie.js"></script>
+
 <script type="text/javascript" src="js/noreferer/noreferer.js"></script>

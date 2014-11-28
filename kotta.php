@@ -9,26 +9,25 @@ if ( $_REQUEST['logout'] == '1' ) {
 
 if ( (isset($_SERVER['PHP_AUTH_USER'])) && ($_SERVER['PHP_AUTH_USER'] != '') ) {
  $id = $_SERVER['PHP_AUTH_USER']; $_SESSION['id'] = $id;
-} elseif ( (isset($_REQUEST['id'])) && ($_REQUEST['id'] != '') ) {
- $id = $_REQUEST['id']; $_SESSION['id'] = $id;
 } elseif ( (isset($_SESSION['id'])) && ($_SESSION['id'] != '') ) {
  $id = $_SESSION['id'];
+} elseif ( (isset($_COOKIE['id'])) && ($_COOKIE['id'] != '') ) {
+ $id = $_COOKIE['id']; $_SESSION['id'] = $id;
+} elseif ( (isset($_REQUEST['id'])) && ($_REQUEST['id'] != '') ) {
+ $id = $_REQUEST['id']; $_SESSION['id'] = $id;
 } else {
  require_once(realpath(__DIR__).'/req/lib_menu.php');die(' kotta-1');
 }
 if ( (isset($_SERVER['PHP_AUTH_PW'])) && ($_SERVER['PHP_AUTH_PW'] != '') ) {
  $pw = $_SERVER['PHP_AUTH_PW']; $_SESSION['pw'] = $pw;
-} elseif ( (isset($_REQUEST['pw'])) && ($_REQUEST['pw'] != '') ) {
- $pw = $_REQUEST['pw']; $_SESSION['pw'] = $pw;
 } elseif ( (isset($_SESSION['pw'])) && ($_SESSION['pw'] != '') ) {
  $pw = $_SESSION['pw'];
+} elseif ( (isset($_COOKIE['pw'])) && ($_COOKIE['pw'] != '') ) {
+ $pw = $_COOKIE['pw']; $_SESSION['pw'] = $pw;
+} elseif ( (isset($_REQUEST['pw'])) && ($_REQUEST['pw'] != '') ) {
+ $pw = $_REQUEST['pw']; $_SESSION['pw'] = $pw;
 } else {
  require_once(realpath(__DIR__).'/req/lib_menu.php');die(' kotta-2');
-}
-if ( (isset($_REQUEST['pw2'])) && ($_REQUEST['pw2'] != '') ) {
- $pw2 = $_REQUEST['pw2']; $_SESSION['pw2'] = $pw2;
-} elseif ( (isset($_SESSION['pw2'])) && ($_SESSION['pw2'] != '') ) {
- $pw2 = $_SESSION['pw2'];
 }
 
 $pwdfile = 'pwd/'.$id.'.cgi';
@@ -38,9 +37,7 @@ if ( file_exists($pwdfile) ) {
  $tpassword = str_replace(array("\r\n","\n","\r"," "), '', $tpassword);
 
  if ( $pw === $tpassword ) {
-  $pw2 = sha1($pw);
- } elseif ( $pw2 === sha1($tpassword) ) {
-
+  ;
  } else {
   require_once(realpath(__DIR__).'/req/lib_menu.php');die(' kotta-3');
  }
