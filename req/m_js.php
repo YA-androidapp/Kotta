@@ -139,9 +139,11 @@
     }
 
     next.addClass('playing').siblings().removeClass('playing');
-    audio.load(jQuery('a', next).attr('data-src'));
-    kirinload();
-    audio.play();
+    if (jQuery('a', next).attr('data-src') !== void 0) {
+     audio.load(jQuery('a', next).attr('data-src'));
+     kirinload();
+     audio.play();
+    }
 
     if(jQuery('#checkbox_auto #enable_notification').prop('checked')){
      if(window.webkitNotifications){
@@ -168,9 +170,11 @@
   jQuery('ol#sort_list li a[data-src]').click(function(e) {
    e.preventDefault();
    jQuery(this).parent().addClass('playing').siblings().removeClass('playing');
-   audio.load(jQuery(this).attr('data-src'));
-   kirinload();
-   audio.play();
+   if (jQuery(this).attr('data-src') !== void 0) {
+    audio.load(jQuery(this).attr('data-src'));
+    kirinload();
+    audio.play();
+   }
    if(jQuery('#checkbox_auto #enable_lyric').prop('checked') == false){
     var position = jQuery('ol#sort_list li.playing').offset().top;
     jQuery('html,body').animate({scrollTop:position}, 400, 'swing');
@@ -179,9 +183,11 @@
   $(document).on('click','ol#sort_list li.appended a[data-src]',function(e){
    e.preventDefault();
    jQuery(this).parent().addClass('playing').siblings().removeClass('playing');
-   audio.load(jQuery(this).attr('data-src'));
-   kirinload();
-   audio.play();
+   if (jQuery(this).attr('data-src') !== void 0) {
+    audio.load(jQuery(this).attr('data-src'));
+    kirinload();
+    audio.play();
+   }
    if(jQuery('#checkbox_auto #enable_lyric').prop('checked') == false){
     var position = jQuery('ol#sort_list li.playing').offset().top;
     jQuery('html,body').animate({scrollTop:position}, 400, 'swing');
@@ -238,9 +244,11 @@
   var audio = a[0];
   first = jQuery('ol#sort_list li a').first().attr('data-src');
   jQuery('ol#sort_list li').first().addClass('playing').siblings().removeClass('playing');
-  audio.load(first);
-  kirinload();
-  audio.play();
+   if (first !== void 0) {
+    audio.load(first);
+    kirinload();
+    audio.play();
+   }
   // audio.js用 終わり
 <?php } ?>
 
@@ -456,25 +464,30 @@ if ( ($arguments['sort'] != '') && ($arguments['sort'] != 'none') ) {
 
  function kirinload(){
   if(jQuery('#checkbox_auto #enable_lyric').prop('checked')){
-   jQuery(function() {
-    jQuery.ajax({
-     url : (jQuery('ol#sort_list li.playing a[data-src]').attr('data-src')).replace('.mp3','.lrc'),
-     success: function(result) {
-      jQuery("#lyrics").text('');
-      jQuery('#lyrics').show();
-      var position = jQuery('#lyrics').offset().top - 20;
-      jQuery('html,body').animate({scrollTop:position}, 100, 'swing');
-      jQuery('#audio').kirinlyric({
-       target : '#lyrics',
-       lrc : result
-      });
-     },
-     error: function(XMLHttpRequest, textStatus, errorThrown) {
-      jQuery("#lyrics").text('');
-      jQuery('#lyrics').hide();
-     }
+   if(jQuery('ol#sort_list li.playing a[data-src]').attr('data-src') !== void 0){
+    jQuery(function() {
+     jQuery.ajax({
+      url : (jQuery('ol#sort_list li.playing a[data-src]').attr('data-src')).replace('.mp3','.lrc'),
+      success: function(result) {
+       jQuery("#lyrics").text('');
+       jQuery('#lyrics').show();
+       var position = jQuery('#lyrics').offset().top - 20;
+       jQuery('html,body').animate({scrollTop:position}, 100, 'swing');
+       jQuery('#audio').kirinlyric({
+        target : '#lyrics',
+        lrc : result
+       });
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+       jQuery("#lyrics").text('');
+       jQuery('#lyrics').hide();
+      }
+     });
     });
-   });
+   }else{
+    jQuery("#lyrics").text('');
+    jQuery('#lyrics').hide();
+   }
   }else{
    jQuery("#lyrics").text('');
    jQuery('#lyrics').hide();

@@ -52,37 +52,19 @@ a{color:#333;text-decoration:none;}
 #wrapper_list ol li.playing{color:#000;font-size:x-large;text-shadow:1px 1px 0px rgba(255, 255, 255, 0.3);}
 #wrapper_list ol li.playing img.fava{height:30px;}
 #wrapper_list ol li.playing img.favr{height:20px;}
-/*#wrapper_list ol li.playing:before{
- color:#000;
- content:'♪';
- font-size:large;
- height:14px;
- left:-24px;
- line-height:14px;
- margin:0px;
- padding:2px;
- position:absolute;
- text-shadow:1px 1px 0px rgba(0, 0, 0, 0.2);
- top:9px;
- width:14px;
-}*/
-
-#wrapper_footerlist{clear:both;font-size:x-small;height:200px;margin:10px;overflow-y:scroll;padding:10px;width:70%;}
-#wrapper_footerlist ol{overflow-y:scroll;width:95%;}
 
 #pagesearch{float:right;font-size:xx-small;}
 #pagesearch #pageq{width:120px;}
 #pagesearch #pagesearchtype{width:30px;}
 #pagesearch #pagesort{width:180px;}
 
-#control{background:rgba(240,240,240,0.8);bottom:0px;color:#999;font-size:x-small;height:120px;margin:0;padding:10px;position:fixed;width:100%;}
-#control>div#control1{display:inline-block;float:left;height:95%;margin:0px auto;padding:5px;width:30%;}
-#control>div#control2{display:inline-block;float:left;height:95%;margin:0px auto;padding:5px;width:15%;}
-#control>div#control3{display:inline-block;float:left;height:95%;margin:0px auto;padding:5px;width:15%;}
-#control>div#control4{display:inline-block;float:left;height:95%;margin:0px auto;padding:5px;width:20%;}
+#control{background:rgba(240,240,240,0.8);bottom:0px;clear:both;color:#999;font-size:x-small;height:180px;margin:0;overflow-y:scroll;padding:10px;position:fixed;width:100%;}
+#control>div#control1{display:inline-block;float:left;margin:0px auto;padding:5px;width:30%;}
+#control>div#control2{display:inline-block;float:left;margin:0px auto;padding:5px;width:20%;}
+#control>div#control3{display:inline-block;float:left;margin:0px auto;padding:5px;width:20%;}
+#control>div#control4{display:inline-block;float:left;margin:0px auto;padding:5px;width:20%;}
 #control>div #num{display:none;width:0;}
 #control>div #slider{margin:0px 0px auto 10px;width:80%;}
 #control input[type=button]{height:30px;width:22%;}
-
--webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;border-radius:4px;
--webkit-box-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);-moz-box-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);-o-box-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);box-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);}
+#control div.toggle{border:1px solid #666;}
+#control #copyrights_list{display:none;}

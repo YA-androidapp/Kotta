@@ -35,23 +35,29 @@
 <?php if ( $arguments['mode'] == 'music' ) { ?>
  <div id="control">
   <div id="control1">
-   <input type="button" id="control_prev" value="Prev" title="Ctrl+←/Shift+←">
-   <input type="button" id="control_play" value="P/P" title="Ctrl+Space/Shift+Space">
-   <input type="button" id="control_twtr" value="t">
-   <input type="button" id="control_next" value="Next" title="Ctrl+→/Shift+→">
-   <br />
-   <div id="volume_control" title="100">
-    Volume<br />
-    <input type="text" name="slide" value="" id="num" readonly="readonly" />
-    <div id="slider"></div>
-   </div>
-   <div id="speed_control" title="1.0">
-    Speed<br />
-    <input type="text" name="slide" value="" id="num" readonly="readonly" />
-    <div id="slider"></div>
-   </div>
+   <div class="toggle" onclick="jQuery('#control #playcontrol').toggle()">Control</div>
+   <form id="playcontrol" style="background-color:transparent;">
+    <input type="button" id="control_prev" value="Prev" title="Ctrl+←/Shift+←">
+    <input type="button" id="control_play" value="P/P" title="Ctrl+Space/Shift+Space">
+    <input type="button" id="control_twtr" value="t">
+    <input type="button" id="control_next" value="Next" title="Ctrl+→/Shift+→">
+   </form>
+   <div class="toggle" onclick="jQuery('#control #sliders').toggle()">Sliders</div>
+   <form id="sliders" style="background-color:transparent;">
+    <div id="volume_control" title="100">
+     Volume<br />
+     <input type="text" name="slide" value="" id="num" readonly="readonly" />
+     <div id="slider"></div>
+    </div>
+    <div id="speed_control" title="1.0">
+     Speed<br />
+     <input type="text" name="slide" value="" id="num" readonly="readonly" />
+     <div id="slider"></div>
+    </div>
+   </form>
   </div>
   <div id="control2">
+   <div class="toggle" onclick="jQuery('#control #checkbox_auto').toggle()">Confs</div>
    <form id="checkbox_auto" style="background-color:transparent;">
     <input type="checkbox" accesskey="o" id="enable_loop"<?php if($arguments['enable_loop']==1){echo ' checked="checked"';} ?>>
      １曲ループ(<u title="Alt+Shift+O">O</u>)　
@@ -70,6 +76,7 @@
    </form>
   </div>
   <div id="control3">
+   <div class="toggle" onclick="jQuery('#control #pagesearch').toggle()">Filtering and Sorting</div>
    <form id="pagesearch" style="background-color:transparent;">
     Filter:<input type="text" id="pageq" value="" title="フィルタリング">
     <select id="pagesearchtype" title="Filter">
@@ -96,6 +103,7 @@
    </form>
   </div>
   <div id="control4">
+   <div class="toggle" onclick="jQuery('#control #copyrights_list').toggle()">About</div>
    <?php require_once(realpath(__DIR__).'/copyrights.php'); ?>
   </div>
  </div>
