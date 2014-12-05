@@ -1,7 +1,7 @@
 <?php
 // Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
-error_reporting(0);
+// error_reporting(0);
 
 if ( (isset($_SERVER['PHP_AUTH_USER'])) && ($_SERVER['PHP_AUTH_USER'] != '') ) {
  $id = $_SERVER['PHP_AUTH_USER']; $_SESSION['id'] = $id;
@@ -51,7 +51,7 @@ if ( file_exists($pwdfile) ) {
   array_walk(
    $keywords,
    function($value, $key) {
-    global $base_dir, $result;
+    global $base_dir, $result,$term;
     if (mb_strpos(strtolower($key), strtolower($term)) === 0) {
      $result[] = array('id' => $value,
                        'label' => $key,

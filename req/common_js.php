@@ -6,6 +6,14 @@
 
 <script type="text/javascript" src="js/jQuery-Notify-bar/jquery.notifyBar.js"></script>
 
+<script type="text/javascript" src="js/jquery-base64/jquery.base64.js"></script>
+
 <script type="text/javascript" src="js/jquery-cookie/jquery.cookie.js"></script>
 
 <script type="text/javascript" src="js/noreferer/noreferer.js"></script>
+
+<script type="text/javascript">
+ jQuery(document).ready(function(){
+  jQuery('a').not('[href="#"]').attr({target:"_blank"}).addClass("ex_link");
+ });
+</script>

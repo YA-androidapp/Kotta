@@ -14,19 +14,19 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
  <head>
   <meta charset="utf-8">
   <title>Kotta Menu</title>
-<?php require_once(realpath(__DIR__).'/req/common_js.php'); ?>
+<?php require_once(realpath(__DIR__).'/common_js.php'); ?>
 <script type="text/javascript">
  $(function () {
 
   $("input").blur( function (e){
-<?php require('req/lib_menu_autocomplete.php'); ?>
+<?php require(realpath(__DIR__).'/lib_menu_autocomplete.php'); ?>
   });
 
  });
 
 </script>
 
-<?php require_once(realpath(__DIR__).'/req/lib_style.php'); ?>
+<?php require_once(realpath(__DIR__).'/lib_style.php'); ?>
   <style type="text/css">
    th { text-align:right;background-color:rgb(136, 170, 255); }
   </style>
