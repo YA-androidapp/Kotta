@@ -33,7 +33,21 @@
   });
 
   $("input").blur( function (e){
-<?php require("req/lib_menu_autocomplete.php"); ?>
+<?php if ( $enable_autocomplete_dir == 1 ) { ?>
+   // ArtistName
+   $("#dir").autocomplete({
+    source: "autocomplete_dir.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
+<?php } else if ( $enable_autocomplete_favnum == 1 ) { ?>
+   // Favnum
+   $("#favnum").autocomplete({
+    source: "autocomplete_favnum.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
+<?php } ?>
+    delay: 200,
+    minLength: 3,
+    select: function (e, ui) {
+     if (ui.item) { $("#result").html(ui.item.id); }
+    }
+   });
   });
   // ヘッダメニュー用 終わり
 
