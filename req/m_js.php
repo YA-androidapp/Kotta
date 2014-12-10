@@ -412,8 +412,7 @@ if ( ($arguments["sort"] != "") && ($arguments["sort"] != "none") ) {
   }
  });
 
-  // Sort用
-<?php if ($arguments["sort"] == "random") { ?>
+ // Sort用
  (function(d){
   d.fn.shuffle=function(c){
    c=[];return this.each(function(){
@@ -425,8 +424,7 @@ if ( ($arguments["sort"] != "") && ($arguments["sort"] != "none") ) {
    return d(a).shuffle()
   }
  })(jQuery);
-<?php } ?>
-  // Sort用 終わり
+ // Sort用 終わり
 
 
 
