@@ -3,11 +3,7 @@
 // 音楽ファイルが存在するディレクトリの指定
 $base_dir = '/path/to/musics/';
 $base_dirfav = 'fav/';
-// if(strpos($_SERVER["REMOTE_ADDR"], '192.168.1.', 0) === 0){
-//  $base_uri_s = 'https://EXAMPLE.COM/media/musics/';
-// }else{
 $base_uri = '/musics/';
-// }
 
 $enable_autocomplete_dir = 1;
 $enable_autocomplete_favnum = 1;
@@ -19,7 +15,6 @@ $confs['filter_file'] = '';
 $confs['filter_album'] = '';
 $confs['filter_genre'] = '';
 
-// $confs['sns_format'] = '@home %t / %a [ %l ] #nowplaying %u';
 $confs['sns_format'] = '@home %t / %a [ %l ] #nowplaying';
  // %a => artist
  // %g => genre

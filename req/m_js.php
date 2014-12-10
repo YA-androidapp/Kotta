@@ -84,6 +84,9 @@
   // ソート用 終わり
 
   // SNS用
+  jQuery("#screen_name").click(function(e) {
+   setscreenname();
+  });
   jQuery("#tweettext").dblclick(function(e) {
    settweetstr(1);
   });
@@ -413,6 +416,20 @@ if ( ($arguments["sort"] != "") && ($arguments["sort"] != "none") ) {
 
 
 
+ function setscreenname() {
+  jQuery.ajax({
+   type: "POST",
+   url: "tweet/index.php",
+   data: "short=1",
+   success: function(data, dataType){
+    if ( data != "" ) {
+     jQuery("span#screen_name").text( data );
+    } else {
+     jQuery("span#screen_name").text( "---" );
+    }
+   }
+  });
+ }
  function settweetstr(mode) {
   tstr = "<?php echo $arguments["sns_format"]; ?>";
   tstr = tstr.replace("%a", jQuery("ol#sort_list li.playing .artist").text() );

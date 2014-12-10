@@ -20,8 +20,7 @@
       <textarea id="tweettext"></textarea>
      </td>
      <td>
-      Tweet<br />
-      <img height="10px" src="icon/twtr2.png" alt="twitterに投稿する" title="twitterに投稿する" onClick="window.open('<?php echo str_replace(basename($_SERVER['SCRIPT_NAME']), 'tweet/tweet.php', $_SERVER['SCRIPT_NAME']); ?>?pass_autotweet=1&tweettext='+encodeURIComponent(jQuery('#tweettext').val()), 'sns');return false;">
+      <img height="20px" src="icon/twtr2.png" alt="twitterに投稿する" title="twitterに投稿する" onClick="window.open('<?php echo str_replace(basename($_SERVER['SCRIPT_NAME']), 'tweet/tweet.php', $_SERVER['SCRIPT_NAME']); ?>?pass_autotweet=1&tweettext='+encodeURIComponent(jQuery('#tweettext').val()), 'sns');return false;">
       Screenname:<span id="screen_name"><?php echo ($_SESSION['oa_screen_name']!='') ? '@'.$_SESSION['oa_screen_name'] : '---'; ?></span>
      </td>
     </tr>
