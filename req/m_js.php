@@ -266,6 +266,9 @@
      if (!next.length) next = jQuery("ol#sort_list li a[data-src]").first();
      next.click();
   });
+  jQuery("#control_pullfavnum").click(function(e) {
+     pullfavnum();
+  });
 
   // Load in the first track
   var audio = a[0];

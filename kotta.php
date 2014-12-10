@@ -56,7 +56,7 @@ if ( $_REQUEST['menu'] == '1' ) {
  die(' kotta-6');
 } elseif ( $_REQUEST['header_menu'] == '1' ) {
  require_once(realpath(__DIR__).'/req/lib_header.php');
- die(' kotta-7');
+ die(''); // die(' kotta-7');
 }
 
 require_once(realpath(__DIR__).'/req/lib_getdirtree.php');

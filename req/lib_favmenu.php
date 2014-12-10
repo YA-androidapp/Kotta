@@ -4,8 +4,8 @@
  <head>
   <meta charset="utf-8">
   <title>Kotta Menu</title>
-   <?php require_once(realpath(__DIR__).'/req/common_js.php'); ?>
-   <?php require_once(realpath(__DIR__).'/req/lib_style.php'); ?>
+   <?php require_once(realpath(__DIR__).'/common_js.php'); ?>
+   <?php require_once(realpath(__DIR__).'/lib_style.php'); ?>
  </head>
  <body>
   <table border="1" style="text-align:center;">

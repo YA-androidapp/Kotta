@@ -65,6 +65,6 @@ a{color:#333;text-decoration:none;}
 #control>div#control4{display:inline-block;float:left;margin:0px auto;padding:5px;width:20%;}
 #control>div #num{display:none;width:0;}
 #control>div #slider{margin:0px 0px auto 10px;width:80%;}
-#control input[type=button]{height:30px;width:22%;}
+#control input[type=button]{height:30px;width:18%;}
 #control div.toggle{border:1px solid #666;}
 #control #copyrights_list{display:none;}

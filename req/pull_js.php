@@ -21,6 +21,8 @@ function pullfavnum() {
     data: "_="+Math.random(),
     xhrFields: {
       onloadstart: function() {
+        $("ul#favoriteslist").text("");
+        $("select#favnum").text("");
         var xhr = this;
         var textlength = 0;
         mytimer = setInterval(function() {
@@ -49,6 +51,7 @@ function pullfavnum() {
 +"\">[m3u]</a></li>"
 
                 );
+                $("select#favnum").append($('<option>').html(json.favnum).val(json.favnum));
               }
             });
           }

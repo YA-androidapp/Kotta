@@ -40,6 +40,7 @@
     <input type="button" id="control_prev" value="Prev" title="Ctrl+←/Shift+←">
     <input type="button" id="control_play" value="P/P" title="Ctrl+Space/Shift+Space">
     <input type="button" id="control_twtr" value="t">
+    <input type="button" id="control_pullfavnum" value="f">
     <input type="button" id="control_next" value="Next" title="Ctrl+→/Shift+→">
    </form>
    <div class="toggle" onclick="jQuery('#control #sliders').toggle()">Sliders</div>
