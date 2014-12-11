@@ -18,12 +18,33 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
 <script type="text/javascript">
  $(function () {
 
+<?php if ( $enable_autocomplete_dir == 1 ) { ?>
   $("input").blur( function (e){
-<?php require(realpath(__DIR__).'/lib_menu_autocomplete.php'); ?>
+   // ArtistName
+   $("#dir").autocomplete({
+    source: "autocomplete_dir.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
+    delay: 200,
+    minLength: 3,
+    select: function (e, ui) {
+     if (ui.item) { $("#result").html(ui.item.id); }
+    }
+   });
   });
+<?php } else if ( $enable_autocomplete_favnum == 1 ) { ?>
+  $("input").blur( function (e){
+   // Favnum
+   $("#favnum").autocomplete({
+    source: "autocomplete_favnum.php?id=" + $("#id").val() + "&pw=" + $("#pw").val(),
+    delay: 200,
+    minLength: 3,
+    select: function (e, ui) {
+     if (ui.item) { $("#result").html(ui.item.id); }
+    }
+   });
+  });
+<?php } ?>
 
  });
-
 </script>
 
 <?php require_once(realpath(__DIR__).'/lib_style.php'); ?>
