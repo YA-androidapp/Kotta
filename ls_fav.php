@@ -50,7 +50,6 @@ if ( file_exists($pwdfile) ) {
   }
   header("Content-type: application/octet-stream");
   header("Transfer-encoding: chunked");
-  // ob_flush();
   flush();
   $i = 0;
   foreach ($line as $value) {
@@ -76,7 +75,6 @@ if ( file_exists($pwdfile) ) {
      ) 
     ); 
     output_chunk($json.str_repeat(' ', 8000)."\n");
-    // ob_flush();
     flush();
     $i++;
    }

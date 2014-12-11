@@ -36,7 +36,7 @@ if ( file_exists($pwdfile) ) {
  if ( ($pw !== '') && ($pw === $tpassword) ) {
   if ( $_REQUEST['dir'] != '' )       { $dir = $_REQUEST['dir'];
   } elseif ( $_SESSION['dir'] != '' ) { $dir = $_SESSION['dir'];
-  } else                                 { $dir = ''; }
+  } else                              { $dir = ''; }
 
   @ini_set('zlib.output_compression', 'Off');
   @ini_set('output_buffering', 'Off');
@@ -48,7 +48,6 @@ if ( file_exists($pwdfile) ) {
   }
   header("Content-type: application/octet-stream");
   header("Transfer-encoding: chunked");
-  // // ob_flush();
   flush();
   $i = 0;
   $depth2 = 0;
@@ -96,7 +95,6 @@ function getdirtree($path){
          ) 
         ); 
         output_chunk($json.str_repeat(' ', 8000)."\n");
-        // ob_flush();
         flush();
         $i++;
        }

@@ -11,6 +11,7 @@ $enable_autocomplete_favnum = 1;
 $rpadd_max = 50;
 
 $confs = array();
+$confs['dbfilename'] = 'musics.sqlite3';
 $confs['filter_dir'] = '';
 $confs['filter_file'] = '';
 $confs['filter_album'] = '';

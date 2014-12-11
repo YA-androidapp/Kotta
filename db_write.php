@@ -1,6 +1,7 @@
 <?php
 // Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
+ignore_user_abort(true);
 set_time_limit(0);
 error_reporting(0);
 require_once(dirname(__FILE__).'/conf/index.php');
@@ -35,8 +36,14 @@ if ( file_exists($pwdfile) ) {
  $tpassword = file_get_contents($pwdfile);
  $tpassword = str_replace(array("\r\n","\n","\r"," "), '', $tpassword);
  if ( ($pw !== '') && ($pw === $tpassword) ) {
-
   if ( (isset($confs['dbfilename']) == false) || ($confs['dbfilename'] == '') ) { $confs['dbfilename'] = 'musics.sqlite3'; }
+  try {
+   if ( (isset($_REQUEST['reset'])) && ($_REQUEST['reset'] == '1') ) {
+    unlink('./conf/'.$confs['dbfilename']);
+   }
+  } catch (Exception $e) {
+   echo "Exception: " . $e->getMessage() . "<br>";
+  }
 
   try {
    $db = new PDO('sqlite:./conf/'.$confs['dbfilename']);
@@ -46,29 +53,41 @@ if ( file_exists($pwdfile) ) {
   } catch (Exception $e) {
    die("Exception: " . $e->getMessage());
   }
-  getdirtree($base_dir);
+
+  try {
+   $db = new PDO('sqlite:./conf/'.$confs['dbfilename']);
+   $sql = "INSERT INTO musics( datasrc , title , favcheck , basename , artistdirtmp , artist , album , number , genre , time_m , time_s)"
+                   ." values (:datasrc, :title, :favcheck, :basename, :artistdirtmp, :artist, :album, :number, :genre, :time_m, :time_s)";
+   $sth = $db->prepare($sql);
+   $db->beginTransaction();
+
+   $i = 0;
+   if ( (isset($_REQUEST['dir'])) && ($_REQUEST['dir'] != '') ) {
+    getdirtree($base_dir.$_REQUEST['dir'].'/');
+   } else {
+    getdirtree($base_dir);
+   }
+
+   $db->commit();
+   $db = null;
+  } catch (Exception $e) {
+   die("Exception: " . $e->getMessage());
+  }
  }
 }
 
 function getdirtree($path){
- global $arguments, $base_dir, $base_uri, $confs;
+ global $arguments, $base_dir, $base_uri, $confs, $db, $i, $sth;
 
  $rpath = realpath($path);
  if ($handle = opendir($rpath)) {
   try {
-   $db = new PDO('sqlite:./conf/'.$confs['dbfilename']);
-
-   $sql = "INSERT INTO musics( datasrc , title , favcheck , basename , artistdirtmp , artist , album , number , genre , time_m , time_s)"
-                   ." values (:datasrc, :title, :favcheck, :basename, :artistdirtmp, :artist, :album, :number, :genre, :time_m, :time_s)";
-
-   $sth = $db->prepare($sql);
-   $db->beginTransaction();
    while (false !== ($file = readdir($handle))) {
     if ('.' == $file || '..' == $file) { continue; }
     if (is_dir($rpath.'/'.$file)) {
      getdirtree($rpath.'/'.$file);
     } elseif ( (is_file($rpath.'/'.$file)) && (stripos(realpath($rpath.'/'.$file), '.mp3') !== FALSE) ) {
-     echo realpath($rpath.'/'.$file)."<br>";
+     echo sprintf("%05d", $i++) . " : " . realpath($rpath.'/'.$file)."<br>";
      $r2path = str_replace($base_dir.'/', '', $rpath);
      if (  ($arguments['filter_dir']=='')  || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1))          ) {
       if ( ($arguments['filter_file']=='') || (($arguments['filter_file']!='') &&(fnmatch($arguments['filter_file'],basename($file))==1)) ) {
@@ -76,11 +95,6 @@ function getdirtree($path){
         if (   ($confs['filter_file']=='') || (    ($confs['filter_file']!='') &&    (fnmatch($confs['filter_file'],basename($file))==1)) ) {
          $getmp3info_parts = array();
          $getmp3info_parts = getmp3info(realpath($rpath.'/'.$file));
-
-
-
-
-
          $rslt = $sth->execute( 
           array(
            ":datasrc" => str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($rpath.'/'.$file)),
@@ -96,27 +110,20 @@ function getdirtree($path){
            ":time_s" => htmlspecialchars( (($getmp3info_parts[6]<10)?("0".$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES),
           )
          );
-         if ($rslt){
-          echo 'データの追加に成功しました: '.htmlspecialchars($getmp3info_parts[0], ENT_QUOTES).'<br>';
-         }else{
+         if (!$rslt){
           $db->rollBack();
           $db = null;
-          die('Exception: データの追加に失敗しました');
+          die(' Exception: データの追加に失敗しました');
          }
-
-
-
-
-
         }
        }
       }
      }
     }
+    ob_flush();
+    flush();
    }
    closedir($handle);
-   $db->commit();
-   $db = null;
   } catch (PDOException $e) {
    $db->rollBack();
    $db = null;
