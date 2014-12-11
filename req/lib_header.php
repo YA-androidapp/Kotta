@@ -55,6 +55,19 @@
      </td>
     </tr>
    </table>
+   <hr />
+   SQL <small><small><a href="db_write.php">DB-Rebuilding</a></small></small><br />
+   <select id="sqlwhere" name="sqlwhere" title="SQL:Where" style="width:100px;">
+    <option value="album">Album</option>
+    <option value="artist">Artist</option>
+    <option value="basename">Filename</option>
+    <option value="genre">Genre</option>
+    <option value="number">Number</option>
+    <option value="title" selected="selected">Title</option>
+   </select>
+   <input type="text" id="sqllike" name="sqllike" title="SQL:Like" style="width:150px;">
+   <a href="#" onClick="var url='ls_sql.php?sqlwhere='+jQuery('select#sqlwhere').val()+'&sqllike='+jQuery('input#sqllike').val();pullls(url);">[Add]</a>
+   <hr />
 <?php if ( $_REQUEST['header_menu'] != '1' ) { ?>
   </div>
   <div style="clear:both;"></div>
