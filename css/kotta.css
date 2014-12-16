@@ -49,6 +49,7 @@ a{color:#333;text-decoration:none;}
 #wrapper_list ol li{border-bottom:1px solid #ccc;cursor:pointer;padding:10px 5px 10px;position:relative;}
 #wrapper_list ol li img.fava{height:20px;}
 #wrapper_list ol li img.favr{height:10px;}
+#wrapper_list ol li img.delicon{height:10px;}
 #wrapper_list ol li.playing{color:#000;font-size:x-large;text-shadow:1px 1px 0px rgba(255, 255, 255, 0.3);}
 #wrapper_list ol li.playing img.fava{height:30px;}
 #wrapper_list ol li.playing img.favr{height:20px;}

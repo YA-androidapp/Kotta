@@ -139,6 +139,15 @@ function pullls(url) {
 +i
 +'" class="favr" src="icon/favr.png" alt="お気に入りから外します" title="お気に入りから外します"></span>'
 ))
++'<span onClick="if(window.confirm(\''
++json.title
++' ('
++json.basename
++')をプレイビューから外してよろしいですか？\')){ $(function(){$(\'#track'
++i
++'\').remove()}); return false; }"><img id="delicon'
++i
++'" class="delicon" src="icon/del.png" alt="プレイビューから外します" title="プレイビューから外します"></span>'
 +'<br>　<a class="artist" href="?favnum=&mode=music&dir='
 +json.artistdirtmp+'">'
 +json.artist

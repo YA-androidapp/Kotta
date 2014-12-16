@@ -10,7 +10,7 @@ function showdirtree($tree){
  foreach ($tree as $key => $value) {
   if (is_array($value)) {
    $args = 'favnum=&';
-   $folders .= '<li><span class="artist" onClick="location.href=\''.$_SERVER['SCRIPT_NAME'].'?'.$args.'mode='.$arguments['mode'].'&dir='.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath(urldecode($key))).'\';return false;">'.basename(urldecode($key)).'/</span>'."\n";
+   $folders .= '<li><span class="artist" onClick="location.href=\'?'.$args.'mode='.$arguments['mode'].'&dir='.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath(urldecode($key))).'\';return false;">'.basename(urldecode($key)).'/</span>'."\n";
    if ($depth1 < $arguments['depth']) {
     $folders .= "<ol>\n";
     showdirtree($value);
@@ -35,22 +35,25 @@ function showdirtree($tree){
             echo htmlspecialchars($getmp3info_parts[0], ENT_QUOTES);
             echo '</a>'."\n";
             echo '　　';
-            echo ' <span onClick="window.open(\''.$_SERVER['SCRIPT_NAME'].'?mode=favmenu&favcheck='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'\', \'favmenu\');return false;">'."\n";
+            echo ' <span onClick="window.open(\'?mode=favmenu&favcheck='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'\', \'favmenu\');return false;">'."\n";
             echo '  　<img id="bookmarkstar'.$i.'" class="fava" src="icon/fava.png" alt="お気に入りの管理" title="お気に入りの管理">　'."\n";
             echo ' </span>';
             if ( $arguments['favnum'] != '' ) {
-             echo ' <span onClick="if(window.confirm(\''.htmlspecialchars($getmp3info_parts[0], ENT_QUOTES).' ('.basename($value).')をお気に入りから外してよろしいですか？\')){ $(function(){$(\'#track'.$i.'\').remove()}); $.get(\''.$_SERVER['SCRIPT_NAME'].'?id='.$arguments['id'].'&pw='.$arguments['pw'].'&mode=favdel&favnum='.$arguments['favnum'].'&linkdel='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'\', function(data){ var status = (data.indexOf(\'(!) \')==0) ? \'error\' : \'success\'; $.notifyBar({ html: data, delay: 1000, cls: status }); });return false; }">';
+             echo ' <span onClick="if(window.confirm(\''.htmlspecialchars($getmp3info_parts[0], ENT_QUOTES).' ('.basename($value).')をお気に入りから外してよろしいですか？\')){ $(function(){$(\'#track'.$i.'\').remove()}); $.get(\'?id='.$arguments['id'].'&pw='.$arguments['pw'].'&mode=favdel&favnum='.$arguments['favnum'].'&linkdel='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'\', function(data){ var status = (data.indexOf(\'(!) \')==0) ? \'error\' : \'success\'; $.notifyBar({ html: data, delay: 1000, cls: status }); });return false; }">';
              echo '  <img id="bookmarkstar'.$i.'" class="favr" src="icon/favr.png" alt="お気に入りから外します" title="お気に入りから外します">'."\n";
              echo ' </span>';
             }
+            echo ' <span onClick="if(window.confirm(\''.htmlspecialchars($getmp3info_parts[0], ENT_QUOTES).' ('.basename($value).')をプレイビューから外してよろしいですか？\')){ $(function(){$(\'#track'.$i.'\').remove()});return false; }">';
+            echo '  <img id="delicon'.$i.'" class="delicon" src="icon/del.png" alt="プレイビューから外します" title="プレイビューから外します">'."\n";
+            echo ' </span>';
             echo '<br>'."\n";
             flush();
             $dirtmp = str_replace(array($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '/'.basename($value)), array('', ''), realpath($value));
             $args = 'favnum=&';
-            echo '　<a class="artist" href="'.$_SERVER['SCRIPT_NAME'].'?'.$args.'mode=music&dir='.$dirtmp.'">';
+            echo '　<a class="artist" href="?'.$args.'mode=music&dir='.$dirtmp.'">';
             echo htmlspecialchars($getmp3info_parts[1], ENT_QUOTES);
             echo '</a> &gt; <span class="trackinfo">';
-            echo '<a class="album" href="'.$_SERVER['SCRIPT_NAME'].'?'.$args.'mode=music&dir='.$dirtmp.'&filter_album='.urlencode($getmp3info_parts[2]).'">';
+            echo '<a class="album" href="?'.$args.'mode=music&dir='.$dirtmp.'&filter_album='.urlencode($getmp3info_parts[2]).'">';
             echo htmlspecialchars($getmp3info_parts[2], ENT_QUOTES);
             echo '</a>';
             echo ' (No.<span class="number">';
@@ -77,7 +80,7 @@ function showdirtree($tree){
    } else {
     echo '<li><a class="artist" href="'.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $baseuri, realpath($value)).'" class="title" title="'.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $baseuri, realpath($value)).'">'.basename($value);
     echo '</a>'."\n";
-    echo '<span onClick="window.open(\''.$_SERVER['SCRIPT_NAME'].'?mode=favmenu&favcheck='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'\', \'favmenu\');return false;">'."\n";
+    echo '<span onClick="window.open(\'?mode=favmenu&favcheck='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'\', \'favmenu\');return false;">'."\n";
     echo ' <img id="bookmarkstar'.$i.'" height="10px" src="icon/fava.png" alt="お気に入りの管理" title="お気に入りの管理">'."\n";
     echo '</span>'."\n";
     echo ' ('.filesize(realpath($value)).'byte)</li>'."\n";
