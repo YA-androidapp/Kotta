@@ -42,9 +42,6 @@
     <input type="button" id="control_twtr" value="t">
     <input type="button" id="control_pullfavnum" value="f">
     <input type="button" id="control_next" value="Next" title="Ctrl+→/Shift+→">
-   </form>
-   <div class="toggle" onclick="jQuery('#control #sliders').toggle()">Sliders</div>
-   <form id="sliders" style="background-color:transparent;">
     <div id="volume_control" title="100">
      Volume<br />
      <input type="text" name="slide" value="" id="num" readonly="readonly" />
@@ -60,20 +57,13 @@
   <div id="control2">
    <div class="toggle" onclick="jQuery('#control #checkbox_auto').toggle()">Confs</div>
    <form id="checkbox_auto" style="background-color:transparent;">
-    <input type="checkbox" accesskey="o" id="enable_loop"<?php if($arguments['enable_loop']==1){echo ' checked="checked"';} ?>>
-     １曲ループ(<u title="Alt+Shift+O">O</u>)　
-    <input type="checkbox" accesskey="a" id="enable_allloop"<?php if($arguments['enable_allloop']!=0){echo ' checked="checked"';} ?>>
-     全曲ループ(<u title="Alt+Shift+A">A</u>)<br>
-    <input type="checkbox" accesskey="r" id="enable_recently_played"<?php if($arguments['enable_recently_played']!=0){echo ' checked="checked"';} ?>>
-     「最近聞いた曲」を自動更新(<u title="Alt+Shift+R">R</u>)<br>
-    <input type="checkbox" accesskey="p" id="enable_autotweet"<?php if($arguments['enable_autotweet']==1){echo ' checked="checked"';} ?>>
-     #nowplayingを自動投稿(<u title="Alt+Shift+P">P</u>)<br>
-    <input type="checkbox" accesskey="n" id="enable_notification"<?php if($arguments['enable_notification']==1){echo ' checked="checked"';} ?>>
-     次に再生する曲を通知(<u title="Alt+Shift+N">N</u>)<br>
-    <input type="checkbox" accesskey="m" id="enable_muted"<?php if($arguments['enable_muted']==1){echo ' checked="checked"';} ?>>
-     ミュート(<u title="Alt+Shift+M">M</u>)　
-    <input type="checkbox" accesskey="l" id="enable_lyric"<?php if($arguments['enable_lyric']==1){echo ' checked="checked"';} ?>>
-     歌詞表示(<u title="Alt+Shift+L">L</u>)<br>
+    <input type="checkbox" accesskey="o" id="enable_loop"<?php if($arguments['enable_loop']==1){echo ' checked="checked"';} ?>>１曲ループ(<u title="Alt+Shift+O">O</u>)<br>
+    <input type="checkbox" accesskey="a" id="enable_allloop"<?php if($arguments['enable_allloop']!=0){echo ' checked="checked"';} ?>>全曲ループ(<u title="Alt+Shift+A">A</u>)<br>
+    <input type="checkbox" accesskey="r" id="enable_recently_played"<?php if($arguments['enable_recently_played']!=0){echo ' checked="checked"';} ?>>「最近聞いた曲」を自動更新(<u title="Alt+Shift+R">R</u>)<br>
+    <input type="checkbox" accesskey="p" id="enable_autotweet"<?php if($arguments['enable_autotweet']==1){echo ' checked="checked"';} ?>>#nowplayingを自動投稿(<u title="Alt+Shift+P">P</u>)<br>
+    <input type="checkbox" accesskey="n" id="enable_notification"<?php if($arguments['enable_notification']==1){echo ' checked="checked"';} ?>>次に再生する曲を通知(<u title="Alt+Shift+N">N</u>)<br>
+    <input type="checkbox" accesskey="m" id="enable_muted"<?php if($arguments['enable_muted']==1){echo ' checked="checked"';} ?>>ミュート(<u title="Alt+Shift+M">M</u>)<br>
+    <input type="checkbox" accesskey="l" id="enable_lyric"<?php if($arguments['enable_lyric']==1){echo ' checked="checked"';} ?>>歌詞表示(<u title="Alt+Shift+L">L</u>)
    </form>
   </div>
   <div id="control3">
