@@ -9,9 +9,11 @@ PHPで書かれたWebベースのオーディオプレーヤシステムです
 ## Install
 ---
 
-### pwd/<USERNAME>.php
+### pwd/<USERNAME>.cgi
 
-ファイル名がユーザ名，ファイルの中身がパスワードであるようなファイルを作成し，それぞれのディレクトリに設置する
+ファイルの中身がパスワードであるようなファイル( <USERNAME>.cgi )を作成し，pwdディレクトリに設置する
+
+同じディレクトリ内に，ファイルの中身が半角英数16文字であるファイル( <USERNAME>_otp.cgi )を設置すると二段階認証を利用できるようになる（使用できる文字は 234567QWERTYUIOPASDFGHJKLZXCVBNM のみ）
 
 ### conf/index.php及びtweet/config.php
 
@@ -23,6 +25,10 @@ PHPで書かれたWebベースのオーディオプレーヤシステムです
 Twitter開発者サイトからConsumer Key・Consumer Secretを取得し，書き込む
 
 ## Libraries
+
+### [GNU LESSER GENERAL PUBLIC LICENSE Version 3](http://www.gnu.org/licenses/lgpl.html)
+
+* [PHP Google two-factor authentication module](http://www.idontplaydarts.com/2011/07/google-totp-two-factor-authentication-for-php/)
 
 ### [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
@@ -48,4 +54,4 @@ Twitter開発者サイトからConsumer Key・Consumer Secretを取得し，書�
 
 ---
 
-Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.

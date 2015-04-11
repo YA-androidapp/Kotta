@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
+<!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
 <meta content="width=device-width, initial-scale=0.6" name="viewport">
 
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css" />

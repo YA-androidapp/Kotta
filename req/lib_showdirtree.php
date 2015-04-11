@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 function showdirtree($tree){
  global $arguments, $base_dir, $base_uri, $confs, $depth1, $folders;
 

@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 if ( (stristr($_REQUEST['mode'], 'fav') !== FALSE)
   && (stristr($_SESSION['mode'], 'fav') !== FALSE)
   && ($_REQUEST['favnum'] == '')
@@ -62,6 +62,10 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
     <tr>
      <td>PW</td>
      <td><input type="password" id="pw" name="pw" value="<?php echo ($_REQUEST['pw']!='') ? $_REQUEST['pw'] : @$_SESSION['pw']; ?>" style="width:200px;" /></td>
+    </tr>
+    <tr>
+     <td>OTP PW</td>
+     <td><input type="password" id="pw2" name="pw2" size="6" maxlength="6" /></td>
     </tr>
     <tr>
      <td>twitter</td>

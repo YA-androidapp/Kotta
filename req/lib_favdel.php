@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
  if (file_exists($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkdel'])) {
   if ( !is_dir($base_dirfav.'/') ) { die('(!) 引数が不正です favdel-1'); }
   $title = (getmp3info($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkdel'])[0] != '') ? getmp3info($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkdel'])[0] : basename($arguments['linkdel']);

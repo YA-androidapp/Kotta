@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
+<!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
 <?php if ( $_REQUEST['header_menu'] != '1' ) { ?>
   <img height="128px" width="128px" src="icon/kotta.png" />
   <div id="wrapper_headerlist">
@@ -7,6 +7,7 @@
    [
    User:<input type="text" id="id" name="id" title="User" value="<?php echo $id; ?>" style="width:100px;">
    Password:<input type="password" id="pw" name="pw" title="Password" value="<?php echo $pw; ?>" style="width:100px;">
+   <input type="password" id="pw2" name="pw2" title="OTP Password" size="6" maxlength="6">
    ]
    <br>
    ||

@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 header("Content-Type: audio/x-mpegurl");
 echo ($arguments['m3uextended']!='0') ? '#EXTM3U'."\n\n" : '';
 

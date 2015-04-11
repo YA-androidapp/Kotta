@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
  if ( !is_dir($base_dirfav.'/') ) { die('(!) 引数が不正です favfdel-1'); }
  if ( !preg_match("/^[_a-zA-Z0-9][-_a-zA-Z0-9]*$/", $arguments['favnum'])){ die('(!) 引数が不正です favfdel-2'); }
  $favfile = $base_dirfav.'/'.$id.'_'.$arguments['favnum'].'.cgi';

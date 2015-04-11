@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
+<!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
   <div id="copyrights_list">
    <div class="toggle" onclick="jQuery('#control #copyrights_list .kotta').toggle()">Kotta</div>
    <ul class="kotta">

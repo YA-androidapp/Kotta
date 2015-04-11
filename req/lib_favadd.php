@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
  if (file_exists($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkadd'])) {
   $fav_exists = 0;
   if ( !is_dir($base_dirfav.'/') ) { mkdir($base_dirfav.'/', '0777', TRUE); }

@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
+<!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
 <?php if ( $arguments["mode"] == "music" ) { ?>
 <script type="text/javascript" src="js/audiojs/audio.js"></script>
 <script type="text/javascript" src="js/kirinlyric/kirinlyric.js"></script>

@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
+<!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
 <script type="text/javascript">
 function pullfavnum() {
  var mytimer = null;
