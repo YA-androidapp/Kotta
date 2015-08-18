@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 require_once(realpath(__DIR__).'/conf/index.php');
 
 $errcode = 0;
