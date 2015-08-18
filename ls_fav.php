@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
 error_reporting(0);
 require_once(dirname(__FILE__).'/conf/index.php');
@@ -28,6 +28,7 @@ if ( (isset($_SERVER['PHP_AUTH_PW'])) && ($_SERVER['PHP_AUTH_PW'] != '') ) {
 }
 
 require_once(realpath(__DIR__).'/conf/index.php');
+require_once(dirname(__FILE__).'/req/get_new_files.php');
 require_once(dirname(__FILE__).'/req/mp3tag_getid3.php');
 $pwdfile = 'pwd/'.$id.'.cgi';
 if ( file_exists($pwdfile) ) {
@@ -38,8 +39,11 @@ if ( file_exists($pwdfile) ) {
   } elseif ( $_SESSION['favnum'] != '' ) { $favnum = $_SESSION['favnum'];
   } else                                 { $favnum = ''; }
 
+if ( $favnum === '_recently_added' ) {
+  $line = getNewFiles($base_dir);
+} else {
   $line = file('fav/'.$id.'_'.$favnum.'.cgi', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
-
+}
   @ini_set('zlib.output_compression', 'Off');
   @ini_set('output_buffering', 'Off');
   @ini_set('output_handler', '');

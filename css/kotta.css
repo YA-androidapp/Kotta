@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. */
+/* Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. */
 
 body{color:#666;line-height:1em;}
 h1{color:#333;margin:0px;padding:10px 3px 10px;}
@@ -68,4 +68,3 @@ a{color:#333;text-decoration:none;}
 #control>div #slider{margin:0px 0px auto 10px;width:80%;}
 #control input[type=button]{height:30px;width:18%;}
 #control div.toggle{border:1px solid #666;}
-#control #copyrights_list{display:none;}

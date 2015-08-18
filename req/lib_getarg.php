@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 
  $arguments = array();
 
@@ -24,8 +24,7 @@
 
  if ( $arguments['favnum'] != '' ) {
   if ( !file_exists('fav/'.$id.'_'.$arguments['favnum'].'.cgi') ) {
-   if ( ($arguments['mode'] != 'favfadd')
-     && ($arguments['favnum'] != '_recently_played') ) {
+   if ( ($arguments['mode'] != 'favfadd') && ($arguments['favnum'] != '_recently_played') && ($arguments['favnum'] != '_recently_added') ) {
     die('引数が不正です getarg-3 '.$arguments['mode']);
    }
   }

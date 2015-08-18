@@ -1,5 +1,5 @@
 <?php
-// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
 error_reporting(0);
 require_once(dirname(__FILE__).'/conf/index.php');
@@ -35,6 +35,7 @@ if ( file_exists($pwdfile) ) {
  if ( ($pw !== '') && ($pw === $tpassword) ) {
   $base_dirfav = 'fav/';
   $favnumarr = glob($base_dirfav.'/'.$id.'_*.cgi');
+  $favnumarr[] = $base_dirfav.'/'.$id.'__recently_added.cgi';
 
   $keywords = array();
 
