@@ -1,15 +1,13 @@
 <?php
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
-error_reporting(0);
-require("../conf/tweet.php");
-require("config_id_oauth_consumer.php");
-require("twitteroauth.php");
+require('../conf/tweet.php');
+require('twitteroauth.php');
 libxml_use_internal_errors(true);
 
 if($_SESSION['oauth_token']===NULL && $_SESSION['oauth_token_secret']===NULL){
 
  $to = new TwitterOAuth($consumer_key,$consumer_secret);
- $tok = $to->getRequestToken($myurl."callback.php");
+ $tok = $to->getRequestToken($myurl.'callback.php');
  $token = $tok['oauth_token'];
  $_SESSION['request_token'] = $token;
  $_SESSION['request_token_secret'] = $tok['oauth_token_secret'];
@@ -26,7 +24,7 @@ if($_SESSION['oauth_token']===NULL && $_SESSION['oauth_token_secret']===NULL){
  $_SESSION['access_token_secret'] = $access_token_secret;
 
  $touser = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
- $requser = $touser->OAuthRequest("https://api.twitter.com/1.1/account/verify_credentials.json","GET");
+ $requser = $touser->OAuthRequest('https://api.twitter.com/1.1/account/verify_credentials.json','GET');
  $jsonuser = json_decode($requser, true, 512, JSON_BIGINT_AS_STRING);
  $_SESSION['oa_user_id'] = (string)$jsonuser['id'];
  $_SESSION['oa_user_name'] = (string)$jsonuser['name'];
@@ -56,7 +54,7 @@ if($_SESSION['oauth_token']===NULL && $_SESSION['oauth_token_secret']===NULL){
  $_SESSION['oa_profile_sidebar_border_color'] = (string)$jsonuser['profile_sidebar_border_color'];
 
  $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
- $req0 = $to->OAuthRequest("https://api.twitter.com/1.1/application/rate_limit_status.json","GET",array("resources"=>"statuses"));
+ $req0 = $to->OAuthRequest('https://api.twitter.com/1.1/application/rate_limit_status.json','GET',array('resources'=>'statuses'));
  $json0 = json_decode($req0, true, 512, JSON_BIGINT_AS_STRING);
 
  if ($json0['resources']['statuses']['/statuses/oembed']['remaining'] < 10){
@@ -64,7 +62,7 @@ if($_SESSION['oauth_token']===NULL && $_SESSION['oauth_token_secret']===NULL){
   $result .= ' statuses/oembed: ';
   $result .= ' remaining:'.$json0['resources']['statuses']['/statuses/oembed']['remaining'];
   $result .= '/limit:'.$json0['resources']['statuses']['/statuses/oembed']['limit'];
-  $result .= ' (reset:'.date("Y/m/d H:i:s", $json0['resources']['statuses']['/statuses/oembed']['reset']).')';
+  $result .= ' (reset:'.date('Y/m/d H:i:s', $json0['resources']['statuses']['/statuses/oembed']['reset']).')';
   die($result);
  } else {
   $_SESSION['remaining_hits'] = $json0['resources']['statuses']['/statuses/oembed']['remaining'];

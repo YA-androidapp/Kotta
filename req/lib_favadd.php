@@ -2,9 +2,9 @@
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
  if (file_exists($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkadd'])) {
   $fav_exists = 0;
-  if ( !is_dir($base_dirfav.'/') ) { mkdir($base_dirfav.'/', '0777', TRUE); }
+  if ( !is_dir($base_dirfav) ) { mkdir($base_dirfav, '0777', TRUE); }
   $title = (getmp3info($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkadd'])[0] != '') ? getmp3info($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkadd'])[0] : basename($arguments['linkadd']);
-  $favfile = $base_dirfav.'/'.$id.'_'.$arguments['favnum'].'.cgi';
+  $favfile = $base_dirfav.$id.'_'.$arguments['favname'].'.cgi';
   if ( !is_file($favfile) ) { touch($favfile); }
   @chmod($base_dirfav, 0777);
   @chmod($favfile, 0777);

@@ -3,28 +3,28 @@
 
  $arguments = array();
 
- if ($_REQUEST['dir']=='') {
-  $arguments['dir'] = '';
+ if ($_REQUEST['dirname']=='') {
+  $arguments['dirname'] = '';
   $real_path = '';
  } else {
-  $arguments['dir'] = $_REQUEST['dir'];
-  $real_path = realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dir']);
+  $arguments['dirname'] = $_REQUEST['dirname'];
+  $real_path = realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dirname']);
   if (!file_exists($real_path))                                                         { die('引数が不正です getarg-1');
   } elseif (stripos($real_path.((mb_substr($real_path,-1)=='/')?'':'/'),$base_dir)!==0) { die('引数が不正です getarg-2');
   }
  }
 
- if       ( $_REQUEST['favnum'] !== NULL )       { $arguments['favnum'] = $_REQUEST['favnum'];
- } else                                          { $arguments['favnum'] = ''; }
+ if       ( $_REQUEST['favname'] !== NULL )      { $arguments['favname'] = $_REQUEST['favname'];
+ } else                                          { $arguments['favname'] = ''; }
 
  if       ( $_REQUEST['mode'] == 'simple' )      { $_SESSION['mode']  = ( $_REQUEST['mode'] = '' ); }
  if       ( $_REQUEST['mode'] != '' )            { $arguments['mode'] = ( $_SESSION['mode'] = $_REQUEST['mode'] );
  } elseif ( $_SESSION['mode'] != '' )            { $arguments['mode'] = $_SESSION['mode'];
  } else                                          { $arguments['mode'] = ''; }
 
- if ( $arguments['favnum'] != '' ) {
-  if ( !file_exists('fav/'.$id.'_'.$arguments['favnum'].'.cgi') ) {
-   if ( ($arguments['mode'] != 'favfadd') && ($arguments['favnum'] != '_recently_played') && ($arguments['favnum'] != '_recently_added') ) {
+ if ( $arguments['favname'] != '' ) {
+  if ( !file_exists('fav/'.$id.'_'.$arguments['favname'].'.cgi') ) {
+   if ( ($arguments['mode'] != 'favfadd') && ($arguments['favname'] != '_recently_played') && ($arguments['favname'] != '_recently_added') ) {
     die('引数が不正です getarg-3 '.$arguments['mode']);
    }
   }

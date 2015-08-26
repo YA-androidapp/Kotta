@@ -4,24 +4,24 @@
 for ($i = 0; $i < count(@$_FILES['uploadfile']['name']); $i++) {
  $upload_result = '';
  if (strlen($_FILES['uploadfile']['name'][$i]) > 0) {
-  $moveTo = $base_dir.'/'.$arguments['dir'].'/'.$_FILES['uploadfile']['name'][$i];
+  $moveTo = $base_dir.'/'.$arguments['dirname'].'/'.$_FILES['uploadfile']['name'][$i];
   $checkImage = @getimagesize($_FILES['uploadfile']['tmp_name'][$i]);
   if ($checkImage !== FALSE) {
-   echo '<img src="'.str_replace($base_dir, $baseuri, $moveTo).'">'."\n";
+   echo '<img src=\''.str_replace($base_dir, $baseuri, $moveTo).'\'>';
   }
   echo basename($moveTo);
   if ($_FILES['uploadfile']['size'][$i] > 1024*1024) {
-   $upload_result .= 'ファイルサイズを1MB以下にしてください。<br>'."\n";
+   $upload_result .= 'ファイルサイズを1MB以下にしてください。<br>';
   } else if ($_FILES['uploadfile']['size'][$i] == 0) {
-   $upload_result .= 'ファイルが存在しません。<br>'."\n";
+   $upload_result .= 'ファイルが存在しません。<br>';
   } else {
    if (move_uploaded_file($_FILES['uploadfile']['tmp_name'][$i], $moveTo)) {
-    echo 'をアップロードしました。<br>'."\n";
+    echo 'をアップロードしました。<br>';
    } else {
-    echo 'のアップロードに失敗しました。<br>'."\n";
+    echo 'のアップロードに失敗しました。<br>';
    }
   }
-  if ( $upload_result != '' ) { echo '　'.$upload_result.'<br>'."\n"; }
+  if ( $upload_result != '' ) { echo '　'.$upload_result.'<br>'; }
  }
 }
 */
@@ -57,8 +57,8 @@ class UploadHandler
 
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
-            'upload_dir' => $base_dir.'/'.$arguments['dir'].'/',
-            'upload_url' => $baseuri.'/'.$arguments['dir'].'/',
+            'upload_dir' => $base_dir.'/'.$arguments['dirname'].'/',
+            'upload_url' => $baseuri.'/'.$arguments['dirname'].'/',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -607,13 +607,13 @@ class UploadHandler
                 if (!preg_match($this->options['inline_file_types'], $file_name)) {
                     header('Content-Description: File Transfer');
                     header('Content-Type: application/octet-stream');
-                    header('Content-Disposition: attachment; filename="'.$file_name.'"');
+                    header('Content-Disposition: attachment; filename=\''.$file_name.'\'');
                     header('Content-Transfer-Encoding: binary');
                 } else {
                     // Prevent Internet Explorer from MIME-sniffing the content-type:
                     header('X-Content-Type-Options: nosniff');
                     header('Content-Type: '.$this->get_file_type($file_path));
-                    header('Content-Disposition: inline; filename="'.$file_name.'"');
+                    header('Content-Disposition: inline; filename=\''.$file_name.'\'');
                 }
                 header('Content-Length: '.$this->get_file_size($file_path));
                 header('Last-Modified: '.gmdate('D, d M Y H:i:s T', filemtime($file_path)));
@@ -645,7 +645,7 @@ class UploadHandler
     public function head() {
         header('Pragma: no-cache');
         header('Cache-Control: no-store, no-cache, must-revalidate');
-        header('Content-Disposition: inline; filename="files.json"');
+        header('Content-Disposition: inline; filename=\'files.json\'');
         // Prevent Internet Explorer from MIME-sniffing the content-type:
         header('X-Content-Type-Options: nosniff');
         if ($this->options['access_control_allow_origin']) {
@@ -689,7 +689,7 @@ class UploadHandler
         $size =  $content_range ? $content_range[3] : null;
         $info = array();
         if ($upload && is_array($upload['tmp_name'])) {
-            // param_name is an array identifier like "files[]",
+            // param_name is an array identifier like 'files[]',
             // $_FILES is a multi-dimensional array:
             foreach ($upload['tmp_name'] as $index => $value) {
                 $info[] = $this->handle_file_upload(
@@ -703,7 +703,7 @@ class UploadHandler
                 );
             }
         } else {
-            // param_name is a single object identifier like "file",
+            // param_name is a single object identifier like 'file',
             // $_FILES is a one-dimensional array:
             $info[] = $this->handle_file_upload(
                 isset($upload['tmp_name']) ? $upload['tmp_name'] : null,

@@ -38,5 +38,5 @@ var NoRefererRedirect = function(url){
 	
 	//@end
 	
-	location.href = url;
+	//location.href = url;
 };

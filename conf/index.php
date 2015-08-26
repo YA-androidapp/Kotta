@@ -6,8 +6,8 @@ $base_dir = '/path/to/musics/';
 $base_dirfav = 'fav/';
 $base_uri = '/musics/';
 
-$enable_autocomplete_dir = 1;
-$enable_autocomplete_favnum = 1;
+$enable_autocomplete_dirname = 1;
+$enable_autocomplete_favname = 1;
 $rpadd_max = 50;
 
 $confs = array();
@@ -26,6 +26,6 @@ $confs['sns_format'] = '@home %t / %a [ %l ] #nowplaying';
  // %s => time_s
  // %t => title
 
-$allowedExtensions = array("mp3");
+$allowedExtensions = array('mp3');
 $allowedSizeLimit = 10 * 1024 * 1024;
 set_time_limit(600);

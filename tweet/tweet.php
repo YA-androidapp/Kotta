@@ -1,8 +1,9 @@
 <?php
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
+set_time_limit(600);
 if ($_REQUEST['tweettext'] != '') { $_SESSION['tweettext'] = $_REQUEST['tweettext']; }
-require_once("config_oauth.php");
+require_once('config_oauth.php');
 
 $tweettext = '';
 $N = '';
@@ -16,7 +17,7 @@ if ($_SESSION['tweettext'] != '') {
 } else { die('引数が不正です'); }
 
 if ( $_REQUEST['pass_autotweet'] != '1') {
- die('<a href="tweet.php?pass_autotweet=1&tweettext='.urlencode($tweettext).'">@'.$_SESSION['oa_screen_name'].': 『'.$tweettext.'』をツイートします</a>');
+ die('<a href=\'tweet.php?pass_autotweet=1&tweettext='.urlencode($tweettext).'\'>@'.$_SESSION['oa_screen_name'].': 『'.$tweettext.'』をツイートします</a>');
 }
 
 if (is_numeric($_REQUEST['N'])) { $N = $_REQUEST['N']; }
@@ -48,7 +49,7 @@ if ( ($N != '') && ($E != '') ) {
  $property['long'] = $E;
 }
 
-$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",$property);
+$req = $to->OAuthRequest('https://api.twitter.com/1.1/statuses/update.json','POST',$property);
 $json = json_decode($req, true, 512, JSON_BIGINT_AS_STRING);
 if ( isset($json['text']) ) {
  echo 'ツイートしました！　@'.$_SESSION['oa_screen_name'].'　メッセージ: '.$json['text'];
@@ -57,6 +58,6 @@ if ( isset($json['text']) ) {
 } else {
  echo 'ツイートできませんでした　@'.$_SESSION['oa_screen_name'].'　メッセージ: '.$json['text'];
  if ( $json['errors']['message'] != '' ) {
-  echo "<br>\n<br>\n".' (エラー内容: '.$json['errors']['message'].')';
+  echo '<br><br>(エラー内容: '.$json['errors']['message'].')';
  }
 }

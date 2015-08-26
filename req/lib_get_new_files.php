@@ -1,9 +1,9 @@
-<!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
 <?php
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 function getNewFiles($dir) {
  global $base_dir;
- $dir = str_replace("\0", '', $dir);
- $dir = realpath($dir);
+ $dirname = str_replace("\0", '', $dir);
+ $dirname = realpath($dir);
  if ( is_dir($dir) ) {
   if ( stripos($dir.((mb_substr($dir,-1)=='/')?'':'/'),$base_dir) === 0 ) {
    $cmd = 'find '.$dir.' -mtime -1 2>&1';

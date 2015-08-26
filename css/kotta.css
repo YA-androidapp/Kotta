@@ -67,4 +67,5 @@ a{color:#333;text-decoration:none;}
 #control>div #num{display:none;width:0;}
 #control>div #slider{margin:0px 0px auto 10px;width:80%;}
 #control input[type=button]{height:30px;width:18%;}
-#control div.toggle{border:1px solid #666;}
+#control input.half[type=button]{height:30px;width:9%;}
+div.toggle{border:1px solid #666;}

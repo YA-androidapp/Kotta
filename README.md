@@ -11,22 +11,26 @@ PHPで書かれたWebベースのオーディオプレーヤシステムです
 
 ### pwd/<USERNAME>.cgi
 
-ファイルの中身がパスワードであるようなファイル( <USERNAME>.cgi )を作成し，pwdディレクトリに設置する
+ファイルの中身がパスワードであるようなテキストファイル( <USERNAME>.cgi )を作成し，pwdディレクトリに設置する
 
-同じディレクトリ内に，ファイルの中身が半角英数16文字であるファイル( <USERNAME>_otp.cgi )を設置すると二段階認証を利用できるようになる（使用できる文字は 234567QWERTYUIOPASDFGHJKLZXCVBNM のみ）
+同じディレクトリ内に，ファイルの中身が半角英数16文字であるテキストファイル( <USERNAME>_otp.cgi )を設置すると二段階認証を利用できるようになる（使用できる文字は 234567QWERTYUIOPASDFGHJKLZXCVBNM のみ）
 
-### conf/index.php及びtweet/config.php
+### conf/index.php
 
-1.$base_uriを，サーバのドメイン・音楽ファイルが置かれているディレクトリに合わせて変更
-2.$base_dirを，音楽ファイルが置かれているディレクトリに合わせて変更
+1. $base_uriを，サーバのドメイン・音楽ファイルが置かれているディレクトリに合わせて変更
+2. $base_dirを，音楽ファイルが置かれているディレクトリに合わせて変更
 
-### config_id_oauth_consumer.php
+### conf/tweet.php
 
 Twitter開発者サイトからConsumer Key・Consumer Secretを取得し，書き込む
 
+---
+
+__アップデートの場合は，conf,pwdディレクトリ以外を上書きしてください__
+
 ## Libraries
 
-### [GNU LESSER GENERAL PUBLIC LICENSE Version 3](http://www.gnu.org/licenses/lgpl.html)
+### [GNU GENERAL PUBLIC LICENSE Version 3](http://www.gnu.org/licenses/lgpl.html)
 
 * [PHP Google two-factor authentication module](http://www.idontplaydarts.com/2011/07/google-totp-two-factor-authentication-for-php/)
 
