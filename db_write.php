@@ -40,6 +40,7 @@ try {
  }
  $db->commit();
  $db = null;
+ echo '完了しました<br>';
 } catch (Exception $e) {
  die('Exception: ' . $e->getMessage());
 }

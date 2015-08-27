@@ -107,14 +107,15 @@ function pullls(url) {
             lines.forEach(function(line){
               if( isJSON(line) ){
                 var json = JSON.parse(line);
-                $('ol#sort_list').append(
+                if(typeof json.title !== 'undefined'){
+                 $('ol#sort_list').append(
 
  '<li class=\'appended\' id=\'track'+i+'\'>'
 +'<a class=\'title\' href=\'#\' data-src=\''+json.datasrc+'\' title=\''+json.datasrc+'\'>'+json.title+'</a>　　'
 +'<span onClick=\'window.open("?mode=favmenu&favcheck='+json.favcheck+'", "favmenu");return false;\'>'
 +'<img id=\'bookmarkstar'+i+'\' class=\'fava\' src=\'icon/fava.png\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\'>'
 +'</span>　'
-+(( json.favname == '' )?'':('<span onClick=\'if(window.confirm("'
++(( typeof json.favname === 'undefined' )?'':('<span onClick=\'if(window.confirm("'
 +json.title+' ('+json.basename+')をお気に入りから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); $.get("?id='+json.id+'&pw='+json.pw+'&mode=favdel&favname='+json.favname+'&linkdel='
 +json.favcheck
 +'", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 1000, cls: status }); });return false; }\'>'
@@ -129,7 +130,8 @@ function pullls(url) {
 +'</a> (No.<span class=\'number\'>'+json.number+'</span>) [<span class=\'genre\'>'+json.genre+'</span>] '
 +'<span class=\'time\'><span class=\'time_m\'>'+json.time_m+'</span>:<span class=\'time_s\'>'+json.time_s+'</span></span></span><br></li>'
 
-                );
+                 );
+                }
               }
               i++;
             });

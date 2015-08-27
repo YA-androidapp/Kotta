@@ -61,7 +61,6 @@
    </select>
    <input type='text' id='sqllike' name='sqllike' title='SQL:Like' style='width:150px;'>
    <a href='#' onClick='var url="ls_sql.php?sqlwhere="+jQuery("select#sqlwhere").val()+"&sqllike="+jQuery("input#sqllike").val();pullls(url);'>[Add]</a>
-   <hr />
 <?php if ( $_REQUEST['header_menu'] != '1' ) { ?>
   </div>
   <div style='clear:both;'></div>

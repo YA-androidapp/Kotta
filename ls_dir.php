@@ -1,7 +1,7 @@
 <?php
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once(realpath(__DIR__).'/req/lib_auth_idpw.php');
 
@@ -66,7 +66,7 @@ function getdirtree($path){
           'id' => $id,
           'favnum' => '',
           'artistdirtmp' => str_replace(array($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '/'.basename($rpath.'/'.$file)), array('', ''), realpath($rpath.'/'.$file)),
-          'artistv' => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),
+          'artist' => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),
           'album' => htmlspecialchars($getmp3info_parts[2], ENT_QUOTES),
           'number' => htmlspecialchars($getmp3info_parts[3], ENT_QUOTES),
           'genre' => htmlspecialchars($getmp3info_parts[4], ENT_QUOTES),

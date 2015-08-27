@@ -263,6 +263,8 @@
   });
   jQuery('#control_play').click(function(e) {
      e.preventDefault();
+
+     jQuery('#control_play').val( (audio.playing)?'Play':'Pause')
      audio.playPause();
   });
   jQuery('#control_next').click(function(e) {
@@ -284,6 +286,7 @@
    if (first !== void 0) {
     audio.load(first);
     kirinload();
+    jQuery('#control_play').val( (audio.playing)?'Play':'Pause')
     audio.play();
    }
   // audio.js用 終わり

@@ -38,10 +38,10 @@
    <div class='toggle' onclick='jQuery("#control #playcontrol").toggle()'>Control</div>
    <form id='playcontrol' style='background-color:transparent;'>
     <input type='button' id='control_prev' value='Prev' title='Ctrl+←/Shift+←'>
-    <input type='button' id='control_play' value='P/P' title='Ctrl+Space/Shift+Space'>
-    <input type='button' id='control_twtr' value='t'>
-    <input type='button' id='control_pulldirname' class='half' value='d'>
-    <input type='button' id='control_pullfavname' class='half' value='f'>
+    <input type='button' id='control_play' value='' title='Ctrl+Space/Shift+Space'>
+    <input type='button' id='control_twtr' class='half' value='t' title='Tweet'>
+    <input type='button' id='control_pulldirname' class='half' value='d' title='Reload Directories list'>
+    <input type='button' id='control_pullfavname' class='half' value='f' title='Reload Favorites list'>
     <input type='button' id='control_next' value='Next' title='Ctrl+→/Shift+→'>
     <div id='volume_control' title='100'>
      Volume<br />
