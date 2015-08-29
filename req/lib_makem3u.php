@@ -6,7 +6,7 @@ echo ($arguments['m3uextended']!='0') ? '#EXTM3U'."\n\n" : '';
 makem3ulist($dirarr);
 
 function makem3ulist($tree){
- global $arguments, $base_dir, $base_uri_s, $baseuri, $confs, $depth1, $folders;
+ global $arguments, $base_dir, $base_uri, $confs, $depth1, $folders;
 
  if (!is_array($tree)) { return false; }
 
@@ -27,7 +27,7 @@ function makem3ulist($tree){
        if (   ($confs['filter_genre']=='') || (    ($confs['filter_genre']!='')&&    (preg_match('/^'.$confs['filter_genre'].'$/isu',$getmp3info_parts[4])==1)) ) {
         // コメント:メタデータ
         echo ($arguments['m3uextended']!='0') ? '#EXTINF:'.($getmp3info_parts[5] * 60 + $getmp3info_parts[6]).','.$getmp3info_parts[0]."\n" : '';
-        echo str_replace($base_dir, str_replace('https://','http://',$base_uri_s) , realpath($value))."\n";
+        echo (empty($_SERVER['HTTPS'])?'http://':'https://').$_SERVER['HTTP_HOST'].str_replace($base_dir, $base_uri , realpath($value))."\n";
         flush();
        }
       }

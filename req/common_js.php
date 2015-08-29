@@ -20,15 +20,8 @@
    $.get('<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?id='+jQuery('input#id').val()+'&pw='+jQuery('input#pw').val()+'&mode=favfadd&favname='+jQuery('input#favname').val(),
     function(data){
      var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
-     $.notifyBar({ html: data, delay: 1000, cls: status });
-     $.get('<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?id='+jQuery('input#id').val()+'&pw='+jQuery('input#pw').val()+'&header_menu=1',
-      function(data){
-       $('div#wrapper_headerlist').html(data);
-       jQuery('#wrapper_headerlist #dirslist').hide()
-       pullname('dir');
-       pullname('fav');
-      }
-     );
+     $.notifyBar({ html: data, delay: 1000, cssClass: status });
+     pullname('fav');
     }
    );
   });
@@ -38,25 +31,20 @@
     $.get('<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?id='+jQuery('input#id').val()+'&pw='+jQuery('input#pw').val()+'&mode=favfdel&favname='+jQuery('select#favname').val(),
      function(data){
       var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
-      $.notifyBar({ html: data, delay: 1000, cls: status });
-      $.get('<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?id='+jQuery('input#id').val()+'&pw='+jQuery('input#pw').val()+'&header_menu=1',
-       function(data){
-        $('div#wrapper_headerlist').html(data);
-        jQuery('#wrapper_headerlist #dirslist').hide()
-        pullname('dir');
-        pullname('fav');
-       }
-      );
+      $.notifyBar({ html: data, delay: 1000, cssClass: status });
+      pullname('fav');
      }
     );
     return false;
    }
   });
 
-  jQuery('#wrapper_headerlist #dirslist').hide()
-  jQuery('#control #playcontrol').hide()
-  jQuery('#control #checkbox_auto').hide()
-  jQuery('#control #pagesearch').hide()
-  jQuery('#control #copyrights_list').hide();
+  jQuery('#wrapper_headerlist #playcontrol').hide()
+  jQuery('#wrapper_headerlist #checkbox_auto').hide()
+  jQuery('#wrapper_headerlist #pagesearch').hide()
+  jQuery('#wrapper_headerlist #tweet').hide()
+  jQuery('#wrapper_headerlist #dirs').hide()
+  jQuery('#wrapper_headerlist #sql').hide()
+  jQuery('#wrapper_headerlist #copyrights_list').hide();
  });
 </script>

@@ -63,13 +63,15 @@ function pullname(mode) {
         return ($(a).text() > $(b).text())?1:-1;
        })
       );
+      $.notifyBar({ html: ((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧を読み込みました', delay: 1000, cls: 'success' });
      }, 100);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
-      console.log('error');
-      console.log('textStatus: '+textStatus);
-      console.log('errorThrown: '+errorThrown);
-      clearInterval(mytimer);
+     console.log('error');
+     console.log('textStatus: '+textStatus);
+     console.log('errorThrown: '+errorThrown);
+     clearInterval(mytimer);
+     $.notifyBar({ html: ((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧の読み込みに失敗しました: '+textStatus, delay: 1000, cls: 'error' });
     }
   });
 }
@@ -118,7 +120,7 @@ function pullls(url) {
 +(( typeof json.favname === 'undefined' )?'':('<span onClick=\'if(window.confirm("'
 +json.title+' ('+json.basename+')をお気に入りから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); $.get("?id='+json.id+'&pw='+json.pw+'&mode=favdel&favname='+json.favname+'&linkdel='
 +json.favcheck
-+'", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 1000, cls: status }); });return false; }\'>'
++'", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 1000, cssClass: status }); });return false; }\'>'
 +'<img id=\'bookmarkstar'+i+'\' class=\'favr\' src=\'icon/favr.png\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\'>'
 +'</span>'
 ))
@@ -145,16 +147,19 @@ function pullls(url) {
       }, 100);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
-      console.log('error');
-      console.log('textStatus: '+textStatus);
-      console.log('errorThrown: '+errorThrown);
-      clearInterval(mytimer);
+     console.log('error');
+     console.log('textStatus: '+textStatus);
+     console.log('errorThrown: '+errorThrown);
+     clearInterval(mytimer);
+     $.notifyBar({ html: textStatus, delay: 1000, cls: 'error' });
     }
   });
 }
 
 jQuery(function() {
+ pullname('fav');
+ setTimeout(function(){
   pullname('dir');
-  pullname('fav');
+ }, 3000);
 });
 </script>

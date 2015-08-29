@@ -18,8 +18,6 @@ if ( ( isset($_REQUEST['output_path']) ) && ( $_REQUEST['output_path'] !== '' ) 
 if ( $_REQUEST['menu'] == '1' ) {
  $flag_authed = 1;
  require_once(realpath(__DIR__).'/req/lib_menu.php');die('');
-} elseif ( $_REQUEST['header_menu'] == '1' ) {
- require_once(realpath(__DIR__).'/req/lib_header.php');die('');
 }
 
 require_once(realpath(__DIR__).'/req/lib_getdirtree.php');

@@ -39,7 +39,7 @@ function showdirtree($tree){
             echo '  　<img id="bookmarkstar'.$i.'" class="fava" src="icon/fava.png" alt="お気に入りの管理" title="お気に入りの管理">　';
             echo ' </span>';
             if ( $arguments['favname'] != '' ) {
-             echo ' <span onClick=\'if(window.confirm("'.htmlspecialchars($getmp3info_parts[0], ENT_QUOTES).' ('.basename($value).')をお気に入りから外してよろしいですか？")){ $(function(){$("#track'.$i.'").remove()}); $.get("?id='.$arguments['id'].'&pw='.$arguments['pw'].'&mode=favdel&favname='.$arguments['favname'].'&linkdel='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 1000, cls: status }); });return false; }\'>';
+             echo ' <span onClick=\'if(window.confirm("'.htmlspecialchars($getmp3info_parts[0], ENT_QUOTES).' ('.basename($value).')をお気に入りから外してよろしいですか？")){ $(function(){$("#track'.$i.'").remove()}); $.get("?id='.$arguments['id'].'&pw='.$arguments['pw'].'&mode=favdel&favname='.$arguments['favname'].'&linkdel='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 1000, cssClass: status }); });return false; }\'>';
              echo '  <img id=\'bookmarkstar'.$i.'\' class=\'favr\' src=\'icon/favr.png\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\'>';
              echo ' </span>';
             }
@@ -78,7 +78,7 @@ function showdirtree($tree){
      }
     }
    } else {
-    echo '<li><a class=\'artist\' href=\''.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $baseuri, realpath($value)).'\' class=\'title\' title=\''.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $baseuri, realpath($value)).'\'>'.basename($value);
+    echo '<li><a class=\'artist\' href=\''.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($value)).'\' class=\'title\' title=\''.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($value)).'\'>'.basename($value);
     echo '</a>';
     echo '<span onClick=\'window.open("?mode=favmenu&favcheck='.urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'", "favmenu");return false;\'>';
     echo ' <img id=\'bookmarkstar'.$i.'\' height=\'10px\' src=\'icon/fava.png\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\'>';

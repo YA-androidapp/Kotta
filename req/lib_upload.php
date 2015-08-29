@@ -7,7 +7,7 @@ for ($i = 0; $i < count(@$_FILES['uploadfile']['name']); $i++) {
   $moveTo = $base_dir.'/'.$arguments['dirname'].'/'.$_FILES['uploadfile']['name'][$i];
   $checkImage = @getimagesize($_FILES['uploadfile']['tmp_name'][$i]);
   if ($checkImage !== FALSE) {
-   echo '<img src=\''.str_replace($base_dir, $baseuri, $moveTo).'\'>';
+   echo '<img src=\''.str_replace($base_dir, $base_uri, $moveTo).'\'>';
   }
   echo basename($moveTo);
   if ($_FILES['uploadfile']['size'][$i] > 1024*1024) {
@@ -53,12 +53,12 @@ class UploadHandler
     );
 
     function __construct($options = null, $initialize = true) {
-        global $arguments, $base_dir, $baseuri, $confs, $depth1, $folders;
+        global $arguments, $base_dir, $base_uri, $confs, $depth1, $folders;
 
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
             'upload_dir' => $base_dir.'/'.$arguments['dirname'].'/',
-            'upload_url' => $baseuri.'/'.$arguments['dirname'].'/',
+            'upload_url' => $base_uri.'/'.$arguments['dirname'].'/',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
