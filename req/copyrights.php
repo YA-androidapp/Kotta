@@ -36,7 +36,7 @@ YA
      <a href='#' onClick='NoRefererRedirect("http://kolber.github.io/audiojs/")'>kolber/audiojs</a> |
      <a href='#' onClick='NoRefererRedirect("https://github.com/kirinsan-org/kirinlyric")'>kirinlyric</a> |
      <a href='#' onClick='NoRefererRedirect("https://github.com/yatt/jquery.base64")'>jquery.base64</a> |
-     <a href='#' onClick='NoRefererRedirect("https://github.com/carhartl/jquery-cookie")'>jquery-cookie</a> |
+     <a href='#' onClick='NoRefererRedirect("https://github.com/js-cookie/js-cookie")'>JavaScript Cookie</a> |
      <a href='#' onClick='NoRefererRedirect("http://www.whoop.ee/posts/2013-04-05-the-resurrection-of-jquery-notify-bar/")'>jQuery-Notify-bar</a>
     </li>
     <li>

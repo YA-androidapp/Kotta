@@ -8,7 +8,7 @@
 
 <script type='text/javascript' src='js/jquery-base64/jquery.base64.js'></script>
 
-<script type='text/javascript' src='js/jquery-cookie/jquery.cookie.js'></script>
+<script type='text/javascript' src='js/js-cookie/js.cookie.js'></script>
 
 <script type='text/javascript' src='js/noreferer/noreferer.js'></script>
 

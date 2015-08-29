@@ -7,14 +7,6 @@
 <script type='text/javascript'>
  $(function () {
 
-  // jQuery('input#enable_loop')           .prop('checked', (jQuery.cookie('enable_loop')=='1')?true:false);
-  // jQuery('input#enable_allloop')        .prop('checked', (jQuery.cookie('enable_allloop')=='1')?true:false);
-  // jQuery('input#enable_recently_played').prop('checked', (jQuery.cookie('enable_recently_played')=='1')?true:false);
-  // jQuery('input#enable_autotweet')      .prop('checked', (jQuery.cookie('enable_autotweet')=='1')?true:false);
-  // jQuery('input#enable_notification')   .prop('checked', (jQuery.cookie('enable_notification')=='1')?true:false);
-  // jQuery('input#enable_muted')          .prop('checked', (jQuery.cookie('enable_muted')=='1')?true:false);
-  // jQuery('input#enable_lyric')          .prop('checked', (jQuery.cookie('enable_lyric')=='1')?true:false);
-
   // ヘッダメニュー用
 
   document.getElementById('audio').loop = jQuery('#checkbox_auto #enable_loop').prop('checked');
@@ -422,42 +414,42 @@ if ( ($arguments['sort'] != '') && ($arguments['sort'] != 'none') ) {
   // 認証用
   jQuery('input#id').blur(function(e) {
    if(jQuery('input#id').val()!=''){
-    jQuery.cookie('id', jQuery('input#id').val());
+    Cookies.set('id', jQuery('input#id').val());
    }
   });
   jQuery('input#pw').blur(function(e) {
    if(jQuery('input#pw').val()!=''){
-    jQuery.cookie('pw', jQuery('input#pw').val());
+    Cookies.set('pw', jQuery('input#pw').val());
    }
   });
   if(jQuery('input#id').val()!=''){
-   jQuery.cookie('id', jQuery('input#id').val());
+   Cookies.set('id', jQuery('input#id').val());
   }
   if(jQuery('input#pw').val()!=''){
-   jQuery.cookie('pw', jQuery('input#pw').val());
+   Cookies.set('pw', jQuery('input#pw').val());
   }
   // 認証用 終わり
 
   jQuery('input#enable_loop').click(function(e) {
-   jQuery.cookie('enable_loop', ((jQuery('input#enable_loop').prop('checked'))?'1':'0'));
+   Cookies.set('enable_loop', ((jQuery('input#enable_loop').prop('checked'))?'1':'0'));
   });
   jQuery('input#enable_allloop').click(function(e) {
-   jQuery.cookie('enable_allloop', ((jQuery('input#enable_allloop').prop('checked'))?'1':'0'));
+   Cookies.set('enable_allloop', ((jQuery('input#enable_allloop').prop('checked'))?'1':'0'));
   });
   jQuery('input#enable_recently_played').click(function(e) {
-   jQuery.cookie('enable_recently_played', ((jQuery('input#enable_recently_played').prop('checked'))?'1':'0'));
+   Cookies.set('enable_recently_played', ((jQuery('input#enable_recently_played').prop('checked'))?'1':'0'));
   });
   jQuery('input#enable_autotweet').click(function(e) {
-   jQuery.cookie('enable_autotweet', ((jQuery('input#enable_autotweet').prop('checked'))?'1':'0'));
+   Cookies.set('enable_autotweet', ((jQuery('input#enable_autotweet').prop('checked'))?'1':'0'));
   });
   jQuery('input#enable_notification').click(function(e) {
-   jQuery.cookie('enable_notification', ((jQuery('input#enable_notification').prop('checked'))?'1':'0'));
+   Cookies.set('enable_notification', ((jQuery('input#enable_notification').prop('checked'))?'1':'0'));
   });
   jQuery('input#enable_muted').click(function(e) {
-   jQuery.cookie('enable_muted', ((jQuery('input#enable_muted').prop('checked'))?'1':'0'));
+   Cookies.set('enable_muted', ((jQuery('input#enable_muted').prop('checked'))?'1':'0'));
   });
   jQuery('input#enable_lyric').click(function(e) {
-   jQuery.cookie('enable_lyric', ((jQuery('input#enable_lyric').prop('checked'))?'1':'0'));
+   Cookies.set('enable_lyric', ((jQuery('input#enable_lyric').prop('checked'))?'1':'0'));
   });
 
  });
