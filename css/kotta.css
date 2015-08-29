@@ -37,6 +37,7 @@ form#checkbox_auto{margin:10px;padding:5px;width:300px;font-size:xx-small;width:
 form#pagesearch #pagesearchtype{width:50px;}
 form#pagesearch #pageq,form#pagesearch #pagesort{width:95%;}
 
+iframe#dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
 
 #wrapper{clear:both;margin:30px auto;width:900px;}
 #wrapper #audiojs_wrapper0{margin:30px auto;padding:10px;}

@@ -37,8 +37,10 @@ __アップデートの場合は，conf,pwdディレクトリ以外を上書き�
 ### [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 * [audiojs](http://kolber.github.io/audiojs/)
-* [jQuery-Notify-bar](http://www.whoop.ee/posts/2013-04-05-the-resurrection-of-jquery-notify-bar/)
 * [kirinlyric](https://github.com/kirinsan-org/kirinlyric)
+* [JavaScript Cookie](https://github.com/js-cookie/js-cookie)
+* [jquery.base64](https://github.com/yatt/jquery.base64)
+* [jQuery-Notify-bar](http://www.whoop.ee/posts/2013-04-05-the-resurrection-of-jquery-notify-bar/)
 
 ### [Mozilla MPL](http://www.mozilla.org/MPL/2.0/)
 

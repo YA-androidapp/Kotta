@@ -147,11 +147,6 @@
    <div id='sql'>
     <table id='header_dirmenu'>
      <tr>
-      <td colspan='3'>
-       <small><small><a href='db_write.php'>DB-Rebuilding</a></small></small>
-      </td>
-     </tr>
-     <tr>
       <td>
        <select id='sqlwhere' name='sqlwhere' title='SQL:Where' style='width:100px;'>
         <option value='album'>Album</option>
@@ -169,12 +164,24 @@
        <a href='#' onClick='var url="ls_sql.php?sqlwhere="+jQuery("select#sqlwhere").val()+"&sqllike="+jQuery("input#sqllike").val();pullls(url);'>[Add]</a>
       </td>
      </tr>
+<?php if (file_exists('conf/musics.sqlite3')) { ?>
+<?php if ( (time() - filemtime('conf/musics.sqlite3')) > (0) ) { ?>
+     <tr>
+      <td colspan='3'>
+       <small><small><a href='db_write.php' target='dbwrite'>DB-Rebuilding</a></small></small>
+      </td>
+     </tr>
+     <tr>
+      <td colspan='3'>
+       <iframe src='' id='dbwrite' name='dbwrite'></iframe>
+      </td>
+     </tr>
+<?php } ?>
+<?php } ?>
     </table>
    </div>
-   <div class='toggle' onclick='jQuery("#wrapper_headerlist #copyrights").toggle()'>About</div>
-   <div id='copyrights'>
-    <?php require_once(realpath(__DIR__).'/copyrights.php'); ?>
-   </div>
+   <div class='toggle' onclick='jQuery("#wrapper_headerlist #copyrights_list").toggle()'>About</div>
+   <?php require_once(realpath(__DIR__).'/copyrights.php'); ?>
   </div>
   <div style='clear:both;'></div>
 
