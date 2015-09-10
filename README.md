@@ -48,6 +48,7 @@ __アップデートの場合は，conf,pwdディレクトリ以外を上書き�
 
 ### Other Licence
 
+* [jQuery](https://github.com/jquery/jquery)
 * [twitteroauth](https://github.com/abraham/twitteroauth)
 
 ## Licence
