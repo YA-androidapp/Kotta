@@ -41,7 +41,7 @@ YA
     </li>
     <li>
      <a href='#' onClick='NoRefererRedirect("http://www.mozilla.org/MPL/2.0/")'>Mozilla MPL</a>:
-     <a href='#' onClick='NoRefererRedirect("http://getid3.sourceforge.net/")'>getID3()</a>
+     <a href='#' onClick='NoRefererRedirect("http://getid3.sourceforge.net/")'>getID3</a>
     </li>
     <li>
      Other Licence:

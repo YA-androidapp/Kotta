@@ -1,5 +1,5 @@
 <!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
-  <img id='kotta' src='icon/kotta.png' />
+  <img id='kotta' src='icon/kotta_s.png' />
   <div id='wrapper_headerlist'>
    ||
    [
@@ -102,7 +102,7 @@
        <textarea id='tweettext'></textarea>
       </td>
       <td>
-       <img src='icon/twtr2.png' alt='twitterに投稿する' id='twtr' title='twitterに投稿する' onClick='window.open("<?php echo str_replace(basename($_SERVER['SCRIPT_NAME']), 'tweet/tweet.php', $_SERVER['SCRIPT_NAME']); ?>?pass_autotweet=1&tweettext="+encodeURIComponent(jQuery("#tweettext").val()), "sns");return false;'>
+       <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfcBAgLLBS2oqjpAAACWklEQVQ4T6VUv2/TQBh9d86PpnaApkKIgdIJspUFsbEwM3ZgYEFILEiwsSIWxAD/AHP/DhYkSlVUVAmEBEIVQi1CSVOROKnt2Mf7znFxXAeE+qLns+7ue/e97z5HPd8emPOehjE4GRTwo59ArX0dmvjEaikUfzqkVpQojM1xzpovY2RHir78PDCJvExOESTkMAY0xxoflfziDIhH2a9T5fQEYSgjM3t42cWDtguv4iDgCdn6LGYaFEz48od+nOCS50BNslo546BDxSHnMwaFmDwpKDWUDFKG9B9JDSaYp99lHrA0r3GBvOg6tiOkJFlMnurpx76toUCSGsUGV09XcXNpLp2cgReffJutzqwQ8qbDJMF4wsjSgJr/RKuqWVtzFJvF20sJKCCUFgroJ+cYAdX3/Bg/6VHYHcV4vRfiTSe0KWWxGdWj7QNjeKuyKCn7bKbrrRpWlxtW8NVugGcfBlisy6rsUWjUFBZZz9y5R6BlyczYyxALkmH+w2kvVFBvKDRdDY90XYUaxWWvxBSp7m9JhoyUBCgU83HO0Xi8csoKCnZoebMXwuF7VSt8GYzx/lcEj/uKUPfe7Zt8RqK76ydYu9ZCc2KzDE9Yhp1RhGphS2o5Rylsq6FxZ72H3qGkXo5wLLc6HStUtze6aYaFk2Tu+0GCG2fruMI68tux8xW63OiO8dYPsEAHOXMW6tbGvmH7HBMUSM+GvPU++ykriwzNGjBH5aKYQK2ud6ZqWAbewxR4mTOh2af8MtRfGbJP8yzbI/82UnJ1d7Nnvh1GdFzi+T8gLtteFb8BfXnMH2QhvcwAAAAASUVORK5CYII=' alt='twitterに投稿する' id='twtr' title='twitterに投稿する' onClick='window.open("<?php echo str_replace(basename($_SERVER['SCRIPT_NAME']), 'tweet/tweet.php', $_SERVER['SCRIPT_NAME']); ?>?pass_autotweet=1&tweettext="+encodeURIComponent(jQuery("#tweettext").val()), "sns");return false;'>
       </td>
      </tr>
     </table>

@@ -114,19 +114,16 @@ function pullls(url) {
 
  '<li class=\'appended\' id=\'track'+i+'\'>'
 +'<a class=\'title\' href=\'#\' data-src=\''+json.datasrc+'\' title=\''+json.datasrc+'\'>'+json.title+'</a>　　'
-+'<span onClick=\'window.open("?mode=favmenu&favcheck='+json.favcheck+'", "favmenu");return false;\'>'
-+'<img id=\'bookmarkstar'+i+'\' class=\'fava\' src=\'icon/fava.png\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\'>'
-+'</span>　'
-+(( typeof json.favname === 'undefined' )?'':('<span onClick=\'if(window.confirm("'
++'<span class=\'starw\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'window.open("?mode=favmenu&favcheck='+json.favcheck+'", "favmenu");return false;\'>'
++'☆</span>　'
++(( typeof json.favname === 'undefined' )?'':('<span class=\'star\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\' onClick=\'if(window.confirm("'
 +json.title+' ('+json.basename+')をお気に入りから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); $.get("?id='+json.id+'&pw='+json.pw+'&mode=favdel&favname='+json.favname+'&linkdel='
 +json.favcheck
 +'", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 1000, cssClass: status }); });return false; }\'>'
-+'<img id=\'bookmarkstar'+i+'\' class=\'favr\' src=\'icon/favr.png\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\'>'
-+'</span>'
++'★</span>'
 ))
-+'<span onClick=\'if(window.confirm("'+json.title+' ('+json.basename+')をプレイビューから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); return false; }\'>'
-+'<img id=\'delicon'+i+'\' class=\'delicon\' src=\'icon/del.png\' alt=\'プレイビューから外します\' title=\'プレイビューから外します\'>'
-+'</span>'
++'<span class=\'del\' id=\'delicon'+i+'\' alt=\'プレイビューから外します\' title=\'プレイビューから外します\' onClick=\'if(window.confirm("'+json.title+' ('+json.basename+')をプレイビューから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); return false; }\'>'
++'×</span>'
 +'<br>　<a class=\'artist\' href=\'?favname=&mode=music&dirname='+json.artistdirtmp+'\'>'+json.artist+'</a> &gt; '
 +'<span class=\'trackinfo\'><a class=\'album\' href=\'?favname=&mode=music&dirname='+json.artistdirtmp+'&filter_album='+json.album+'\'>'+json.album
 +'</a> (No.<span class=\'number\'>'+json.number+'</span>) [<span class=\'genre\'>'+json.genre+'</span>] '

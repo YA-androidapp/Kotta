@@ -48,14 +48,17 @@ form#playcontrol input[type=button].half[type=button]{height:5%;width:10%;}
 h1{color:#333;margin:0px;padding:10px 3px 10px;}
 h1 em{font-style:normal;}
 
-img#kotta{width:128px;height:128px;}
+img#kotta{width:64px;height:64px;}
 img#kotta_s{width:16px;height:16px;}
-img#twtr{width:16px;height:16px;}
+img#twtr{width:20px;height:20px;}
 
 input[type=text]#num{display:none;width:0;}
 
 p#config_oauth{font-size:x-small;padding:10px;width:300px;background-color:#09f;text-align:center;border:#00f;}
 
+span.del{color:red;}
+span.star{color:yellow;}
+span.starw{color:orange;}
 span.xxsmall{font-size:xx-small;}
 
 table#favmenu {text-align:center;width:95%;}

@@ -43,13 +43,11 @@
   $dirarr = array();
   $dirarr = file($val, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
   if ( !in_array($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['favcheck'], $dirarr) ) {
-   echo ' <td> </td><td><span onClick=\'if(window.confirm("'.$title.'をブックマーク: 「'.$favname.'」に追加してよろしいですか？")){ $(function(){ $.get("'.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&mode=favadd&favname='.$favname.'&linkadd='.urlencode($arguments['favcheck']).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>';
-   echo '  <img id=\'bookmarkstar'.$i.'\' height=\'10px\' src=\'icon/fava.png\' alt=\'ブックマーク: 「'.$favname.'」に追加します\' title=\'ブックマーク: 「'.$favname.'」に追加します\'>';
-   echo ' </span></td>';
+   echo ' <td> </td><td><span class=\'starw\' id=\'bookmarkstar'.$i.'\' alt=\'ブックマーク: 「'.$favname.'」に追加します\' title=\'ブックマーク: 「'.$favname.'」に追加します\' onClick=\'if(window.confirm("'.$title.'をブックマーク: 「'.$favname.'」に追加してよろしいですか？")){ $(function(){ $.get("'.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&mode=favadd&favname='.$favname.'&linkadd='.urlencode($arguments['favcheck']).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>';
+   echo ' ☆</span></td>';
   } else {
-   echo ' <td><span onClick=\'if(window.confirm("'.$title.'をブックマーク: 「'.$favname.'」から解除してよろしいですか？")){ $(function(){ $.get("'.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&mode=favdel&favname='.$favname.'&linkdel='.urlencode($arguments['favcheck']).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>';
-   echo '  <img id=\'bookmarkstar'.$i.'\' height=\'10px\' src=\'icon/favr.png\' alt=\'ブックマーク: 「'.$favname.'」から解除します\' title=\'ブックマーク: 「'.$favname.'」から解除します\'>';
-   echo ' </span></td><td> </td>';
+   echo ' <td><span class=\'star\' id=\'bookmarkstar'.$i.'\' alt=\'ブックマーク: 「'.$favname.'」から解除します\' title=\'ブックマーク: 「'.$favname.'」から解除します\' onClick=\'if(window.confirm("'.$title.'をブックマーク: 「'.$favname.'」から解除してよろしいですか？")){ $(function(){ $.get("'.$_SERVER['SCRIPT_NAME'].'?id='.$id.'&mode=favdel&favname='.$favname.'&linkdel='.urlencode($arguments['favcheck']).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>';
+   echo ' ★</span></td><td> </td>';
   }
    echo ' </tr>';
  }
