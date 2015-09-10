@@ -1,67 +1,106 @@
 @charset "UTF-8";
 /* Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. */
 
-body{color:#666;line-height:1em;}
-h1{color:#333;margin:0px;padding:10px 3px 10px;}
-h1 em{font-style:normal;}
 a{color:#333;text-decoration:none;}
 
+body{color:#666;line-height:1em;}
+
+div#copyrights_list{margin:10px;padding:5px;width:95%;}
+div#slider{margin:0px 0px auto 10px;width:80%;}
 div.toggle{border:1px solid #666;}
+div.clearboth{clear:both;}
+
+div#logout{background-color:white;width:300px;}
+
+div#wrapper{clear:both;margin:30px auto;width:95%;}
+div#wrapper #audiojs_wrapper0{margin:30px auto;padding:10px;}
+
+div#wrapper_headerlist{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;float:right;font-size:x-small;height:300px;margin:10px;overflow-y:scroll;padding:5px;width:95%;}
+
+div#wrapper_headerlist input[type=text]#id{width:20%;}
+div#wrapper_headerlist input[type=password]#pw{width:20%;}
+div#wrapper_headerlist li{margin:0 5px;}
+div#wrapper_headerlist table#header_tweet{font-size:x-small;height:5%;margin:10px;width:95%;}
+div#wrapper_headerlist table#header_tweet img{cursor:pointer;}
+div#wrapper_headerlist table#header_tweet textarea#tweettext{height:5%;font-size:large;width:95%;}
+div#wrapper_headerlist ul{margin:0 10px;padding:0;}
+
+div#wrapper_list{clear:both;margin:10px auto;}
+div#wrapper_list a.title{color:#333;font-size:larger;}
+div#wrapper_list ol{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;color:#666;font-size:medium;list-style:decimal-leading-zero inside;margin:10px auto;padding:5px;width:95%;}
+div#wrapper_list ol li{border-bottom:1px solid #ccc;cursor:pointer;padding:10px 5px 10px;position:relative;}
+div#wrapper_list ol li img.fava{height:20px;}
+div#wrapper_list ol li img.favr{height:10px;}
+div#wrapper_list ol li img.delicon{height:10px;}
+div#wrapper_list ol li.playing{color:#000;font-size:x-large;text-shadow:1px 1px 0px rgba(255, 255, 255, 0.3);}
+div#wrapper_list ol li.playing img.fava{height:30px;}
+div#wrapper_list ol li.playing img.favr{height:20px;}
+
+form#checkbox_auto{margin:10px;padding:5px;width:95%;font-size:xx-small;}
+form#pagesearch{margin:10px;padding:5px;width:95%;}
+form#pagesearch input[type=text]#pageq{width:95%;}
+form#pagesearch select#pagesearchtype{width:95%;}
+form#pagesearch select#pagesort{width:95%;}
+form#playcontrol{margin:10px;padding:5px;width:95%;}
+form#playcontrol input[type=button]{height:5%;width:20%;}
+form#playcontrol input[type=button].half[type=button]{height:5%;width:10%;}
+
+h1{color:#333;margin:0px;padding:10px 3px 10px;}
+h1 em{font-style:normal;}
+
+img#kotta{width:128px;height:128px;}
+img#kotta_s{width:16px;height:16px;}
+img#twtr{width:16px;height:16px;}
 
 input[type=text]#num{display:none;width:0;}
-div#slider{margin:0px 0px auto 10px;width:80%;}
 
-#wrapper_headerlist{
- border:1px solid #333;
- border-radius:5px;
- box-shadow:0 0 8px #333;
- float:right;
- font-size:x-small;
- height:200px;
- margin:10px;
- overflow-y:scroll;
- padding:5px;
- width:60%;
-}
-#wrapper_headerlist ul{margin:0 10px;padding:0;}
-#wrapper_headerlist li{margin:0 5px;}
+p#config_oauth{font-size:x-small;padding:10px;width:300px;background-color:#09f;text-align:center;border:#00f;}
 
-#wrapper_headerlist #header_tweet{font-size:x-small;height:60px;margin:10px;width:95%;}
-#wrapper_headerlist #header_tweet textarea#tweettext{height:50px;font-size:large;width:95%;}
-#wrapper_headerlist #header_tweet img{cursor:pointer;}
+span.xxsmall{font-size:xx-small;}
 
-form#playcontrol,form#pagesearch,div#copyrights_list{margin:10px;padding:5px;width:300px;}
-form#playcontrol input[type=button]{height:30px;width:18%;}
-form#playcontrol input[type=button].half[type=button]{height:30px;width:9%;}
-form#checkbox_auto{margin:10px;padding:5px;width:300px;font-size:xx-small;width:180px;}
-form#pagesearch #pagesearchtype{width:50px;}
-form#pagesearch #pageq,form#pagesearch #pagesort{width:95%;}
+table#favmenu {text-align:center;width:95%;}
+table#favmenu input[type=text]#favname{width:40%;}
+table#favmenu select#favname{width:40%;}
+table#favmenu td#favf{text-align:right;}
+table#favmenu td.favmenustar{width:10%;}
+table#header_favmenu{width:95%;}
+table#header_favmenu input[type=text]#favname{width:85%;}
+table#header_favmenu select#favname{width:85%;}
+table#header_dirmenu{width:95%;}
+table#header_dirmenu input[type=text]#dir{width:95%;}
+table#header_dirmenu td.dir{width:75%;}
+table#header_sqlmenu{width:95%;}
+table#header_sqlmenu iframe#dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
+table#header_sqlmenu input[type=text]#sqllike{width:95%;}
+table#header_sqlmenu select#sqlwhere{width:95%;}
 
-iframe#dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
+table#menu{font-size:x-small;width:95%;}
+table#menu input[type=text]#depth{width:95%;}
+table#menu input[type=text]#dirname{width:95%;}
+table#menu input[type=text]#favname{width:95%;}
+table#menu input[type=text]#filter_album{width:95%;}
+table#menu input[type=text]#filter_artist{width:95%;}
+table#menu input[type=text]#filter_dir{width:95%;}
+table#menu input[type=text]#filter_file{width:95%;}
+table#menu input[type=text]#filter_genre{width:95%;}
+table#menu input[type=text]#filter_title{width:95%;}
+table#menu input[type=text]#filter_track{width:95%;}
+table#menu input[type=text]#id{width:95%;}
+table#menu input[type=text]#m3uuri{width:95%;}
+table#menu input[type=text]#numlast{width:45%;}
+table#menu input[type=text]#numsince{width:45%;}
+table#menu input[type=password]#pw{width:95%;}
+table#menu input[type=text]#sns_format{width:95%;}
 
-#wrapper{clear:both;margin:30px auto;width:900px;}
-#wrapper #audiojs_wrapper0{margin:30px auto;padding:10px;}
-
-#wrapper_list{
- clear:both;
- margin:10px auto;
-}
-#wrapper_list a.title{color:#333;font-size:larger;}
-#wrapper_list ol{
- border:1px solid #333;
- border-radius:5px;
- box-shadow:0 0 8px #333;
- color:#666;
- font-size:medium;
- list-style:decimal-leading-zero inside;
- margin:10px auto;
- padding:5px;
- width:90%;
-}
-#wrapper_list ol li{border-bottom:1px solid #ccc;cursor:pointer;padding:10px 5px 10px;position:relative;}
-#wrapper_list ol li img.fava{height:20px;}
-#wrapper_list ol li img.favr{height:10px;}
-#wrapper_list ol li img.delicon{height:10px;}
-#wrapper_list ol li.playing{color:#000;font-size:x-large;text-shadow:1px 1px 0px rgba(255, 255, 255, 0.3);}
-#wrapper_list ol li.playing img.fava{height:30px;}
-#wrapper_list ol li.playing img.favr{height:20px;}
+table#menu select#enable_allloop{width:95%;}
+table#menu select#enable_autotweet{width:95%;}
+table#menu select#enable_loop{width:95%;}
+table#menu select#enable_lyric{width:95%;}
+table#menu select#enable_muted{width:95%;}
+table#menu select#enable_notification{width:95%;}
+table#menu select#enable_recently_played{width:95%;}
+table#menu select#pass_autotweet{width:95%;}
+table#menu select#mode{width:95%;}
+table#menu select#sort{width:95%;}
+table#menu td.item{width:20%;}
+table#menu th{text-align:right;background-color:rgb(136, 170, 255);}}

@@ -8,7 +8,7 @@
  <body>
 
    <center>
-    <p style='font-size:x-small;padding:10px;width:300px;background-color:#09f;text-align:center;border:#00f;'>
+    <p id='config_oauth'>
      <br>下のボタンを押すと、twitter社の認証画面に移動します。<br>アドレスバーがtwitter.comに変わったことを確認したうえで<br>ユーザー名とパスワードを入力してください。<br><br>
      <small>Streaming APIを必要としない機能を使う場合には、<br>当サービス(<?php echo htmlspecialchars($myurl, ENT_QUOTES); ?>)内で<br>ユーザー名などを入力していただく必要はありません。</small><br><br><br>
      <a href='<?php echo htmlspecialchars($to->getAuthorizeURL($token), ENT_QUOTES); ?>'><img src='login_twtr.png'></a><br><br>

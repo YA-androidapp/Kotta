@@ -1,6 +1,9 @@
 <?php
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
+
+if ( (isset($_REQUEST['check']) == false) || ($_REQUEST['check'] == '0') ) { die('<small><small><a href="db_write.php?check=1">DB-Rebuilding</a></small></small>'); }
+
 ignore_user_abort(true);
 set_time_limit(0);
 error_reporting(0);

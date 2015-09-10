@@ -1,5 +1,5 @@
 <!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
-<meta content='width=device-width, initial-scale=0.6' name='viewport'>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <link rel='stylesheet' type='text/css' href='https://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css' />
 
@@ -17,5 +17,3 @@
 <?php } ?>
 
 <link rel='stylesheet' type='text/css' href='css/kotta.css'>
-
-<meta name='viewport' content='width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0' />

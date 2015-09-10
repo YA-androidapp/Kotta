@@ -10,7 +10,7 @@ require_once('config_oauth.php');
   <title>Kottaのログイン情報は保持したままtwitterからログアウトする</title>
  </head>
  <body>
-  <div style='background-color:white;width:300px;'>
+  <div id='logout'>
 <?php
 $oa_screen_name_tmp = $_SESSION['oa_screen_name'];
 echo '<ul>';

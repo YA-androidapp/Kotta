@@ -1,10 +1,10 @@
 <!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
-  <img height='128px' width='128px' src='icon/kotta.png' />
+  <img id='kotta' src='icon/kotta.png' />
   <div id='wrapper_headerlist'>
    ||
    [
-   User:<input type='text' id='id' name='id' title='User' value='<?php echo $id; ?>' size='6' maxlength='6'>
-   Password:<input type='password' id='pw' name='pw' title='Password' value='<?php echo $pw; ?>' size='6' maxlength='6'>
+   User:<input type='text' id='id' name='id' title='User' value='<?php echo $id; ?>'>
+   Password:<input type='password' id='pw' name='pw' title='Password' value='<?php echo $pw; ?>'>
    <input type='password' id='pw2' name='pw2' title='OTP Password' size='6' maxlength='6'>
    ]
    <br>
@@ -15,7 +15,7 @@
 <?php if ( $arguments['mode'] == 'music' ) { ?>
    <div id='controls'>
     <div class='toggle' onclick='jQuery("#wrapper_headerlist #playcontrol").toggle()'>Control</div>
-    <form id='playcontrol' style='background-color:transparent;'>
+    <form id='playcontrol'>
      <input type='button' id='control_prev' value='Prev' title='Ctrl+←/Shift+←'>
      <input type='button' id='control_play' value='' title='Ctrl+Space/Shift+Space'>
      <input type='button' id='control_twtr' class='half' value='t' title='Tweet'>
@@ -36,7 +36,7 @@
    </div>
    <div id='confs'>
     <div class='toggle' onclick='jQuery("#wrapper_headerlist #checkbox_auto").toggle()'>Confs</div>
-    <form id='checkbox_auto' style='background-color:transparent;'>
+    <form id='checkbox_auto'>
      <input type='checkbox' accesskey='o' id='enable_loop'<?php if($arguments['enable_loop']==1){echo ' checked="checked"';} ?>>１曲ループ(<u title='Alt+Shift+O'>O</u>)<br>
      <input type='checkbox' accesskey='a' id='enable_allloop'<?php if($arguments['enable_allloop']!=0){echo ' checked="checked"';} ?>>全曲ループ(<u title='Alt+Shift+A'>A</u>)<br>
      <input type='checkbox' accesskey='r' id='enable_recently_played'<?php if($arguments['enable_recently_played']!=0){echo ' checked="checked"';} ?>>「最近聞いた曲」を自動更新(<u title='Alt+Shift+R'>R</u>)<br>
@@ -48,7 +48,7 @@
    </div>
    <div id='filtersort'>
     <div class='toggle' onclick='jQuery("#wrapper_headerlist #pagesearch").toggle()'>Filtering and Sorting</div>
-    <form id='pagesearch' style='background-color:transparent;'>
+    <form id='pagesearch'>
      <table id='header_tweet'>
       <tr>
        <td>
@@ -102,7 +102,7 @@
        <textarea id='tweettext'></textarea>
       </td>
       <td>
-       <img height='20px' src='icon/twtr2.png' alt='twitterに投稿する' title='twitterに投稿する' onClick='window.open("<?php echo str_replace(basename($_SERVER['SCRIPT_NAME']), 'tweet/tweet.php', $_SERVER['SCRIPT_NAME']); ?>?pass_autotweet=1&tweettext="+encodeURIComponent(jQuery("#tweettext").val()), "sns");return false;'>
+       <img src='icon/twtr2.png' alt='twitterに投稿する' id='twtr' title='twitterに投稿する' onClick='window.open("<?php echo str_replace(basename($_SERVER['SCRIPT_NAME']), 'tweet/tweet.php', $_SERVER['SCRIPT_NAME']); ?>?pass_autotweet=1&tweettext="+encodeURIComponent(jQuery("#tweettext").val()), "sns");return false;'>
       </td>
      </tr>
     </table>
@@ -113,11 +113,11 @@
     <table id='header_favmenu'>
      <tr>
       <td>
-       <input type='text' id='favname' name='favname' title='名前' style='width:100px;'>
+       <input type='text' id='favname' name='favname' title='名前'>
        <a href='#' id='favfadd'>Create</a>
       </td>
       <td>
-       <select id='favname' name='favname' style='width:100px;'>
+       <select id='favname' name='favname'>
         <option value=''>-</option>
 <?php if (count($favnamearr2)>0) { foreach ($favnamearr2 as $val3) { echo '<option value="'.$val3.'" id="favmenu_'.$val3.'">'.$val3.'</option>'; } } ?>
        </select>
@@ -126,13 +126,13 @@
      </tr>
     </table>
    </div>
-   <div class='toggle' onclick='jQuery("#wrapper_headerlist #dirs").toggle();'>Directories(autocomplete)</div>
+   <div class='toggle' onclick='jQuery("#wrapper_headerlist #dirs").toggle();'>Directories</div>
    <div id='dirs'>
     <ul id='dirslist'></ul>
     <table id='header_dirmenu'>
      <tr>
-      <td>
-       <input type='text' id='dir' name='dir' title='ディレクトリ名' style='width:250px;'>
+      <td class='dir'>
+       <input type='text' id='dir' name='dir' title='ディレクトリ名'>
       </td>
       <td>
        <a href='#' onClick='var url="ls_dir.php?dirname="+jQuery("input#dirname").val();pullls(url);'>[Add]</a>
@@ -145,10 +145,10 @@
    </div>
    <div class='toggle' onclick='jQuery("#wrapper_headerlist #sql").toggle();'>SQL</div>
    <div id='sql'>
-    <table id='header_dirmenu'>
+    <table id='header_sqlmenu'>
      <tr>
       <td>
-       <select id='sqlwhere' name='sqlwhere' title='SQL:Where' style='width:100px;'>
+       <select id='sqlwhere' name='sqlwhere' title='SQL:Where'>
         <option value='album'>Album</option>
         <option value='artist'>Artist</option>
         <option value='basename'>Filename</option>
@@ -158,7 +158,7 @@
        </select>
       </td>
       <td>
-       <input type='text' id='sqllike' name='sqllike' title='SQL:Like' style='width:150px;'>
+       <input type='text' id='sqllike' name='sqllike' title='SQL:Like'>
       </td>
       <td>
        <a href='#' onClick='var url="ls_sql.php?sqlwhere="+jQuery("select#sqlwhere").val()+"&sqllike="+jQuery("input#sqllike").val();pullls(url);'>[Add]</a>
@@ -168,12 +168,7 @@
 <?php if ( (time() - filemtime('conf/musics.sqlite3')) > (0) ) { ?>
      <tr>
       <td colspan='3'>
-       <small><small><a href='db_write.php' target='dbwrite'>DB-Rebuilding</a></small></small>
-      </td>
-     </tr>
-     <tr>
-      <td colspan='3'>
-       <iframe src='' id='dbwrite' name='dbwrite'></iframe>
+       <iframe src='db_write.php?check=0' id='dbwrite' name='dbwrite'></iframe>
       </td>
      </tr>
 <?php } ?>
@@ -183,7 +178,7 @@
    <div class='toggle' onclick='jQuery("#wrapper_headerlist #copyrights_list").toggle()'>About</div>
    <?php require_once(realpath(__DIR__).'/copyrights.php'); ?>
   </div>
-  <div style='clear:both;'></div>
+  <div class='clearboth'></div>
 
 <?php if ( ($arguments['mode'] == '') || ($arguments['mode'] == 'music') ) { ?>
   <div id='wrapper'>

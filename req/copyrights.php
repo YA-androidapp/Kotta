@@ -4,7 +4,7 @@
    <ul class='kotta'>
     <li>
      <a href='https://github.com/YA-androidapp/Kotta'>Kotta</a>
-     <a href='https://github.com/YA-androidapp/Kotta'><img height='16px' width='16px' src='icon/kotta_s.png' /></a>
+     <a href='https://github.com/YA-androidapp/Kotta'><img id='kotta_s' src='icon/kotta_s.png' /></a>
      Copyright &copy; <?php echo date('Y'); ?> 
 <script type='text/javascript'>
 <!--
