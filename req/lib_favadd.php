@@ -15,8 +15,10 @@
    array_splice($dirarr, array_search($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkadd'],$dirarr), 1);
    $fav_exists = 1;
   }
-  while ( count($dirarr) >= $rpadd_max ) {
-   array_pop($dirarr);
+  if ( $arguments['favname'] == '_recently_played' ) {
+   while ( count($dirarr) >= $rpadd_max ) {
+    array_pop($dirarr);
+   }
   }
   array_unshift($dirarr, $base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['linkadd']);
   $dirarr = array_unique($dirarr);
