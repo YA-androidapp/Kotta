@@ -1,5 +1,4 @@
-<!-- Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. -->
-<script type='text/javascript'>
+// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 function pullname(mode) {
  mode = (mode == 'fav')?'fav':'dir';
  var mytimer = null;
@@ -39,11 +38,11 @@ function pullname(mode) {
                 if(typeof nam !== 'undefined'){
                  var url = 'ls_'+mode+'.php?'+mode+'name='+nam;
                  $('ul#'+mode+'slist').append(
-                  '<li id=\''+mode+'menu_'+nam+'\'><a href=\'?id=<?php echo $id; ?>&mode=simple&'+mode+'name='+nam+'\'>'+nam+'</a>'
-                  +'<a href=\'?id=<?php echo $id; ?>&mode=music&'+mode+'name='+nam+'\'>[music]</a>'
+                  '<li id=\''+mode+'menu_'+nam+'\'><a href=\'?mode=simple&'+mode+'name='+nam+'\'>'+nam+'</a>'
+                  +'<a href=\'?mode=music&'+mode+'name='+nam+'\'>[music]</a>'
                   +'<a href=\'#\' onClick=\'pullls("'+url+'");\'>[Add]</a>'
                   +'<a href=\'#\' onClick=\'var url="db_write.php?dirname="+jQuery("input#dirname").val()+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val();window.open(url,"db");\'>[AddDB]</a>'
-                  +'<a href=\'?id=<?php echo $id; ?>&mode=makem3u&'+mode+'name='+nam+'\'>[m3u]</a></li>'
+                  +'<a href=\'?mode=makem3u&'+mode+'name='+nam+'\'>[m3u]</a></li>'
                  );
                  if(mode == 'fav'){$('select#favname').append($('<option>').html(nam).val(nam));}
                 }
@@ -152,11 +151,3 @@ function pullls(url) {
     }
   });
 }
-
-jQuery(function() {
- pullname('fav');
- setTimeout(function(){
-  pullname('dir');
- }, 3000);
-});
-</script>

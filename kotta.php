@@ -72,10 +72,9 @@ if ( $arguments['mode'] === 'makem3u' ) {
   <meta charset='utf-8'>
   <title>Kotta <?php echo $arguments['mode']; ?></title>
 <?php
-require_once(realpath(__DIR__).'/req/common_js.php');
-require_once(realpath(__DIR__).'/req/m_js.php');
-require_once(realpath(__DIR__).'/req/pull_js.php');
 require_once(realpath(__DIR__).'/req/lib_style.php');
+
+require_once(realpath(__DIR__).'/req/lib_js.php');
 ?>
  </head>
  <body>

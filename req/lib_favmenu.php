@@ -4,8 +4,8 @@
  <head>
   <meta charset='utf-8'>
   <title>Kotta Menu</title>
-   <?php require_once(realpath(__DIR__).'/common_js.php'); ?>
    <?php require_once(realpath(__DIR__).'/lib_style.php'); ?>
+   <?php require_once(realpath(__DIR__).'/lib_js.php'); ?>
    <?php require_once(realpath(__DIR__).'/mp3tag_getid3.php'); ?>
  </head>
  <body>
