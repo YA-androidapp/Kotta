@@ -56,9 +56,9 @@ input[type=text]#num{display:none;width:0;}
 
 p#config_oauth{font-size:x-small;padding:10px;width:300px;background-color:#09f;text-align:center;border:#00f;}
 
-span.del{color:red;}
-span.star{color:yellow;}
-span.starw{color:orange;}
+span.del{color:red;cursor:pointer;}
+span.star{color:yellow;cursor:pointer;}
+span.starw{color:orange;cursor:pointer;}
 span.xxsmall{font-size:xx-small;}
 
 table#favmenu {text-align:center;width:95%;}
