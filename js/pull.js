@@ -157,4 +157,13 @@ jQuery(function() {
  setTimeout(function(){
   pullname('dir');
  }, 3000);
+
+ jQuery(document).keydown(function(e) {
+  var unicode = e.charCode ? e.charCode : e.keyCode;
+  if ( unicode == 70 ) {
+   pullname('fav');
+  } else if ( unicode == 68 ) {
+   pullname('dir');
+  }
+ });
 });
