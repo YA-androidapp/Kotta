@@ -33,16 +33,10 @@ $(document).ready(function(){
  jQuery('#wrapper_headerlist #sql').hide()
  jQuery('#wrapper_headerlist #copyrights_list').hide();
 
- pullname('fav');
- setTimeout(function(){
-  pullname('dir');
- }, 3000);
 });
 
 $(function () {
 
- document.getElementById('audio').loop = jQuery('#checkbox_auto #enable_loop').prop('checked');
- document.getElementById('audio').muted = jQuery('#checkbox_auto #enable_muted').prop('checked');
  if(jQuery('#checkbox_auto #enable_lyric').prop('checked')){
   jQuery('#lyrics').show();
  } else {
@@ -50,12 +44,6 @@ $(function () {
   jQuery('#lyrics').hide();
  }
 
- jQuery('#checkbox_auto #enable_loop').change(function() {
-  document.getElementById('audio').loop = jQuery('#checkbox_auto #enable_loop').prop('checked');
- });
- jQuery('#checkbox_auto #enable_muted').change(function() {
-  document.getElementById('audio').muted = jQuery('#checkbox_auto #enable_muted').prop('checked');
- });
  jQuery('#checkbox_auto #enable_lyric').change(function() {
   if(jQuery('#checkbox_auto #enable_lyric').prop('checked')){
    // jQuery('#lyrics').show();

@@ -151,3 +151,10 @@ function pullls(url) {
     }
   });
 }
+
+jQuery(function() {
+ pullname('fav');
+ setTimeout(function(){
+  pullname('dir');
+ }, 3000);
+});

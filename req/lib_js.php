@@ -3,7 +3,9 @@
 <script type='text/javascript' src='https://code.jquery.com/ui/1.10.3/jquery-ui.min.js'></script>
 <script type='text/javascript' src='js/jQuery-Notify-bar/jquery.notifyBar.js'></script>
 
+<?php if ( ( $_REQUEST['menu'] != '1' ) && ( $arguments['mode'] != 'favmenu' ) ) { ?>
 <script type='text/javascript' src='js/pull.js'></script>
+<?php } ?>
 <script type='text/javascript' src='js/common.js'></script>
 
 <script type='text/javascript' src='js/jquery-base64/jquery.base64.js'></script>

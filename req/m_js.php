@@ -35,6 +35,15 @@
      audio.play();
     }
 
+    document.getElementById('audio').loop = jQuery('#checkbox_auto #enable_loop').prop('checked');
+    document.getElementById('audio').muted = jQuery('#checkbox_auto #enable_muted').prop('checked');
+    jQuery('#checkbox_auto #enable_loop').change(function() {
+     document.getElementById('audio').loop = jQuery('#checkbox_auto #enable_loop').prop('checked');
+    });
+    jQuery('#checkbox_auto #enable_muted').change(function() {
+     document.getElementById('audio').muted = jQuery('#checkbox_auto #enable_muted').prop('checked');
+    });
+
     if(jQuery('#checkbox_auto #enable_notification').prop('checked')){
      if(window.webkitNotifications){
       var message =
