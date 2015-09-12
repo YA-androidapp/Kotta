@@ -60,4 +60,102 @@
    }
   }
  }
+
+ // ソート用
+ var arr      = new Array();
+ var sortAsc  = function(a, b) { return a.key.localeCompare(b.key); } // 昇順
+ var sortDesc = function(a, b) { return b.key.localeCompare(a.key); } // 降順
+ function filename_u() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = basename( jQuery('a[data-src]', this).attr('data-src') );
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortAsc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function filename_d() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = basename( jQuery('a[data-src]', this).attr('data-src') );
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortDesc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function title_u() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = jQuery('a[data-src]', this).text();
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortAsc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function title_d() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = jQuery('a[data-src]', this).text();
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortDesc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function artist_u() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = jQuery('.artist', this).text();
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortAsc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function artist_d() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = jQuery('.artist', this).text();
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortDesc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function trackinfo_u() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = jQuery('.trackinfo', this).text();
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortAsc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function trackinfo_d() {
+  jQuery('ol#sort_list li').each(function(i){
+   arr[i] = new Object();
+   arr[i].key = jQuery('.trackinfo', this).text();
+   arr[i].value = jQuery(this);
+  });
+  arr.sort(sortDesc);
+  for(i = 0; i < arr.length; i++){ jQuery('ol#sort_list').append(arr[i].value); }
+ }
+ function random() {
+  jQuery('ol#sort_list li').shuffle();
+ }
+ (function(d){
+  d.fn.shuffle=function(c){
+   c=[];return this.each(function(){
+    c.push(d(this).clone(true))
+   }).each(function(a,b){
+    d(b).replaceWith(c[a=Math.floor(Math.random()*c.length)]);c.splice(a,1)
+   })
+  };d.shuffle=function(a){
+   return d(a).shuffle()
+  }
+ })(jQuery);
+<?php
+if ( ($arguments['sort'] != '') && ($arguments['sort'] != 'none') ) {
+ echo 'setTimeout(function(){ '.$arguments['sort'].'(); }, 3000);';
+}
+?>
+ // ソート用 終わり
+
 </script>

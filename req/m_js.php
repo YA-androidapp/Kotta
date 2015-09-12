@@ -103,67 +103,68 @@
    }
   });
 
- // Shortcut keys
- jQuery(document).keydown(function(e) {
-  var unicode = e.charCode ? e.charCode : e.keyCode;
-  if (e.shiftKey+e.ctrlKey != 0) {
-   if ( unicode == 39 ) {
-    var next = jQuery('ol#sort_list li.playing').next().children('a[data-src]');
-    if (!next.length) next = jQuery('ol#sort_list li a[data-src]').first();
-    next.click();
-   } else if ( unicode == 37 ) {
-    var prev = jQuery('ol#sort_list li.playing').prev().children('a[data-src]');
-    if (!prev.length) prev = jQuery('ol#sort_list li a[data-src]').last();
-    prev.click();
-   } else if ( unicode == 32 ) {
-    e.preventDefault();
-    audio.playPause();
+  // Shortcut keys
+  jQuery(document).keydown(function(e) {
+   var unicode = e.charCode ? e.charCode : e.keyCode;
+   if (e.shiftKey+e.ctrlKey != 0) {
+    if ( unicode == 39 ) {
+     var next = jQuery('ol#sort_list li.playing').next().children('a[data-src]');
+     if (!next.length) next = jQuery('ol#sort_list li a[data-src]').first();
+     next.click();
+    } else if ( unicode == 37 ) {
+     var prev = jQuery('ol#sort_list li.playing').prev().children('a[data-src]');
+     if (!prev.length) prev = jQuery('ol#sort_list li a[data-src]').last();
+     prev.click();
+    } else if ( unicode == 32 ) {
+     e.preventDefault();
+     audio.playPause();
+    }
+   } else {
+    if ( unicode == 176 ) {
+     var next = jQuery('ol#sort_list li.playing').next().children('a[data-src]');
+     if (!next.length) next = jQuery('ol#sort_list li a[data-src]').first();
+     next.click();
+    } else if ( unicode == 177 ) {
+     var prev = jQuery('ol#sort_list li.playing').prev().children('a[data-src]');
+     if (!prev.length) prev = jQuery('ol#sort_list li a[data-src]').last();
+     prev.click();
+    } else if ( unicode == 179 ) {
+     e.preventDefault();
+     audio.playPause();
+    }
    }
-  } else {
-   if ( unicode == 176 ) {
-    var next = jQuery('ol#sort_list li.playing').next().children('a[data-src]');
-    if (!next.length) next = jQuery('ol#sort_list li a[data-src]').first();
-    next.click();
-   } else if ( unicode == 177 ) {
-    var prev = jQuery('ol#sort_list li.playing').prev().children('a[data-src]');
-    if (!prev.length) prev = jQuery('ol#sort_list li a[data-src]').last();
-    prev.click();
-   } else if ( unicode == 179 ) {
-    e.preventDefault();
-    audio.playPause();
+  });
+  jQuery('#control_prev').click(function(e) {
+   var prev = jQuery('ol#sort_list li.playing').prev().children('a[data-src]');
+   if (!prev.length) prev = jQuery('ol#sort_list li a[data-src]').last();
+   prev.click();
+  });
+  jQuery('#control_play').click(function(e) {
+   e.preventDefault();
+   jQuery('#control_play').val( (audio.playing)?'Play':'Pause')
+   audio.playPause();
+  });
+  jQuery('#control_next').click(function(e) {
+   var next = jQuery('ol#sort_list li.playing').next().children('a[data-src]');
+   if (!next.length) next = jQuery('ol#sort_list li a[data-src]').first();
+   next.click();
+  });
+  // 音量調節スライダー用
+  jQuery('#volume_control #slider').slider({
+   value:100,
+   range:'min',
+   min:0,
+   max:100,
+   slide:function(event,ui){
+    jQuery('#volume_control #num').val(ui.value);
    }
-  }
- });
- jQuery('#control_prev').click(function(e) {
-    var prev = jQuery('ol#sort_list li.playing').prev().children('a[data-src]');
-    if (!prev.length) prev = jQuery('ol#sort_list li a[data-src]').last();
-    prev.click();
- });
- jQuery('#control_play').click(function(e) {
-    e.preventDefault();
-    jQuery('#control_play').val( (audio.playing)?'Play':'Pause')
-    audio.playPause();
- });
- jQuery('#control_next').click(function(e) {
-    var next = jQuery('ol#sort_list li.playing').next().children('a[data-src]');
-    if (!next.length) next = jQuery('ol#sort_list li a[data-src]').first();
-    next.click();
- });
- // 音量調節スライダー用
- jQuery('#volume_control #slider').slider({
-  value:100,
-  range:'min',
-  min:0,
-  max:100,
-  slide:function(event,ui){
-   jQuery('#volume_control #num').val(ui.value);
-  }
- });
- jQuery('#volume_control #num').val(jQuery('#volume_control #slider').slider('value'));
- jQuery('#volume_control').mouseup(function(e) {
-  audio.setVolume( jQuery('#volume_control #num').val()*0.01 );
-  jQuery('#volume_control #slider').attr('title', jQuery('#volume_control #num').val());
- });
+  });
+  jQuery('#volume_control #num').val(jQuery('#volume_control #slider').slider('value'));
+  jQuery('#volume_control').mouseup(function(e) {
+   audio.setVolume( jQuery('#volume_control #num').val()*0.01 );
+   jQuery('#volume_control #slider').attr('title', jQuery('#volume_control #num').val());
+  });
 
  });
+
 </script>

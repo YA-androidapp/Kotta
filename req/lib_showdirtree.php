@@ -54,13 +54,13 @@ function showdirtree($tree){
             echo htmlspecialchars($getmp3info_parts[2], ENT_QUOTES);
             echo '</a>';
             echo ' (No.<span class=\'number\'>';
-            echo htmlspecialchars($getmp3info_parts[3], ENT_QUOTES);
+            echo htmlspecialchars(str_pad($getmp3info_parts[3], 2, 0, STR_PAD_LEFT), ENT_QUOTES);
             echo '</span>) [<span class=\'genre\'>';
             echo htmlspecialchars($getmp3info_parts[4], ENT_QUOTES);
             echo '</span>] <span class=\'time\'><span class=\'time_m\'>';
-            echo htmlspecialchars( (($getmp3info_parts[5]<10)?('0'.$getmp3info_parts[5]):($getmp3info_parts[5])) , ENT_QUOTES);
+            echo htmlspecialchars(str_pad($getmp3info_parts[5], 2, 0, STR_PAD_LEFT), ENT_QUOTES);
             echo '</span>:<span class=\'time_s\'>';
-            echo htmlspecialchars( (($getmp3info_parts[6]<10)?('0'.$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES);
+            echo htmlspecialchars(str_pad($getmp3info_parts[6], 2, 0, STR_PAD_LEFT), ENT_QUOTES);
             echo '</span></span>';
             echo '</span><br>';
             flush();

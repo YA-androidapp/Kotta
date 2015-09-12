@@ -125,7 +125,7 @@ function pullls(url) {
 +'×</span>'
 +'<br>　<a class=\'artist\' href=\'?favname=&mode=music&dirname='+json.artistdirtmp+'\'>'+json.artist+'</a> &gt; '
 +'<span class=\'trackinfo\'><a class=\'album\' href=\'?favname=&mode=music&dirname='+json.artistdirtmp+'&filter_album='+json.album+'\'>'+json.album
-+'</a> (No.<span class=\'number\'>'+json.number+'</span>) [<span class=\'genre\'>'+json.genre+'</span>] '
++'</a> (No.<span class=\'number\'>'+((json.number<10)?"0"+json.number:json.number)+'</span>) [<span class=\'genre\'>'+json.genre+'</span>] '
 +'<span class=\'time\'><span class=\'time_m\'>'+json.time_m+'</span>:<span class=\'time_s\'>'+json.time_s+'</span></span></span><br></li>'
 
                  );
