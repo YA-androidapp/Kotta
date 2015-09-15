@@ -53,16 +53,16 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
   <form action='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>' method='POST'>
    <table id='menu'>
     <tr>
-     <td class='item'>ID</td>
+     <td class='item'>User</td>
      <td><input type='text' id='id' name='id' value='<?php echo ($_REQUEST['id']!='') ? $_REQUEST['id'] : @$_SESSION['id']; ?>' /></td>
     </tr>
     <tr>
-     <td>PW</td>
+     <td>Password</td>
      <td><input type='password' id='pw' name='pw' value='<?php echo ($_REQUEST['pw']!='') ? $_REQUEST['pw'] : @$_SESSION['pw']; ?>' /></td>
     </tr>
     <tr>
-     <td>OTP PW</td>
-     <td><input type='password' id='pw2' name='pw2' size='6' maxlength='6' /></td>
+     <td>OTP Password</td>
+     <td><input type='number' id='pw2' name='pw2' max='999999' /></td>
     </tr>
     <tr>
      <td>twitter</td>

@@ -46,7 +46,7 @@ function getdirtree($path){
    if ('.' == $file || '..' == $file) { continue; }
    if (is_dir($rpath.'/'.$file)) {
     if ($depth2 <= $arguments['depth']) {
-     $dirs[urlencode($rpath.'/'.$file)] = getdirtree($rpath.'/'.$file);
+     $dirs[rawurlencode($rpath.'/'.$file)] = getdirtree($rpath.'/'.$file);
     }
    } elseif ( (is_file($rpath.'/'.$file)) && (stripos(realpath($rpath.'/'.$file), '.mp3') !== FALSE) ) {
     $r2path = str_replace($base_dir.'/', '', $rpath);
@@ -61,7 +61,7 @@ function getdirtree($path){
           'track' => $i,
           'datasrc' => str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($rpath.'/'.$file)),
           'title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
-          'favcheck' => urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($rpath.'/'.$file))),
+          'favcheck' => rawurlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($rpath.'/'.$file))),
           'basename' => basename($rpath.'/'.$file),
           'id' => $id,
           'favnum' => '',

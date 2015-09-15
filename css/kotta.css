@@ -17,8 +17,9 @@ div#wrapper #audiojs_wrapper0{margin:30px auto;padding:10px;}
 
 div#wrapper_headerlist{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;float:right;font-size:x-small;height:300px;margin:10px;overflow-y:scroll;padding:5px;width:95%;}
 
-div#wrapper_headerlist input[type=text]#id{width:20%;}
-div#wrapper_headerlist input[type=password]#pw{width:20%;}
+div#wrapper_headerlist input[type=text]#id    {ime-mode:inactive;width:20%;}
+div#wrapper_headerlist input[type=password]#pw{ime-mode:inactive;width:20%;}
+div#wrapper_headerlist input[type=number]#pw2 {ime-mode:disabled;width:20%;}
 div#wrapper_headerlist li{margin:0 5px;}
 div#wrapper_headerlist table#header_tweet{font-size:x-small;height:5%;margin:10px;width:95%;}
 div#wrapper_headerlist table#header_tweet img{cursor:pointer;}
@@ -62,38 +63,39 @@ span.starw{color:orange;cursor:pointer;}
 span.xxsmall{font-size:xx-small;}
 
 table#favmenu {text-align:center;width:95%;}
-table#favmenu input[type=text]#favname{width:40%;}
+table#favmenu input[type=text]#favname{ime-mode:inactive;width:40%;}
 table#favmenu select#favname{width:40%;}
 table#favmenu td#favf{text-align:right;}
 table#favmenu td.favmenustar{width:10%;}
 table#header_favmenu{width:95%;}
-table#header_favmenu input[type=text]#favname{width:85%;}
+table#header_favmenu input[type=text]#favname{ime-mode:inactive;width:85%;}
 table#header_favmenu select#favname{width:85%;}
 table#header_dirmenu{width:95%;}
-table#header_dirmenu input[type=text]#dir{width:95%;}
+table#header_dirmenu input[type=text]#dirname{ime-mode:inactive;width:95%;}
 table#header_dirmenu td.dir{width:75%;}
 table#header_sqlmenu{width:95%;}
 table#header_sqlmenu iframe#dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
-table#header_sqlmenu input[type=text]#sqllike{width:95%;}
+table#header_sqlmenu input[type=text]#sqllike{ime-mode:inactive;width:95%;}
 table#header_sqlmenu select#sqlwhere{width:95%;}
 
 table#menu{font-size:x-small;width:95%;}
-table#menu input[type=text]#depth{width:95%;}
-table#menu input[type=text]#dirname{width:95%;}
-table#menu input[type=text]#favname{width:95%;}
-table#menu input[type=text]#filter_album{width:95%;}
-table#menu input[type=text]#filter_artist{width:95%;}
-table#menu input[type=text]#filter_dir{width:95%;}
-table#menu input[type=text]#filter_file{width:95%;}
-table#menu input[type=text]#filter_genre{width:95%;}
-table#menu input[type=text]#filter_title{width:95%;}
-table#menu input[type=text]#filter_track{width:95%;}
-table#menu input[type=text]#id{width:95%;}
-table#menu input[type=text]#m3uuri{width:95%;}
-table#menu input[type=text]#numlast{width:45%;}
-table#menu input[type=text]#numsince{width:45%;}
-table#menu input[type=password]#pw{width:95%;}
-table#menu input[type=text]#sns_format{width:95%;}
+table#menu input[type=text]#depth        {ime-mode:disabled;width:95%;}
+table#menu input[type=text]#dirname      {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#favname      {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#filter_album {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#filter_artist{ime-mode:inactive;width:95%;}
+table#menu input[type=text]#filter_dir   {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#filter_file  {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#filter_genre {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#filter_title {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#filter_track {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#id           {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#m3uuri       {ime-mode:inactive;width:95%;}
+table#menu input[type=text]#numlast      {ime-mode:disabled;width:45%;}
+table#menu input[type=text]#numsince     {ime-mode:disabled;width:45%;}
+table#menu input[type=password]#pw       {ime-mode:inactive;width:95%;}
+table#menu input[type=number]#pw2        {ime-mode:disabled;width:95%;}
+table#menu input[type=text]#sns_format   {ime-mode:inactive;width:95%;}
 
 table#menu select#enable_allloop{width:95%;}
 table#menu select#enable_autotweet{width:95%;}

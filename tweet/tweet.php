@@ -17,7 +17,7 @@ if ($_SESSION['tweettext'] != '') {
 } else { die('引数が不正です'); }
 
 if ( $_REQUEST['pass_autotweet'] != '1') {
- die('<a href=\'tweet.php?pass_autotweet=1&tweettext='.urlencode($tweettext).'\'>@'.$_SESSION['oa_screen_name'].': 『'.$tweettext.'』をツイートします</a>');
+ die('<a href=\'tweet.php?pass_autotweet=1&tweettext='.rawurlencode($tweettext).'\'>@'.$_SESSION['oa_screen_name'].': 『'.$tweettext.'』をツイートします</a>');
 }
 
 if (is_numeric($_REQUEST['N'])) { $N = $_REQUEST['N']; }

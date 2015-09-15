@@ -15,7 +15,7 @@
   $dirarr = array_unique($dirarr);
   $dirarr = array_filter($dirarr, 'strlen');
   sort($dirarr);
-  if ( file_put_contents($favfile, implode("\n", $dirarr), LOCK_EX) ) {
+  if ( file_put_contents($favfile, implode("\n", $dirarr), LOCK_EX) !== FALSE ) {
    die('「'.$title.'」をお気に入りから削除しました');
   } else { die('(!) 引数が不正です favdel-3'); }
  } else { die('(!) 引数が不正です favdel-4'); }

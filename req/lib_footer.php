@@ -19,8 +19,8 @@
 <?php
  $flag = ($_SERVER['HTTPS']!='') ? 's' : '';
  $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].'?'.http_build_query($arguments);
- $permalink = str_replace('dirname='.urlencode($base_dir.'/'),'dirname=' , $permalink);
- $permalink = str_replace('dirname='.urlencode($base_dir),'dirname=' , $permalink);
+ $permalink = str_replace('dirname='.rawurlencode($base_dir.'/'),'dirname=' , $permalink);
+ $permalink = str_replace('dirname='.rawurlencode($base_dir),'dirname=' , $permalink);
 ?>
   <div id='permalink' align='right'>
    Permanent Link: 

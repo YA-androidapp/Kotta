@@ -54,7 +54,7 @@ foreach ($line as $value) {
      'track' => $i,
      'datasrc' => str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($value)),
      'title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
-     'favcheck' => urlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))),
+     'favcheck' => rawurlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))),
      'basename' => basename($value),
      'id' => $id,
      'favname' => $favname,

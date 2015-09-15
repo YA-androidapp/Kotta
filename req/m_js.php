@@ -67,14 +67,16 @@
 
   // Load in the first track
   var audio = a[0];
-  first = jQuery('ol#sort_list li a').first().attr('data-src');
-  jQuery('ol#sort_list li').first().addClass('playing').siblings().removeClass('playing');
-  if (first !== void 0) {
-   audio.load(first);
-   kirinload();
-   jQuery('#control_play').val( (audio.playing)?'Play':'Pause')
-   audio.play();
-  }
+  setTimeout(function(){
+   first = jQuery('ol#sort_list li a').first().attr('data-src');
+   jQuery('ol#sort_list li').first().addClass('playing').siblings().removeClass('playing');
+   if (first !== void 0) {
+    audio.load(first);
+    kirinload();
+    jQuery('#control_play').val( (audio.playing)?'Play':'Pause')
+    audio.play();
+   }
+  }, 5000);
   // Load in a track on click
   jQuery('ol#sort_list li a[data-src]').click(function(e) {
    e.preventDefault();

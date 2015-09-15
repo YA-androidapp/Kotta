@@ -185,6 +185,23 @@ function isHankaku(str){
  }
 }
 
+function htmlspecialchars(str){
+ str = str.replace(/&/g,"&amp;") ;
+ str = str.replace(/"/g,"&quot;") ;
+ str = str.replace(/</g,"&lt;") ;
+ str = str.replace(/>/g,"&gt;") ;
+ return str ;
+}
+
+function htmlspecialcharsEntQuotes(str){
+ str = str.replace(/&/g,"&amp;") ;
+ str = str.replace(/"/g,"&quot;") ;
+ str = str.replace(/'/g,"&#039;") ;
+ str = str.replace(/</g,"&lt;") ;
+ str = str.replace(/>/g,"&gt;") ;
+ return str ;
+}
+
 // basename(for sort)
 function basename(path, suffix) {
  var b = path.replace(/^.*[\/\\]/g, '');

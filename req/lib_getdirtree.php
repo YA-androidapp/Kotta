@@ -10,7 +10,7 @@ function getdirtree($path){
    if ('.' == $file || '..' == $file) { continue; }
    if (is_dir($rpath.'/'.$file)) {
     if ($depth2 <= $arguments['depth']) {
-     $dirs[urlencode($rpath.'/'.$file)] = getdirtree($rpath.'/'.$file);
+     $dirs[rawurlencode($rpath.'/'.$file)] = getdirtree($rpath.'/'.$file);
     }
    } elseif (is_file($rpath.'/'.$file)) {
     $r2path = str_replace($base_dir.'/', '', $rpath);

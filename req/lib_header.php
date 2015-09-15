@@ -5,7 +5,7 @@
    [
    User:<input type='text' id='id' name='id' title='User' value='<?php echo $id; ?>'>
    Password:<input type='password' id='pw' name='pw' title='Password' value='<?php echo $pw; ?>'>
-   <input type='password' id='pw2' name='pw2' title='OTP Password' size='6' maxlength='6'>
+   OTP Password:<input type='number' id='pw2' name='pw2' title='OTP Password' max='999999' />
    ]
    <br>
    ||
@@ -113,13 +113,13 @@
     <table id='header_favmenu'>
      <tr>
       <td>
-       <input type='text' id='favname' name='favname' title='名前'>
+       <input type='text' id='favname' name='favname' pattern='^[a-zA-Z0-9][-_a-zA-Z0-9]*$' title='名前'>(半角英数)
        <a href='#' id='favfadd'>Create</a>
       </td>
       <td>
        <select id='favname' name='favname'>
         <option value=''>-</option>
-<?php if (count($favnamearr2)>0) { foreach ($favnamearr2 as $val3) { echo '<option value="'.$val3.'" id="favmenu_'.$val3.'">'.$val3.'</option>'; } } ?>
+<?php if (count($favnamearr2)>0) { foreach ($favnamearr2 as $val3) { echo '<option value="'.htmlspecialchars($val3, ENT_QUOTES).'" id="favmenu_'.htmlspecialchars($val3, ENT_QUOTES).'">'.$val3.'</option>'; } } ?>
        </select>
         <a href='#' id='favfdel'>Delete</a>
       </td>
@@ -132,13 +132,13 @@
     <table id='header_dirmenu'>
      <tr>
       <td class='dir'>
-       <input type='text' id='dir' name='dir' title='ディレクトリ名'>
+       <input type='text' id='dirname' name='dirname' title='ディレクトリ名'>
       </td>
       <td>
-       <a href='#' onClick='var url="ls_dir.php?dirname="+jQuery("input#dirname").val();pullls(url);'>[Add]</a>
+       <a href='#' onClick='var url="ls_dir.php?dirname="+encodeURIComponent(jQuery("input#dirname").val());pullls(url);'>[Add]</a>
       </td>
       <td>
-       <a href='#' onClick='var url="db_write.php?dirname="+jQuery("input#dirname").val()+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val();window.open(url,"db");'>[AddDB]</a>
+       <a href='#' onClick='var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val();window.open(url,"db");'>[AddDB]</a>
       </td>
      </tr>
     </table>
@@ -161,7 +161,7 @@
        <input type='text' id='sqllike' name='sqllike' title='SQL:Like'>
       </td>
       <td>
-       <a href='#' onClick='var url="ls_sql.php?sqlwhere="+jQuery("select#sqlwhere").val()+"&sqllike="+jQuery("input#sqllike").val();pullls(url);'>[Add]</a>
+       <a href='#' onClick='var url="ls_sql.php?sqlwhere="+encodeURIComponent(jQuery("select#sqlwhere").val())+"&sqllike="+encodeURIComponent(jQuery("input#sqllike").val());pullls(url);'>[Add]</a>
       </td>
      </tr>
 <?php if (file_exists('conf/musics.sqlite3')) { ?>
