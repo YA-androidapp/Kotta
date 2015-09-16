@@ -49,7 +49,7 @@ function getdirtree($path){
      $dirs[rawurlencode($rpath.'/'.$file)] = getdirtree($rpath.'/'.$file);
     }
    } elseif ( (is_file($rpath.'/'.$file)) && (stripos(realpath($rpath.'/'.$file), '.mp3') !== FALSE) ) {
-    $r2path = str_replace($base_dir.'/', '', $rpath);
+    $r2path = str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $rpath.'/');
     if (  ($arguments['filter_dir']=='')  || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1))          ) {
      if ( ($arguments['filter_file']=='') || (($arguments['filter_file']!='') &&(fnmatch($arguments['filter_file'],basename($file))==1)) ) {
       if (    ($confs['filter_dir']=='')  || (    ($confs['filter_dir'] !='') &&    (fnmatch($confs['filter_dir'],$r2path)==1))          ) {
@@ -97,7 +97,7 @@ function getdirnametree($path){
   while (false !== ($file = readdir($handle))) {
    if ('.' == $file || '..' == $file) { continue; }
    if (is_dir($rpath.'/'.$file)) {
-    $r2path = str_replace($base_dir.'/', '', $rpath);
+    $r2path = str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $rpath.'/');
     if ( ($arguments['filter_dir']=='') || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1)) ) {
      if (   ($confs['filter_dir']=='')  || (    ($confs['filter_dir'] !='') &&    (fnmatch($confs['filter_dir'],$r2path)==1)) ) {
       $json = json_encode( 

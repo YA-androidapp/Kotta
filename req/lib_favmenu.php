@@ -15,7 +15,7 @@
      <a href='<?php echo str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['favcheck'])); ?>'>
 <?php
  $getmp3info_parts = array();
- $getmp3info_parts = getmp3info(str_replace($base_dir.'/', '', realpath($base_dir.'/'.$arguments['favcheck'])));
+ $getmp3info_parts = getmp3info(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['favcheck'])));
 
  $title = $getmp3info_parts[0];
  echo $title; // title

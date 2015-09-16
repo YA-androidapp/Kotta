@@ -49,7 +49,7 @@ $dirarr = array();
 $depth1 = 0;
 $depth2 = 0;
 if ( $arguments['favname'] === '_recently_added' ) {
- $line = getNewFiles(( $arguments['dirname'] !== '' )?($base_dir.'/'.$arguments['dirname']):($base_dir));
+ $line = getNewFiles(( $arguments['dirname'] !== '' )?($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dirname']):($base_dir));
  foreach ($line as $val) {
   $dirarr[basename($val)] = $val;
  }
@@ -59,7 +59,7 @@ if ( $arguments['favname'] === '_recently_added' ) {
   $dirarr[basename($val)] = $val;
  }
 } elseif ( $arguments['dirname'] !== '' ) {
- $dirarr = getdirtree($base_dir.'/'.$arguments['dirname']);
+ $dirarr = getdirtree($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dirname']);
 }
 
 if ( $arguments['mode'] === 'makem3u' ) {

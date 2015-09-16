@@ -4,7 +4,7 @@
 for ($i = 0; $i < count(@$_FILES['uploadfile']['name']); $i++) {
  $upload_result = '';
  if (strlen($_FILES['uploadfile']['name'][$i]) > 0) {
-  $moveTo = $base_dir.'/'.$arguments['dirname'].'/'.$_FILES['uploadfile']['name'][$i];
+  $moveTo = $base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dirname'].((mb_substr($arguments['dirname'],-1)=='/')?'':'/').$_FILES['uploadfile']['name'][$i];
   $checkImage = @getimagesize($_FILES['uploadfile']['tmp_name'][$i]);
   if ($checkImage !== FALSE) {
    echo '<img src=\''.str_replace($base_dir, $base_uri, $moveTo).'\'>';
@@ -56,9 +56,9 @@ class UploadHandler
         global $arguments, $base_dir, $base_uri, $confs, $depth1, $folders;
 
         $this->options = array(
-            'script_url' => $this->get_full_url().'/',
-            'upload_dir' => $base_dir.'/'.$arguments['dirname'].'/',
-            'upload_url' => $base_uri.'/'.$arguments['dirname'].'/',
+            'script_url' => $this->get_full_url().((mb_substr($this->get_full_url(),-1)=='/')?'':'/'),
+            'upload_dir' => $base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dirname'].((mb_substr($arguments['dirname'],-1)=='/')?'':'/'),
+            'upload_url' => $base_uri.((mb_substr($base_uri,-1)=='/')?'':'/').$arguments['dirname'].((mb_substr($arguments['dirname'],-1)=='/')?'':'/'),
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -172,7 +172,7 @@ class UploadHandler
 
     protected function get_user_path() {
         if ($this->options['user_dirs']) {
-            return $this->get_user_id().'/';
+            return $this->get_user_id().((mb_substr($this->get_user_id(),-1)=='/')?'':'/');
         }
         return '';
     }
@@ -280,7 +280,7 @@ class UploadHandler
             if (!is_dir($version_dir)) {
                 mkdir($version_dir, $this->options['mkdir_mode']);
             }
-            $new_file_path = $version_dir.'/'.$file_name;
+            $new_file_path = $version_dir.((mb_substr($version_dir,-1)=='/')?'':'/').$file_name;
         } else {
             $new_file_path = $file_path;
         }

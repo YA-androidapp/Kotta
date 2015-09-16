@@ -72,7 +72,13 @@ $(function () {
  // フィルタリング用 終わり
 
  // ソート用
- jQuery('#pagesort').change(function(e) {
+ //jQuery('#pagesort').change(function(e) {
+ // sortevent();
+ //});
+ jQuery('#pagesort').mouseup(function(e) {
+  sortevent();
+ });
+ function sortevent(){
   switch ( jQuery('#pagesort').val() ){
    case 'filename_u':
     filename_u();
@@ -102,7 +108,7 @@ $(function () {
     random();
     break;
   }
- });
+ }
  // ソート用 終わり
 
  // SNS用

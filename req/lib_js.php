@@ -153,7 +153,7 @@
  })(jQuery);
 <?php
 if ( ($arguments['sort'] != '') && ($arguments['sort'] != 'none') ) {
- echo 'setTimeout(function(){ '.$arguments['sort'].'(); }, 3000);';
+ echo 'setTimeout(function(){ '.$arguments['sort'].'(); }, 2000);';
 }
 ?>
  // ソート用 終わり

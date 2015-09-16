@@ -19,8 +19,6 @@
      <input type='button' id='control_prev' value='Prev' title='Ctrl+←/Shift+←'>
      <input type='button' id='control_play' value='' title='Ctrl+Space/Shift+Space'>
      <input type='button' id='control_twtr' class='half' value='t' title='Tweet'>
-     <input type='button' id='control_pulldirname' class='half' value='d' title='Reload Directories list'>
-     <input type='button' id='control_pullfavname' class='half' value='f' title='Reload Favorites list'>
      <input type='button' id='control_next' value='Next' title='Ctrl+→/Shift+→'>
      <div id='volume_control' title='100'>
       Volume<br />
@@ -109,12 +107,14 @@
    </div>
    <div class='toggle' onclick='jQuery("#wrapper_headerlist #favs").toggle();'>My Favorites</div>
    <div id='favs'>
+    <input type='button' id='control_pullfavname' class='rightbutton' value='reload:fav' title='Reload Favorites list'>
     <ul id='favslist'></ul>
     <table id='header_favmenu'>
      <tr>
       <td>
-       <input type='text' id='favname' name='favname' pattern='^[a-zA-Z0-9][-_a-zA-Z0-9]*$' title='名前'>(半角英数)
+       <input type='text' id='favname' name='favname' title='名前'>
        <a href='#' id='favfadd'>Create</a>
+       <span id="favresult"></span>
       </td>
       <td>
        <select id='favname' name='favname'>
@@ -128,11 +128,13 @@
    </div>
    <div class='toggle' onclick='jQuery("#wrapper_headerlist #dirs").toggle();'>Directories</div>
    <div id='dirs'>
+    <input type='button' id='control_pulldirname' class='rightbutton' value='reload:dir' title='Reload Directories list'>
     <ul id='dirslist'></ul>
     <table id='header_dirmenu'>
      <tr>
       <td class='dir'>
        <input type='text' id='dirname' name='dirname' title='ディレクトリ名'>
+       <span id="dirresult"></span>
       </td>
       <td>
        <a href='#' onClick='var url="ls_dir.php?dirname="+encodeURIComponent(jQuery("input#dirname").val());pullls(url);'>[Add]</a>

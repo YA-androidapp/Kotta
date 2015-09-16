@@ -37,7 +37,7 @@ try {
  $db->beginTransaction();
  $i = 0;
  if ( (isset($_REQUEST['dirname'])) && ($_REQUEST['dirname'] != '') ) {
-  getdirtree($base_dir.$_REQUEST['dirname'].'/');
+  getdirtree($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$_REQUEST['dirname'].((mb_substr($_REQUEST['dirname'],-1)=='/')?'':'/'));
  } else {
   getdirtree($base_dir);
  }
@@ -60,7 +60,7 @@ function getdirtree($path){
      getdirtree($rpath.'/'.$file);
     } elseif ( (is_file($rpath.'/'.$file)) && (stripos(realpath($rpath.'/'.$file), '.mp3') !== FALSE) ) {
      echo sprintf('%05d', $i++) . ' : ' . realpath($rpath.'/'.$file).'<br>';
-     $r2path = str_replace($base_dir.'/', '', $rpath);
+     $r2path = str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $rpath.'/');
      if (  ($arguments['filter_dir']=='')  || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1))          ) {
       if ( ($arguments['filter_file']=='') || (($arguments['filter_file']!='') &&(fnmatch($arguments['filter_file'],basename($file))==1)) ) {
        if (    ($confs['filter_dir']=='')  || (    ($confs['filter_dir'] !='') &&    (fnmatch($confs['filter_dir'],$r2path)==1))          ) {

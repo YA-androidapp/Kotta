@@ -14,40 +14,9 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
  <head>
   <meta charset='utf-8'>
   <title>Kotta Menu</title>
-<?php require_once(realpath(__DIR__).'/lib_js.php'); ?>
-<script type='text/javascript'>
- $(function () {
-
-<?php if ( $enable_autocomplete_dirname == 1 ) { ?>
-  $('input').blur( function (e){
-   // ArtistName
-   $('#dir').autocomplete({
-    source: 'autocomplete_name.php?mode=dir&id=' + $('#id').val() + '&pw=' + $('#pw').val(),
-    delay: 200,
-    minLength: 3,
-    select: function (e, ui) {
-     if (ui.item) { $('#result').html(ui.item.id); }
-    }
-   });
-  });
-<?php } else if ( $enable_autocomplete_favname == 1 ) { ?>
-  $('input').blur( function (e){
-   // Favnum
-   $('#favname').autocomplete({
-    source: 'autocomplete_name.php?mode=fav&id=' + $('#id').val() + '&pw=' + $('#pw').val(),
-    delay: 200,
-    minLength: 3,
-    select: function (e, ui) {
-     if (ui.item) { $('#result').html(ui.item.id); }
-    }
-   });
-  });
-<?php } ?>
-
- });
-</script>
-
 <?php require_once(realpath(__DIR__).'/lib_style.php'); ?>
+
+<?php require_once(realpath(__DIR__).'/lib_js.php'); ?>
  </head>
  <body>
   <form action='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>' method='POST'>
@@ -92,18 +61,20 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
     <tr class='source'>
      <td>ディレクトリ(autocomplete)</td>
      <td>
-      <input type='text' id='dirname' name='dirname' onclick='jQuery("#dir").css("background-color","#fff");jQuery("#favname,#m3uuri").css("background-color","#ccc")' value='<?php echo @str_replace($base_dir, '', @str_replace($base_dir.'/', '', $_REQUEST['dirname'])); ?>' />
+      <input type='text' id='dirname' name='dirname' onclick='jQuery("#dirname").css("background-color","#fff");jQuery("#favname,#m3uuri").css("background-color","#ccc")' value='<?php echo @str_replace($base_dir, '', @str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $_REQUEST['dirname'])); ?>' />
+      <span id="dirresult"></span>
      </td>
     </tr>
     <tr class='source'>
      <td>お気に入り</td>
      <td>
-      <input type='text' id='favname' name='favname' onclick='jQuery("#favname").css("background-color","#fff");jQuery("#dir,#m3uuri").css("background-color","#ccc")' value='<?php echo ($_REQUEST['favname']!='') ? $_REQUEST['favname'] : @$_SESSION['favname']; ?>' />
+      <input type='text' id='favname' name='favname' onclick='jQuery("#favname").css("background-color","#fff");jQuery("#dirname,#m3uuri").css("background-color","#ccc")' value='<?php echo ($_REQUEST['favname']!='') ? $_REQUEST['favname'] : @$_SESSION['favname']; ?>' />
+      <span id="favresult"></span>
      </td>
     </tr>
     <tr class='source'>
      <td>M3UプレイリストのURL</td>
-     <td><input type='text' id='m3uuri' name='m3uuri' onclick='jQuery("#m3uuri").css("background-color","#fff");jQuery("#dir,#favname").css("background-color","#ccc")' value='<?php echo ($_REQUEST['m3uuri']!='') ? $_REQUEST['m3uuri'] : @$_SESSION['m3uuri']; ?>' /></td>
+     <td><input type='text' id='m3uuri' name='m3uuri' onclick='jQuery("#m3uuri").css("background-color","#fff");jQuery("#dirname,#favname").css("background-color","#ccc")' value='<?php echo ($_REQUEST['m3uuri']!='') ? $_REQUEST['m3uuri'] : @$_SESSION['m3uuri']; ?>' /></td>
     </tr>
     <tr class='source'>
      <td>読み込む階層の深さ</td>

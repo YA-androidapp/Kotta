@@ -12,8 +12,8 @@
     if(jQuery('#checkbox_auto #enable_recently_played').prop('checked')){
      jQuery.ajax({
       type: 'POST',
-      url : <?php echo basename($_SERVER['SCRIPT_NAME']); ?>,
-      data: 'id='+jQuery('#id').val()+'&pw='+jQuery('#pw').val()+'&mode=rpadd&linkadd='+jQuery('ol#sort_list li.playing a[data-src]').attr('data-src').replace('<?php echo $base_uri; ?>/',''),
+      url : '<?php echo basename($_SERVER['SCRIPT_NAME']); ?>',
+      data: 'id='+jQuery('#id').val()+'&pw='+jQuery('#pw').val()+'&mode=rpadd&linkadd='+jQuery('ol#sort_list li.playing a[data-src]').attr('data-src').replace('<?php echo $base_uri.((mb_substr($base_uri,-1)=='/')?'':'/'); ?>',''),
       beforeSend: function(xhr) {
        var credentials = $.base64.encode( jQuery('#id').val()+':'+ jQuery('#pw').val());
        xhr.setRequestHeader('Authorization', 'Basic ' + credentials);

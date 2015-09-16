@@ -44,11 +44,10 @@ if ( $mode == 'fav' ) {
  }
 } elseif ( $mode == 'dir' ) {
  require_once(realpath(__DIR__).'/req/lib_getdirtree_flat.php');
- $dirs = array();
- $arguments['depth'] = mb_substr_count($bdir.'/'.$term, '/') + 1;
- $keyword = getdirtree_flat(realpath($base_dir.'/'.$bdir), 'dir');
+ $arguments['depth'] = mb_substr_count($bdir.((mb_substr($bdir,-1)=='/')?'':'/').$term, '/') + 1;
+ $keyword = getdirtree_flat(realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$bdir), 'dir');
  foreach ($keyword as $k => $v) {
-  $keywords[str_replace(realpath($base_dir.'/'.$bdir).'/', '', urldecode($v))] = str_replace(realpath($base_dir.'/'.$bdir).'/', '', urldecode($v));
+  $keywords[str_replace(realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$bdir).'/', '', urldecode($v))] = str_replace(realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$bdir).'/', '', urldecode($v));
  }
 }
 

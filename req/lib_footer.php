@@ -19,7 +19,7 @@
 <?php
  $flag = ($_SERVER['HTTPS']!='') ? 's' : '';
  $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].'?'.http_build_query($arguments);
- $permalink = str_replace('dirname='.rawurlencode($base_dir.'/'),'dirname=' , $permalink);
+ $permalink = str_replace('dirname='.rawurlencode($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/')),'dirname=' , $permalink);
  $permalink = str_replace('dirname='.rawurlencode($base_dir),'dirname=' , $permalink);
 ?>
   <div id='permalink' align='right'>

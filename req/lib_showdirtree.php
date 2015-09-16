@@ -33,8 +33,7 @@ function showdirtree($tree){
             echo '<li id=\'track'.$i.'\'><a class=\'title\' href=\'#\' data-src=\''.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($value))
                                                                 .'\' title=\''.str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($value)).'\'>';
             echo htmlspecialchars($getmp3info_parts[0], ENT_QUOTES);
-            echo '</a>';
-            echo '　　';
+            echo '</a><br>';
             echo ' <span class=\'starw\' id="bookmarkstar'.$i.'" alt="お気に入りの管理" title="お気に入りの管理" onClick=\'window.open("?mode=favmenu&favcheck='.rawurlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'", "favmenu");return false;\'>';
             echo ' ☆</span>';
             if ( $arguments['favname'] != '' ) {
@@ -76,7 +75,7 @@ function showdirtree($tree){
     }
    } else {
     echo '<li><a class=\'artist\' href=\''.htmlspecialchars(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($value)), ENT_QUOTES).'\' class=\'title\' title=\''.htmlspecialchars(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($value)), ENT_QUOTES).'\'>'.basename($value);
-    echo '</a>';
+    echo '</a><br>';
     echo '<span class=\'starw\' id=\'bookmarkstar'.$i.'\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'window.open("?mode=favmenu&favcheck='.rawurlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($value))).'", "favmenu");return false;\'>';
     echo '☆</span>';
     echo ' ('.filesize(realpath($value)).'byte)</li>';

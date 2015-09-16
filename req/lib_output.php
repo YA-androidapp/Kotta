@@ -1,7 +1,7 @@
 <?php
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 
-output_file($base_dir.'/'.$_REQUEST['output_path']);
+output_file($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$_REQUEST['output_path']);
 
 function output_file($path){
  if (!file_exists($path)) {

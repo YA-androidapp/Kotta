@@ -112,7 +112,7 @@ function pullls(url) {
                  $('ol#sort_list').append(
 
  '<li class=\'appended\' id=\'track'+i+'\'>'
-+'<a class=\'title\' href=\'#\' data-src=\''+json.datasrc+'\' title=\''+json.datasrc+'\'>'+json.title+'</a>　　'
++'<a class=\'title\' href=\'#\' data-src=\''+json.datasrc+'\' title=\''+json.datasrc+'\'>'+json.title+'</a><br>'
 +'<span class=\'starw\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'window.open("?mode=favmenu&favcheck='+json.favcheck+'", "favmenu");return false;\'>'
 +'☆</span>　'
 +(( typeof json.favname === 'undefined' )?'':('<span class=\'star\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\' onClick=\'if(window.confirm("'
@@ -154,11 +154,11 @@ function pullls(url) {
 
 jQuery(function() {
  setTimeout(function(){
-  pullname('dir');
- }, 3000);
+  pullname('fav');
+ }, 1000);
  setTimeout(function(){
   pullname('dir');
- }, 4000);
+ }, 1500);
 
  jQuery(document).keydown(function(e) {
   var unicode = e.charCode ? e.charCode : e.keyCode;

@@ -17,25 +17,21 @@ div#wrapper #audiojs_wrapper0{margin:30px auto;padding:10px;}
 
 div#wrapper_headerlist{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;float:right;font-size:x-small;height:300px;margin:10px;overflow-y:scroll;padding:5px;width:95%;}
 
+div#wrapper_headerlist input[type=button].rightbutton{float:right;height:10%;width:20%;}
 div#wrapper_headerlist input[type=text]#id    {ime-mode:inactive;width:20%;}
 div#wrapper_headerlist input[type=password]#pw{ime-mode:inactive;width:20%;}
 div#wrapper_headerlist input[type=number]#pw2 {ime-mode:disabled;width:20%;}
 div#wrapper_headerlist li{margin:0 5px;}
-div#wrapper_headerlist table#header_tweet{font-size:x-small;height:5%;margin:10px;width:95%;}
+div#wrapper_headerlist table#header_tweet{font-size:x-small;height:10%;margin:10px;width:95%;}
 div#wrapper_headerlist table#header_tweet img{cursor:pointer;}
-div#wrapper_headerlist table#header_tweet textarea#tweettext{height:5%;font-size:large;width:95%;}
+div#wrapper_headerlist table#header_tweet textarea#tweettext{height:10%;font-size:large;width:95%;}
 div#wrapper_headerlist ul{margin:0 10px;padding:0;}
 
 div#wrapper_list{clear:both;margin:10px auto;}
 div#wrapper_list a.title{color:#333;font-size:larger;}
 div#wrapper_list ol{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;color:#666;font-size:medium;list-style:decimal-leading-zero inside;margin:10px auto;padding:5px;width:95%;}
 div#wrapper_list ol li{border-bottom:1px solid #ccc;cursor:pointer;padding:10px 5px 10px;position:relative;}
-div#wrapper_list ol li img.fava{height:20px;}
-div#wrapper_list ol li img.favr{height:10px;}
-div#wrapper_list ol li img.delicon{height:10px;}
 div#wrapper_list ol li.playing{color:#000;font-size:x-large;text-shadow:1px 1px 0px rgba(255, 255, 255, 0.3);}
-div#wrapper_list ol li.playing img.fava{height:30px;}
-div#wrapper_list ol li.playing img.favr{height:20px;}
 
 form#checkbox_auto{margin:10px;padding:5px;width:95%;font-size:xx-small;}
 form#pagesearch{margin:10px;padding:5px;width:95%;}
@@ -43,8 +39,8 @@ form#pagesearch input[type=text]#pageq{width:95%;}
 form#pagesearch select#pagesearchtype{width:95%;}
 form#pagesearch select#pagesort{width:95%;}
 form#playcontrol{margin:10px;padding:5px;width:95%;}
-form#playcontrol input[type=button]{height:5%;width:20%;}
-form#playcontrol input[type=button].half[type=button]{height:5%;width:10%;}
+form#playcontrol input[type=button]{height:10%;width:20%;}
+form#playcontrol input[type=button].half{height:10%;width:10%;}
 
 h1{color:#333;margin:0px;padding:10px 3px 10px;}
 h1 em{font-style:normal;}
