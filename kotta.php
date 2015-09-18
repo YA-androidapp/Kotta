@@ -1,10 +1,6 @@
 <?php
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 
-// require_once(realpath(__DIR__).'/conf/kotta.php');
-
-$errcode = 0;
-
 if ( $_REQUEST['logout'] == '1' ) { require_once(realpath(__DIR__).'/req/lib_logout.php');die(''); }
 
 $showMenu='1';
@@ -22,7 +18,6 @@ if ( $_REQUEST['menu'] == '1' ) {
 
 require_once(realpath(__DIR__).'/req/lib_getdirtree.php');
 require_once(realpath(__DIR__).'/req/mp3tag_getid3.php');
-require_once(realpath(__DIR__).'/req/lib_showdirtree.php');
 require_once(realpath(__DIR__).'/req/lib_get_new_files.php');
 
 $folders = '';
@@ -49,17 +44,11 @@ $dirarr = array();
 $depth1 = 0;
 $depth2 = 0;
 if ( $arguments['favname'] === '_recently_added' ) {
- $line = getNewFiles(( $arguments['dirname'] !== '' )?($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dirname']):($base_dir));
- foreach ($line as $val) {
-  $dirarr[basename($val)] = $val;
- }
+ $url = 'ls_fav.php?favname=_recently_added'.(( $arguments['dirname'] !== '' )?('&dirname='.rawurlencode($arguments['dirname'])):(''));
 } elseif ( $arguments['favname'] !== '' ) {
- $line = file('fav/'.$id.'_'.$arguments['favname'].'.cgi', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
- foreach ($line as $val) {
-  $dirarr[basename($val)] = $val;
- }
+ $url = 'ls_fav.php?favname='.rawurlencode($arguments['favname']);
 } elseif ( $arguments['dirname'] !== '' ) {
- $dirarr = getdirtree($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['dirname']);
+ $url = 'ls_dir.php?dirname='.rawurlencode($arguments['dirname']);
 }
 
 if ( $arguments['mode'] === 'makem3u' ) {
@@ -73,21 +62,24 @@ if ( $arguments['mode'] === 'makem3u' ) {
   <title>Kotta <?php echo $arguments['mode']; ?></title>
 <?php
 require_once(realpath(__DIR__).'/req/lib_style.php');
-
 require_once(realpath(__DIR__).'/req/lib_js.php');
+ob_end_flush();
+ob_start();
+flush();
 ?>
  </head>
  <body>
 <?php
 require_once(realpath(__DIR__).'/req/lib_header.php');
+require_once(realpath(__DIR__).'/req/lib_footer.php');
 ob_end_flush();
 ob_start();
 flush();
-if(!empty($dirarr)) {
- $depth1 = 0;
- showdirtree($dirarr);
-}
-require_once(realpath(__DIR__).'/req/lib_footer.php'); ?>
+?>
+  <script type='text/javascript'>
+   var url='<?php echo $url; ?>';
+   pullls(url);
+  </script>
  </body>
 </html>
 <?php

@@ -9,6 +9,10 @@ require_once(dirname(__FILE__).'/conf/index.php');
 require_once(dirname(__FILE__).'/req/lib_get_new_files.php');
 require_once(dirname(__FILE__).'/req/mp3tag_getid3.php');
 
+if ( $_REQUEST['dirname'] != '' )       { $dirname = $_REQUEST['dirname'];
+} elseif ( $_SESSION['dirname'] != '' ) { $dirname = $_SESSION['dirname'];
+} else                                  { $dirname = ''; }
+
 if ( $_REQUEST['favname'] != '' )       { $favname = $_REQUEST['favname'];
 } elseif ( $_SESSION['favname'] != '' ) { $favname = $_SESSION['favname'];
 } else                                  { $favname = ''; }
@@ -21,7 +25,7 @@ if ( $onlyname == '1' ) {
  $line = glob($base_dirfav.$id.'_*.cgi');
  $line[] = $base_dirfav.$id.'__recently_added.cgi';
 } elseif ( $favname === '_recently_added' ) {
-  $line = getNewFiles($base_dir);
+  $line = getNewFiles($base_dir.(($dirname!=='')?((mb_substr($base_dir,-1)=='/')?'':'/').$dirname:''));
 } else {
   $line = file('fav/'.$id.'_'.$favname.'.cgi', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
 }
