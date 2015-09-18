@@ -2,106 +2,74 @@
 /* Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved. */
 
 a{color:#333;text-decoration:none;}
+a.title{font-size:larger;}
 
-body{color:#666;line-height:1em;}
+body{color:#666;line-height:1.5em;}
 
-div#copyrights_list{margin:10px;padding:5px;width:95%;}
-div#slider{margin:0px 0px auto 10px;width:80%;}
-div.toggle{border:1px solid #666;}
-div.clearboth{clear:both;}
+div{width:95%;}
 
-div#logout{background-color:white;width:300px;}
+form{width:95%;}
 
-div#wrapper{clear:both;margin:30px auto;width:95%;}
-div#wrapper #audiojs_wrapper0{margin:30px auto;padding:10px;}
+h1{color:#333;padding:10px 3px 10px;}
 
-div#wrapper_headerlist{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;float:right;font-size:x-small;height:300px;margin:10px;overflow-y:scroll;padding:5px;width:95%;}
+input[type=button]  {height:20%;width:20%;}
+input[type=number]  {ime-mode:disabled;width:95%;}
+input[type=password]{ime-mode:inactive;width:95%;}
+input[type=text]    {ime-mode:inactive;width:95%;}
+input#num{display:none;width:0;}
 
-div#wrapper_headerlist input[type=button].rightbutton{float:right;height:10%;width:20%;}
-div#wrapper_headerlist input[type=text]#id    {ime-mode:inactive;width:20%;}
-div#wrapper_headerlist input[type=password]#pw{ime-mode:inactive;width:20%;}
-div#wrapper_headerlist input[type=number]#pw2 {ime-mode:disabled;width:20%;}
-div#wrapper_headerlist li{margin:0 5px;}
-div#wrapper_headerlist table#header_tweet{font-size:x-small;height:10%;margin:10px;width:95%;}
-div#wrapper_headerlist table#header_tweet img{cursor:pointer;}
-div#wrapper_headerlist table#header_tweet textarea#tweettext{height:10%;font-size:large;width:95%;}
-div#wrapper_headerlist ul{margin:0 10px;padding:0;}
+select{width:95%;}
 
-div#wrapper_list{clear:both;margin:10px auto;}
-div#wrapper_list a.title{color:#333;font-size:larger;}
-div#wrapper_list ol{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;color:#666;font-size:medium;list-style:decimal-leading-zero inside;margin:10px auto;padding:5px;width:95%;}
-div#wrapper_list ol li{border-bottom:1px solid #ccc;cursor:pointer;padding:10px 5px 10px;position:relative;}
-div#wrapper_list ol li.playing{color:#000;font-size:x-large;text-shadow:1px 1px 0px rgba(255, 255, 255, 0.3);}
+table{width:95%;}
 
-form#checkbox_auto{margin:10px;padding:5px;width:95%;font-size:xx-small;}
-form#pagesearch{margin:10px;padding:5px;width:95%;}
-form#pagesearch input[type=text]#pageq{width:95%;}
-form#pagesearch select#pagesearchtype{width:95%;}
-form#pagesearch select#pagesort{width:95%;}
-form#playcontrol{margin:10px;padding:5px;width:95%;}
-form#playcontrol input[type=button]{height:10%;width:20%;}
-form#playcontrol input[type=button].half{height:10%;width:10%;}
+#audiojs_wrapper0{margin:30px auto;padding:10px;}
 
-h1{color:#333;margin:0px;padding:10px 3px 10px;}
-h1 em{font-style:normal;}
+#config_oauth{font-size:x-small;padding:10px;width:300px;background-color:#09f;text-align:center;border:#00f;}
 
-img#kotta{width:64px;height:64px;}
-img#kotta_s{width:16px;height:16px;}
-img#twtr{width:20px;height:20px;}
+#copyrights_list{margin:10px;padding:5px;width:95%;}
 
-input[type=text]#num{display:none;width:0;}
+#dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
 
-p#config_oauth{font-size:x-small;padding:10px;width:300px;background-color:#09f;text-align:center;border:#00f;}
+#favmenu #favname{ime-mode:inactive;width:40%;}
 
-span.del{color:red;cursor:pointer;}
-span.star{color:yellow;cursor:pointer;}
-span.starw{color:orange;cursor:pointer;}
-span.xxsmall{font-size:xx-small;}
+#header_favmenu #favname{ime-mode:inactive;width:85%;}
+#header_dirmenu .dir{width:75%;}
 
-table#favmenu {text-align:center;width:95%;}
-table#favmenu input[type=text]#favname{ime-mode:inactive;width:40%;}
-table#favmenu select#favname{width:40%;}
-table#favmenu td#favf{text-align:right;}
-table#favmenu td.favmenustar{width:10%;}
-table#header_favmenu{width:95%;}
-table#header_favmenu input[type=text]#favname{ime-mode:inactive;width:85%;}
-table#header_favmenu select#favname{width:85%;}
-table#header_dirmenu{width:95%;}
-table#header_dirmenu input[type=text]#dirname{ime-mode:inactive;width:95%;}
-table#header_dirmenu td.dir{width:75%;}
-table#header_sqlmenu{width:95%;}
-table#header_sqlmenu iframe#dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
-table#header_sqlmenu input[type=text]#sqllike{ime-mode:inactive;width:95%;}
-table#header_sqlmenu select#sqlwhere{width:95%;}
+#hlist{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;float:right;font-size:x-small;height:300px;margin:10px;overflow-y:scroll;padding:5px;width:95%;}
 
-table#menu{font-size:x-small;width:95%;}
-table#menu input[type=text]#depth        {ime-mode:disabled;width:95%;}
-table#menu input[type=text]#dirname      {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#favname      {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#filter_album {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#filter_artist{ime-mode:inactive;width:95%;}
-table#menu input[type=text]#filter_dir   {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#filter_file  {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#filter_genre {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#filter_title {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#filter_track {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#id           {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#m3uuri       {ime-mode:inactive;width:95%;}
-table#menu input[type=text]#numlast      {ime-mode:disabled;width:45%;}
-table#menu input[type=text]#numsince     {ime-mode:disabled;width:45%;}
-table#menu input[type=password]#pw       {ime-mode:inactive;width:95%;}
-table#menu input[type=number]#pw2        {ime-mode:disabled;width:95%;}
-table#menu input[type=text]#sns_format   {ime-mode:inactive;width:95%;}
+#hlist li{margin:0 5px;padding:0;}
+#hlist ul{margin:0 10px;padding:0;}
+#tweet{font-size:x-small;margin:10px;width:95%;}
+#tweet_img{cursor:pointer;width:20px;height:20px;}
 
-table#menu select#enable_allloop{width:95%;}
-table#menu select#enable_autotweet{width:95%;}
-table#menu select#enable_loop{width:95%;}
-table#menu select#enable_lyric{width:95%;}
-table#menu select#enable_muted{width:95%;}
-table#menu select#enable_notification{width:95%;}
-table#menu select#enable_recently_played{width:95%;}
-table#menu select#pass_autotweet{width:95%;}
-table#menu select#mode{width:95%;}
-table#menu select#sort{width:95%;}
-table#menu td.item{width:20%;}
-table#menu th{text-align:right;background-color:rgb(136, 170, 255);}}
+#kotta{width:64px;height:64px;}
+
+#kotta_s{width:16px;height:16px;}
+
+#logout{background-color:white;width:300px;}
+
+#menu input         {ime-mode:inactive;width:95%;}
+#menu input#numlast {ime-mode:disabled;width:45%;}
+#menu input#numsince{ime-mode:disabled;width:45%;}
+#menu td.item{width:20%;}
+#menu th{text-align:right;background-color:rgb(136, 170, 255);}}
+
+#slider{margin:0px 0px auto 10px;width:80%;}
+
+#tweettext{height:10%;font-size:large;width:95%;}
+
+#wrapper{clear:both;margin:30px auto;width:95%;}
+
+#wrapper_list{clear:both;margin:10px auto;}
+#wrapper_list li{border-bottom:1px solid #ccc;cursor:pointer;padding:10px 5px 10px;position:relative;}
+#wrapper_list li.playing{color:#000;font-size:x-large;text-shadow:1px 1px 0px rgba(255, 255, 255, 0.3);}
+#wrapper_list ol{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;color:#666;font-size:medium;list-style:decimal-leading-zero inside;margin:10px auto;padding:5px;width:95%;}
+
+.clearboth{clear:both;}
+.del{color:red;cursor:pointer;}
+.favmenustar{width:10%;}
+.rightbutton{float:right;}
+.star{color:yellow;cursor:pointer;}
+.starw{color:orange;cursor:pointer;}
+.toggle{border:1px solid #666;}
+.xxsmall{font-size:xx-small;}

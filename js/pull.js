@@ -155,10 +155,10 @@ function pullls(url) {
 jQuery(function() {
  setTimeout(function(){
   pullname('fav');
- }, 1000);
+ }, 2000);
  setTimeout(function(){
   pullname('dir');
- }, 1500);
+ }, 2500);
 
  jQuery(document).keydown(function(e) {
   var unicode = e.charCode ? e.charCode : e.keyCode;
