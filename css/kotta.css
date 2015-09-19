@@ -30,8 +30,6 @@ table{width:95%;}
 
 #dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
 
-#favmenu #favname{ime-mode:inactive;width:40%;}
-
 #header_favmenu #favname{ime-mode:inactive;width:85%;}
 #header_dirmenu .dir{width:75%;}
 

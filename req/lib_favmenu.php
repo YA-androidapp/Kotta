@@ -15,12 +15,11 @@
      <a href='<?php echo str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['favcheck'])); ?>'>
 <?php
  $getmp3info_parts = array();
- $getmp3info_parts = getmp3info(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['favcheck'])));
-
+ $getmp3info_parts = getmp3info(realpath($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/').$arguments['favcheck']));
  $title = $getmp3info_parts[0];
  echo $title; // title
  echo ' / ';
- echo $getmp3info_parts[1]; // filter_artist
+ echo $getmp3info_parts[1]; // artist
  echo ' [';
  echo $getmp3info_parts[2]; // album
  echo ']';
@@ -54,16 +53,23 @@
 ?>
    <tr><td colspan='3'>　</td></tr>
    <tr>
-    <td colspan='3' id='favf'>
-      <input type='text' id='favname' name='favname' pattern='^[a-zA-Z0-9][-_a-zA-Z0-9]*$' title='名前'>(半角英数)
+    <td colspan='2'>
+      <input type='text' id='favname' name='favname' pattern='^[a-zA-Z0-9][-_a-zA-Z0-9]*$' title='名前(半角英数)'>
+    </td>
+    <td>
 <?php
  echo '<a href=\'#\' onClick=\'$(function(){ $.get("?id='.$id.'&mode=favfadd&favname="+encodeURIComponent($("input#favname").val()), function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); });\'>作成</a>';
 ?>
-     　
+    </td>
+   </tr>
+   <tr>
+    <td colspan='2'>
      <select id='favname' name='favname'>
       <option value=''>-</option>
       <?php foreach ($favnamearr2 as $val) { echo '<option value=\''.htmlspecialchars($val, ENT_QUOTES).'\'>'.$val.'</option>'; } ?>
      </select>
+    </td>
+    <td>
 <?php
  echo '<a href=\'#\' onClick=\'if(window.confirm(htmlspecialcharsEntQuotes($("select#favname").val())+"を削除してよろしいですか？")){ $(function(){ $.get("?id='.$id.'&mode=favfdel&favname="+encodeURIComponent($("select#favname").val()), function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>削除</a>';
 ?>
