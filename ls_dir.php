@@ -16,6 +16,10 @@ if ( $_REQUEST['onlyname'] != '' )       { $onlyname = $_REQUEST['onlyname'];
 } elseif ( $_SESSION['onlyname'] != '' ) { $onlyname = $_SESSION['onlyname'];
 } else                                   { $onlyname = ''; }
 
+if ( $_GET['makem3u'] != '' )        { $makem3u = $_GET['makem3u'];
+} elseif ( $_POST['makem3u'] != '' ) { $makem3u = $_POST['makem3u'];
+} else                               { $makem3u = ''; }
+
 @ini_set('zlib.output_compression', 'Off');
 @ini_set('output_buffering', 'Off');
 @ini_set('output_handler', '');
@@ -24,8 +28,17 @@ function output_chunk($chunk) {
  echo sprintf("%x\r\n", strlen($chunk));
  echo $chunk."\r\n";
 }
-header('Content-type: application/octet-stream');
-header('Transfer-encoding: chunked');
+
+if ( $makem3u !== '' ) {
+ header('Content-Type: audio/x-mpegurl');
+ header('Accept-Ranges: bytes');
+ header('Content-Disposition: attachment; filename='.$favname.'.m3u');
+ echo ($makem3u==='2') ? '#EXTM3U'."\n\n" : '';
+} else {
+ header('Content-type: application/octet-stream');
+ header('Transfer-encoding: chunked');
+}
+
 flush();
 $i = 0;
 $depth2 = 0;
@@ -56,25 +69,30 @@ function getdirtree($path){
        if (   ($confs['filter_file']=='') || (    ($confs['filter_file']!='') &&    (fnmatch($confs['filter_file'],basename($file))==1)) ) {
         $getmp3info_parts = array();
         $getmp3info_parts = getmp3info(realpath($rpath.'/'.$file));
-        $json = json_encode( 
-         array(
-          'track' => $i,
-          'datasrc' => str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($rpath.'/'.$file)),
-          'title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
-          'favcheck' => rawurlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($rpath.'/'.$file))),
-          'basename' => basename($rpath.'/'.$file),
-          'id' => $id,
-          'favnum' => '',
-          'artistdirtmp' => str_replace(array($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '/'.basename($rpath.'/'.$file)), array('', ''), realpath($rpath.'/'.$file)),
-          'artist' => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),
-          'album' => htmlspecialchars($getmp3info_parts[2], ENT_QUOTES),
-          'number' => htmlspecialchars($getmp3info_parts[3], ENT_QUOTES),
-          'genre' => htmlspecialchars($getmp3info_parts[4], ENT_QUOTES),
-          'time_m' => htmlspecialchars( (($getmp3info_parts[5]<10)?('0'.$getmp3info_parts[5]):($getmp3info_parts[5])) , ENT_QUOTES),
-          'time_s' => htmlspecialchars( (($getmp3info_parts[6]<10)?('0'.$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES),
-         ) 
-        ); 
-        output_chunk($json.str_repeat(' ', 8000)."\n");
+        if ( $makem3u !== '' ) {
+         echo ($makem3u==='2') ? '#EXTINF:'.($getmp3info_parts[5] * 60 + $getmp3info_parts[6]).','.$getmp3info_parts[0]."\n" : '';
+         echo (empty($_SERVER['HTTPS'])?'http://':'https://').$_SERVER['HTTP_HOST'].str_replace($base_dir, $base_uri , realpath($rpath.'/'.$file))."\n";
+        } else {
+         $json = json_encode(
+          array(
+           'track' => $i,
+           'datasrc' => str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($rpath.'/'.$file)),
+           'title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
+           'favcheck' => rawurlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($rpath.'/'.$file))),
+           'basename' => basename($rpath.'/'.$file),
+           'id' => $id,
+           'favnum' => '',
+           'artistdirtmp' => str_replace(array($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '/'.basename($rpath.'/'.$file)), array('', ''), realpath($rpath.'/'.$file)),
+           'artist' => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),
+           'album' => htmlspecialchars($getmp3info_parts[2], ENT_QUOTES),
+           'number' => htmlspecialchars($getmp3info_parts[3], ENT_QUOTES),
+           'genre' => htmlspecialchars($getmp3info_parts[4], ENT_QUOTES),
+           'time_m' => htmlspecialchars( (($getmp3info_parts[5]<10)?('0'.$getmp3info_parts[5]):($getmp3info_parts[5])) , ENT_QUOTES),
+           'time_s' => htmlspecialchars( (($getmp3info_parts[6]<10)?('0'.$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES),
+          )
+         );
+         output_chunk($json.str_repeat(' ', 8000)."\n");
+        }
         flush();
         $i++;
        }
@@ -100,13 +118,13 @@ function getdirnametree($path){
     $r2path = str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $rpath.'/');
     if ( ($arguments['filter_dir']=='') || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1)) ) {
      if (   ($confs['filter_dir']=='')  || (    ($confs['filter_dir'] !='') &&    (fnmatch($confs['filter_dir'],$r2path)==1)) ) {
-      $json = json_encode( 
+      $json = json_encode(
        array(
         'id' => $i,
         'path' => $rpath.'/'.$file,
         'dirname' => basename($rpath.'/'.$file),
-       ) 
-      ); 
+       )
+      );
       output_chunk($json.str_repeat(' ', 8000)."\n");
       flush();
       $i++;

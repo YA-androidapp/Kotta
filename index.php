@@ -56,10 +56,6 @@ if ( $arguments['favname'] === '_recently_added' ) {
 } elseif ( $arguments['dirname'] !== '' ) {
  $url = 'ls_dir.php?dirname='.rawurlencode($arguments['dirname']);
 }
-
-if ( $arguments['mode'] === 'makem3u' ) {
- require_once(realpath(__DIR__).'/req/lib_makem3u.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang='ja'>

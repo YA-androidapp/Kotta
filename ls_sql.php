@@ -15,6 +15,10 @@ if ( $_REQUEST['sqllike'] != '' )          { $sqllike  = $_REQUEST['sqllike'];
 } elseif ( $_SESSION['sqllike'] != '' )    { $sqllike  = $_SESSION['sqllike'];
 } else                                     { $sqllike  = '4SEASONs'; }
 
+if ( $_GET['makem3u'] != '' )        { $makem3u = $_GET['makem3u'];
+} elseif ( $_POST['makem3u'] != '' ) { $makem3u = $_POST['makem3u'];
+} else                               { $makem3u = ''; }
+
 @ini_set('zlib.output_compression', 'Off');
 @ini_set('output_buffering', 'Off');
 @ini_set('output_handler', '');
@@ -23,9 +27,17 @@ function output_chunk($chunk) {
  echo sprintf("%x\r\n", strlen($chunk));
  echo $chunk."\r\n";
 }
-header('Content-type: application/octet-stream');
-header('Transfer-encoding: chunked');
-// // ob_flush();
+
+if ( $makem3u !== '' ) {
+ header('Content-Type: audio/x-mpegurl');
+ header('Accept-Ranges: bytes');
+ header('Content-Disposition: attachment; filename='.$favname.'.m3u');
+ echo ($makem3u==='2') ? '#EXTM3U'."\n\n" : '';
+} else {
+ header('Content-type: application/octet-stream');
+ header('Transfer-encoding: chunked');
+}
+
 flush();
 $i = 0;
 $depth2 = 0;
@@ -46,26 +58,32 @@ function getarr($sqlwhere,$sqllike){
   $sth = $db->prepare($sql);
   $sth->execute(array('%'.$sqllike.'%'));
   while ($line = @$sth->fetch(PDO::FETCH_ASSOC)) {
-   $json = json_encode( 
-         array(
-          'track' => $line['i'],
-          'datasrc' => $line['datasrc'],
-          'title' => $line['title'],
-          'favcheck' => $line['favcheck'],
-          'basename' => $line['basename'],
-          'id' => $id,
-          'favname' => '',
-          'artistdirtmp' => $line['artistdirtmp'],
-          'artist' => $line['artist'],
-          'album' => $line['album'],
-          'number' => $line['number'],
-          'genre' => $line['genre'],
-          'time_m' => $line['time_m'],
-          'time_s' => $line['time_s'],
-         )
-   );
-   output_chunk($json.str_repeat(' ', 8000)."\n");
-   // ob_flush();
+
+   if ( $makem3u !== '' ) {
+    echo ($makem3u==='2') ? '#EXTINF:'.($getmp3info_parts[5] * 60 + $getmp3info_parts[6]).','.$getmp3info_parts[0]."\n" : '';
+    echo (empty($_SERVER['HTTPS'])?'http://':'https://').$_SERVER['HTTP_HOST'].str_replace($base_dir, $base_uri , realpath($rpath.'/'.$file))."\n";
+   } else {
+
+    $json = json_encode(
+     array(
+      'track' => $line['i'],
+      'datasrc' => $line['datasrc'],
+      'title' => $line['title'],
+      'favcheck' => $line['favcheck'],
+      'basename' => $line['basename'],
+      'id' => $id,
+      'favname' => '',
+      'artistdirtmp' => $line['artistdirtmp'],
+      'artist' => $line['artist'],
+      'album' => $line['album'],
+      'number' => $line['number'],
+      'genre' => $line['genre'],
+      'time_m' => $line['time_m'],
+      'time_s' => $line['time_s'],
+     )
+    );
+    output_chunk($json.str_repeat(' ', 8000)."\n");
+   }
    flush();
   }
   $sth->closeCursor();

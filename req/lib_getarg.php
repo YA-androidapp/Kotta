@@ -93,9 +93,6 @@
  $arguments['linkadd']                           = ($_REQUEST['linkadd'] != '') ? $_REQUEST['linkadd'] : NULL;
  $arguments['linkdel']                           = ($_REQUEST['linkdel'] != '') ? $_REQUEST['linkdel'] : NULL;
 
- $arguments['m3uextended']                       = ($_REQUEST['m3uextended'] != '') ? $_REQUEST['m3uextended'] : '';
- $arguments['m3uuri']                            = ($_REQUEST['m3uuri'] != '')      ? $_REQUEST['m3uuri']      : '';
-
  $arguments['sns_format']                        = ($_REQUEST['sns_format'] != '')  ? $_REQUEST['sns_format'] : $confs['sns_format'];
 
  $arguments['numlast']                           = ( ctype_digit($_REQUEST['numsince']) && ctype_digit($_REQUEST['numlast']) ) ? $_REQUEST['numlast'] : NULL;

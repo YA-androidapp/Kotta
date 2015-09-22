@@ -51,7 +51,6 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
       <select name='mode'>
        <option value=''<?php echo (stripos(basename($_SERVER['SCRIPT_NAME']), 'index.php')!==FALSE) ? ' selected=\'selected\'' : ''; ?>>シンプル</option>
        <option value='music'<?php echo ( ($_REQUEST['mode'] == 'music') || ($_SESSION['mode'] == 'music') || ( stripos(basename($_SERVER['SCRIPT_NAME']), 'music.php')!==FALSE) ) ? ' selected=\'selected\'' : ''; ?>>MP3プレーヤ</option>
-       <option value='makem3u'<?php echo ( ($_REQUEST['mode'] == 'makem3u') || ($_SESSION['mode'] == 'makem3u') ) ? ' selected=\'selected\'' : ''; ?>>M3Uプレイリストを生成</option>
       </select>
      </td>
     </tr>
@@ -61,20 +60,16 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
     <tr class='source'>
      <td>ディレクトリ(autocomplete)</td>
      <td>
-      <input type='text' id='dirname' name='dirname' onclick='jQuery("#dirname").css("background-color","#fff");jQuery("#favname,#m3uuri").css("background-color","#ccc")' value='<?php echo @str_replace($base_dir, '', @str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $_REQUEST['dirname'])); ?>' />
+      <input type='text' id='dirname' name='dirname' onclick='jQuery("#dirname").css("background-color","#fff");jQuery("#favname").css("background-color","#ccc")' value='<?php echo @str_replace($base_dir, '', @str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $_REQUEST['dirname'])); ?>' />
       <span id="dirresult"></span>
      </td>
     </tr>
     <tr class='source'>
      <td>お気に入り</td>
      <td>
-      <input type='text' id='favname' name='favname' onclick='jQuery("#favname").css("background-color","#fff");jQuery("#dirname,#m3uuri").css("background-color","#ccc")' value='<?php echo ($_REQUEST['favname']!='') ? $_REQUEST['favname'] : @$_SESSION['favname']; ?>' />
+      <input type='text' id='favname' name='favname' onclick='jQuery("#favname").css("background-color","#fff");jQuery("#dirname").css("background-color","#ccc")' value='<?php echo ($_REQUEST['favname']!='') ? $_REQUEST['favname'] : @$_SESSION['favname']; ?>' />
       <span id="favresult"></span>
      </td>
-    </tr>
-    <tr class='source'>
-     <td>M3UプレイリストのURL</td>
-     <td><input type='text' id='m3uuri' name='m3uuri' onclick='jQuery("#m3uuri").css("background-color","#fff");jQuery("#dirname,#favname").css("background-color","#ccc")' value='<?php echo ($_REQUEST['m3uuri']!='') ? $_REQUEST['m3uuri'] : @$_SESSION['m3uuri']; ?>' /></td>
     </tr>
     <tr class='source'>
      <td>読み込む階層の深さ</td>

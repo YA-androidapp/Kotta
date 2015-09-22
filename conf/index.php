@@ -26,6 +26,4 @@ $confs['sns_format'] = '@home %t / %a [ %l ] #nowplaying';
  // %s => time_s
  // %t => title
 
-$allowedExtensions = array('mp3');
-$allowedSizeLimit = 10 * 1024 * 1024;
 set_time_limit(600);

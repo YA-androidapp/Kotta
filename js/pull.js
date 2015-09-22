@@ -42,7 +42,7 @@ function pullname(mode) {
                   +'<a href=\'?mode=music&'+mode+'name='+htmlspecialcharsEntQuotes(nam)+'\'>[music]</a>'
                   +'<a href=\'#\' onClick=\'pullls("'+htmlspecialcharsEntQuotes(url)+'");\'>[Add]</a>'
                   +'<a href=\'#\' onClick=\'var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val();window.open(url,"db");\'>[AddDB]</a>'
-                  +'<a href=\'?mode=makem3u&'+mode+'name='+htmlspecialcharsEntQuotes(nam)+'\'>[m3u]</a></li>'
+                  +'<a href=\'ls_'+mode+'.php?makem3u=1&'+mode+'name='+htmlspecialcharsEntQuotes(nam)+'\'>[m3u]</a></li>'
                  );
                  if(mode == 'fav'){$('select#favname').append($('<option>').html(nam).val(nam));}
                 }
