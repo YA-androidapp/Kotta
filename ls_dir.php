@@ -10,7 +10,7 @@ require_once(dirname(__FILE__).'/req/mp3tag_getid3.php');
 
 if ( $_REQUEST['dirname'] != '' )       { $dirname = $_REQUEST['dirname'];
 } elseif ( $_SESSION['dirname'] != '' ) { $dirname = $_SESSION['dirname'];
-} else                              { $dirname = ''; }
+} else                                  { $dirname = ''; }
 
 if ( $_REQUEST['onlyname'] != '' )       { $onlyname = $_REQUEST['onlyname'];
 } elseif ( $_SESSION['onlyname'] != '' ) { $onlyname = $_SESSION['onlyname'];
@@ -29,10 +29,10 @@ function output_chunk($chunk) {
  echo $chunk."\r\n";
 }
 
-if ( $makem3u !== '' ) {
+if ( !empty($makem3u) ) {
  header('Content-Type: audio/x-mpegurl');
  header('Accept-Ranges: bytes');
- header('Content-Disposition: attachment; filename='.$favname.'.m3u');
+ header('Content-Disposition: attachment; filename='.$dirname.'.m3u');
  echo ($makem3u==='2') ? '#EXTM3U'."\n\n" : '';
 } else {
  header('Content-type: application/octet-stream');
@@ -69,7 +69,7 @@ function getdirtree($path){
        if (   ($confs['filter_file']=='') || (    ($confs['filter_file']!='') &&    (fnmatch($confs['filter_file'],basename($file))==1)) ) {
         $getmp3info_parts = array();
         $getmp3info_parts = getmp3info(realpath($rpath.'/'.$file));
-        if ( $makem3u !== '' ) {
+        if ( !empty($makem3u) ) {
          echo ($makem3u==='2') ? '#EXTINF:'.($getmp3info_parts[5] * 60 + $getmp3info_parts[6]).','.$getmp3info_parts[0]."\n" : '';
          echo (empty($_SERVER['HTTPS'])?'http://':'https://').$_SERVER['HTTP_HOST'].str_replace($base_dir, $base_uri , realpath($rpath.'/'.$file))."\n";
         } else {
