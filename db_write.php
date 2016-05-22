@@ -32,7 +32,7 @@ try {
 try {
  $db = new PDO('sqlite:./conf/'.$confs['dbfilename']);
  $sql = 'INSERT INTO musics( datasrc , title , favcheck , basename , artistdirtmp , artist , album , number , genre , time_m , time_s)'
-                 .' values (:datasrc, :title, :favcheck, :basename, :artistdirtmp, :artist, :album, :number, :genre, :time_m, :time_s)';
+ .' values (:datasrc, :title, :favcheck, :basename, :artistdirtmp, :artist, :album, :number, :genre, :time_m, :time_s)';
  $sth = $db->prepare($sql);
  $db->beginTransaction();
  $i = 0;
@@ -67,7 +67,7 @@ function getdirtree($path){
         if (   ($confs['filter_file']=='') || (    ($confs['filter_file']!='') &&    (fnmatch($confs['filter_file'],basename($file))==1)) ) {
          $getmp3info_parts = array();
          $getmp3info_parts = getmp3info(realpath($rpath.'/'.$file));
-         $rslt = $sth->execute( 
+         $rslt = $sth->execute(
           array(
            ':datasrc' => str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($rpath.'/'.$file)),
            ':title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
@@ -80,8 +80,8 @@ function getdirtree($path){
            ':genre' => htmlspecialchars($getmp3info_parts[4], ENT_QUOTES),
            ':time_m' => htmlspecialchars( (($getmp3info_parts[5]<10)?('0'.$getmp3info_parts[5]):($getmp3info_parts[5])) , ENT_QUOTES),
            ':time_s' => htmlspecialchars( (($getmp3info_parts[6]<10)?('0'.$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES),
-          )
-         );
+           )
+          );
          if (!$rslt){
           $db->rollBack();
           $db = null;
@@ -101,5 +101,63 @@ function getdirtree($path){
    $db = null;
    die('Exception: ' . $e->getMessage());
   }
+ }
+}
+
+function getdirtree2($path) {
+ global $arguments, $base_dir, $base_uri, $confs, $db, $i, $sth;
+
+ try {
+  foreach (new RecursiveIteratorIterator(
+   new RecursiveDirectoryIterator(
+    $path,
+    FileSystemIterator::SKIP_DOTS
+    )
+   ) as $item) {
+   switch (true) {
+    case !$item->isFile():
+    case (endsWith($item->getPathname(), '.mp3') == FALSE):
+    break;
+    default :
+    echo sprintf('%05d', $i++) . ' : ' . realpath($item->getPathname())."<br>\n";
+    $r2path = str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $rpath.'/');
+    if (  ($arguments['filter_dir']=='')  || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1))          ) {
+     if ( ($arguments['filter_file']=='') || (($arguments['filter_file']!='') &&(fnmatch($arguments['filter_file'],basename($file))==1)) ) {
+      if (    ($confs['filter_dir']=='')  || (    ($confs['filter_dir'] !='') &&    (fnmatch($confs['filter_dir'],$r2path)==1))          ) {
+       if (   ($confs['filter_file']=='') || (    ($confs['filter_file']!='') &&    (fnmatch($confs['filter_file'],basename($file))==1)) ) {
+        $getmp3info_parts = array();
+        $getmp3info_parts = getmp3info(realpath($item->getPathname()));
+        $rslt = $sth->execute(
+         array(
+          ':datasrc' => str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), $base_uri, realpath($item->getPathname())),
+          ':title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
+          ':favcheck' => rawurlencode(str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', realpath($item->getPathname()))),
+          ':basename' => basename($rpath.'/'.$file),
+          ':artistdirtmp' => str_replace(array($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '/'.basename($rpath.'/'.$file)), array('', ''), realpath($item->getPathname())),
+          ':artist' => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),
+          ':album' => htmlspecialchars($getmp3info_parts[2], ENT_QUOTES),
+          ':number' => htmlspecialchars($getmp3info_parts[3], ENT_QUOTES),
+          ':genre' => htmlspecialchars($getmp3info_parts[4], ENT_QUOTES),
+          ':time_m' => htmlspecialchars( (($getmp3info_parts[5]<10)?('0'.$getmp3info_parts[5]):($getmp3info_parts[5])) , ENT_QUOTES),
+          ':time_s' => htmlspecialchars( (($getmp3info_parts[6]<10)?('0'.$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES),
+          )
+         );
+        if (!$rslt){
+         $db->rollBack();
+         $db = null;
+         die(' Exception: データの追加に失敗しました');
+        }
+       }
+      }
+     }
+    }
+   }
+   ob_flush();
+   flush();
+  }
+ } catch (PDOException $e) {
+  $db->rollBack();
+  $db = null;
+  die('Exception: ' . $e->getMessage());
  }
 }
