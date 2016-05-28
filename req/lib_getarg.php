@@ -20,7 +20,7 @@
  if       ( $_REQUEST['mode'] == 'simple' )      { $_SESSION['mode']  = ( $_REQUEST['mode'] = '' ); }
  if       ( $_REQUEST['mode'] != '' )            { $arguments['mode'] = ( $_SESSION['mode'] = $_REQUEST['mode'] );
  } elseif ( $_SESSION['mode'] != '' )            { $arguments['mode'] = $_SESSION['mode'];
- } else                                          { $arguments['mode'] = ''; }
+ } else                                          { $arguments['mode'] = 'music'; }
 
  if ( $arguments['favname'] != '' ) {
   if ( !file_exists('fav/'.$id.'_'.$arguments['favname'].'.cgi') ) {

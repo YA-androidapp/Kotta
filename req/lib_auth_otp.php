@@ -19,21 +19,29 @@ if ( (isset($_REQUEST['otppwauthed'])) && ($_REQUEST['otppwauthed'] != '') ) {
 
 $otpfile = 'pwd/'.$id.'_otp.cgi';
 if ( file_exists($otpfile) ) {
- // echo 'OTP�F�؂��L��';
+ // echo 'OTP認証が有効';
  $totpkey = file_get_contents($otpfile);
  $totpkey = str_replace(array("\r\n","\n","\r",' '), '', $totpkey);
  require_once(realpath(__DIR__).'/ga.php');
  $otp = Google2FA::oath_hotp(Google2FA::base32_decode($totpkey), Google2FA::get_timestamp());
  // echo 'otp: '.$otp.' totpkey: '.$totpkey.' time: '.Google2FA::get_timestamp();
  if ( $_SESSION['otppwauthed'] === 'otppwauthed' ) {
-  // echo 'OTP�F�؂ɐ���(��)';
-  ;
+  // echo 'OTP認証に成功(再)';
+  echo "<!-- 認証されました auth_otp-01 -->";
  } elseif ( Google2FA::verify_key($totpkey, $pw2) ) {
-  // echo 'OTP�F�؂ɐ���';
+  // echo 'OTP認証に成功';
   $_SESSION['otppwauthed'] = 'otppwauthed';
+  echo "<!-- 認証されました auth_otp-02 -->";
+  ;
+ } elseif ( Google2FA::verify_key($totpkey, substr($pw, strlen($pw) - 6, strlen($pw))) ) {
+  // echo 'OTP認証に成功';
+  $_SESSION['otppwauthed'] = 'otppwauthed';
+  echo "<!-- 認証されました auth_otp-03 -->";
   ;
  } else {
-  // echo 'OTP�F�؂Ɏ��s';
-  require_once(realpath(__DIR__).'/lib_menu.php');die(' auth_idpw-01');
+  if ( ! $throughAuth ) { die('OTP認証できません auth_otp-03'); }
  }
+} else {
+ echo "<!-- OTP認証が有効ではありません -->";
 }
+echo "<!-- OTP End -->";

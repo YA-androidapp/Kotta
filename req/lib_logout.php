@@ -7,5 +7,5 @@
  $_GET = array();
  $_POST = array();
  echo '<li>HTTPリクエスト情報を削除しました</li>';
- echo '<li>ログアウトしました！<br>\n <a href=\''.htmlspecialchars($_SERVER[HTTP_REFERER], ENT_QUOTES).'\'>戻る</a></li>';
+ echo '<li>ログアウトしました！<br>'."\n".' <a href=\''.htmlspecialchars($_SERVER[HTTP_REFERER], ENT_QUOTES).'\'>戻る</a></li>';
  echo '</ul>';

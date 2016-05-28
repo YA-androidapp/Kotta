@@ -16,7 +16,7 @@ function pullname(mode) {
  };
    $.ajax({
     type: 'post',
-    url:  'ls_'+mode+'.php',
+    url:  'ls_'+mode+'.php?id='+jQuery('input#id').val()+'&pw='+jQuery('input#pw').val()+'&pw2='+jQuery('input#pw2').val(),
     cache: false,
     data: 'onlyname=1&_='+Math.random(),
     xhrFields: {
@@ -36,12 +36,12 @@ function pullname(mode) {
                 var json = JSON.parse(line);
                 var nam = (mode == 'fav')?json.favname:json.dirname;
                 if(typeof nam !== 'undefined'){
-                 var url = 'ls_'+mode+'.php?'+mode+'name='+nam;
+                 var url = 'ls_'+mode+'.php?id='+jQuery('input#id').val()+'&pw='+jQuery('input#pw').val()+'&pw2='+jQuery('input#pw2').val()+'&'+mode+'name='+nam;
                  $('ul#'+mode+'slist').append(
                   '<li id=\''+mode+'menu_'+htmlspecialcharsEntQuotes(nam)+'\'><a href=\'?mode=simple&'+mode+'name='+htmlspecialcharsEntQuotes(nam)+'\'>'+nam+'</a>'
                   +'<a href=\'?mode=music&'+mode+'name='+htmlspecialcharsEntQuotes(nam)+'\'>[music]</a>'
                   +'<a href=\'#\' onClick=\'pullls("'+htmlspecialcharsEntQuotes(url)+'");\'>[Add]</a>'
-                  +'<a href=\'#\' onClick=\'var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val();window.open(url,"db");\'>[AddDB]</a>'
+                  +'<a href=\'#\' onClick=\'var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val()+"&pw2="+jQuery("input#pw2").val();window.open(url,"db");\'>[AddDB]</a>'
                   +'<a href=\'ls_'+mode+'.php?makem3u=1&'+mode+'name='+htmlspecialcharsEntQuotes(nam)+'\'>[m3u]</a></li>'
                  );
                  if(mode == 'fav'){$('select#favname').append($('<option>').html(nam).val(nam));}
@@ -153,12 +153,50 @@ function pullls(url) {
 }
 
 jQuery(function() {
- setTimeout(function(){
-  pullname('fav');
- }, 2000);
- setTimeout(function(){
-  pullname('dir');
- }, 2500);
+ if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') && (jQuery("input#pw2").val()!='') ) {
+  setTimeout(function(){
+   pullname('fav');
+  }, 2000);
+  setTimeout(function(){
+   pullname('dir');
+  }, 2500);
+ }
+
+ $("input#id").focus(function(){
+  if ( jQuery("input#id").val() == '' ) {
+   $(this).css("background","#ffcccc");
+  }
+ }).blur(function(){
+  if ( jQuery("input#id").val()!='' ) {
+   $(this).css("background","#ccffcc");
+  }
+ });
+
+ $("input#pw").focus(function(){
+  if ( jQuery("input#pw").val() == '' ) {
+   $(this).css("background","#ffcccc");
+  }
+ }).blur(function(){
+  if ( jQuery("input#pw").val()!='' ) {
+   $(this).css("background","#ccffcc");
+  }
+ });
+
+ $("input#pw2").focus(function(){
+  if ( jQuery("input#pw2").val() == '' ) {
+   $(this).css("background","#ffcccc");
+  }
+ }).blur(function(){
+  if ( jQuery("input#pw2").val()!='' ) {
+   $(this).css("background","#ccffcc");
+   setTimeout(function(){
+    pullname('fav');
+   }, 2000);
+   setTimeout(function(){
+    pullname('dir');
+   }, 2500);
+  }
+ });
 
  jQuery(document).keydown(function(e) {
   var unicode = e.charCode ? e.charCode : e.keyCode;

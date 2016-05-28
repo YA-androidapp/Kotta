@@ -14,7 +14,22 @@ $permalink = 'http'.$flag.'://'.$_SERVER['SERVER_NAME'].$_SERVER['SCRIPT_NAME'].
  <head>
   <meta charset='utf-8'>
   <title>Kotta Menu</title>
-<?php require_once(realpath(__DIR__).'/lib_style.php'); ?>
+<!-- style -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link rel='stylesheet' type='text/css' href='https://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css' />
+
+<link rel='stylesheet' type='text/css' href='js/jQuery-Notify-bar/jquery.notifyBar.css' />
+
+<link rel='stylesheet' type='text/css' href='css/kirinlyric.css'>
+
+<link rel='stylesheet' href='css/jQuery-File-Upload/jquery.fileupload.css'>
+<link rel='stylesheet' href='css/jQuery-File-Upload/jquery.fileupload-ui.css'>
+<noscript><link rel='stylesheet' href='css/jQuery-File-Upload/jquery.fileupload-noscript.css'></noscript>
+<noscript><link rel='stylesheet' href='css/jQuery-File-Upload/jquery.fileupload-ui-noscript.css'></noscript>
+
+<link rel='stylesheet' type='text/css' href='css/kotta.css'>
+<!-- Style -->
 
 <?php require_once(realpath(__DIR__).'/lib_js.php'); ?>
  </head>

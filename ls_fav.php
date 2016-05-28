@@ -4,6 +4,7 @@ session_start();
 error_reporting(0);
 
 require_once(realpath(__DIR__).'/req/lib_auth_idpw.php');
+require_once(realpath(__DIR__).'/req/lib_auth_otp.php');
 
 require_once(dirname(__FILE__).'/conf/index.php');
 require_once(dirname(__FILE__).'/req/lib_get_new_files.php');

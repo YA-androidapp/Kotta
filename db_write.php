@@ -2,13 +2,14 @@
 // Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
 
-if ( (isset($_REQUEST['check']) == false) || ($_REQUEST['check'] == '0') ) { die('<small><small><a href="db_write.php?check=1">DB-Rebuilding</a></small></small>'); }
+if ( (isset($_REQUEST['check']) == false) || ($_REQUEST['check'] == '0') ) { die('<small><small><ul><li><a href="db_write.php?check=1">DB-Rebuilding</a></li><li><a href="db_write.php?check=1&reset=1">DB-Rebuilding(Reset)</a></li></ul></small></small>'); }
 
 ignore_user_abort(true);
 set_time_limit(0);
 error_reporting(0);
 
 require_once(realpath(__DIR__).'/req/lib_auth_idpw.php');
+require_once(realpath(__DIR__).'/req/lib_auth_otp.php');
 
 require_once(dirname(__FILE__).'/conf/index.php');
 require_once(dirname(__FILE__).'/req/mp3tag_getid3.php');
@@ -48,7 +49,7 @@ try {
  die('Exception: ' . $e->getMessage());
 }
 
-function getdirtree($path){
+function getdirtree2($path){
  global $arguments, $base_dir, $base_uri, $confs, $db, $i, $sth;
 
  $rpath = realpath($path);
@@ -59,7 +60,7 @@ function getdirtree($path){
     if (is_dir($rpath.'/'.$file)) {
      getdirtree($rpath.'/'.$file);
     } elseif ( (is_file($rpath.'/'.$file)) && (stripos(realpath($rpath.'/'.$file), '.mp3') !== FALSE) ) {
-     echo sprintf('%05d', $i++) . ' : ' . realpath($rpath.'/'.$file).'<br>';
+     echo sprintf('%05d', $i++) . ' : ' . realpath($rpath.'/'.$file);
      $r2path = str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $rpath.'/');
      if (  ($arguments['filter_dir']=='')  || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1))          ) {
       if ( ($arguments['filter_file']=='') || (($arguments['filter_file']!='') &&(fnmatch($arguments['filter_file'],basename($file))==1)) ) {
@@ -82,7 +83,9 @@ function getdirtree($path){
            ':time_s' => htmlspecialchars( (($getmp3info_parts[6]<10)?('0'.$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES),
            )
           );
-         if (!$rslt){
+         if ($rslt){
+          echo '　　　データの追加に成功しました';
+         }else{
           $db->rollBack();
           $db = null;
           die(' Exception: データの追加に失敗しました');
@@ -92,6 +95,7 @@ function getdirtree($path){
       }
      }
     }
+    echo "<br>\n";
     ob_flush();
     flush();
    }
@@ -104,7 +108,7 @@ function getdirtree($path){
  }
 }
 
-function getdirtree2($path) {
+function getdirtree($path) {
  global $arguments, $base_dir, $base_uri, $confs, $db, $i, $sth;
 
  try {
@@ -119,7 +123,7 @@ function getdirtree2($path) {
     case (endsWith($item->getPathname(), '.mp3') == FALSE):
     break;
     default :
-    echo sprintf('%05d', $i++) . ' : ' . realpath($item->getPathname())."<br>\n";
+    echo sprintf('%05d', $i++) . ' : ' . realpath($item->getPathname());
     $r2path = str_replace($base_dir.((mb_substr($base_dir,-1)=='/')?'':'/'), '', $rpath.'/');
     if (  ($arguments['filter_dir']=='')  || (($arguments['filter_dir'] !='') &&(fnmatch($arguments['filter_dir'],$r2path)==1))          ) {
      if ( ($arguments['filter_file']=='') || (($arguments['filter_file']!='') &&(fnmatch($arguments['filter_file'],basename($file))==1)) ) {
@@ -142,7 +146,9 @@ function getdirtree2($path) {
           ':time_s' => htmlspecialchars( (($getmp3info_parts[6]<10)?('0'.$getmp3info_parts[6]):($getmp3info_parts[6])) , ENT_QUOTES),
           )
          );
-        if (!$rslt){
+        if ($rslt){
+         echo '　　　データの追加に成功しました';
+        }else{
          $db->rollBack();
          $db = null;
          die(' Exception: データの追加に失敗しました');
@@ -152,6 +158,7 @@ function getdirtree2($path) {
      }
     }
    }
+   echo "<br>\n";
    ob_flush();
    flush();
   }
