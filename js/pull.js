@@ -153,7 +153,7 @@ function pullls(url) {
 }
 
 jQuery(function() {
- if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') && (jQuery("input#pw2").val()!='') ) {
+ if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') && ( (Cookies.get('otppwauthed')=='otppwauthed') || (Cookies.get('otppwauthed')=='otppwdisabled') || (jQuery("input#pw2").val()!='') ) ) {
   setTimeout(function(){
    pullname('fav');
   }, 2000);
@@ -161,42 +161,6 @@ jQuery(function() {
    pullname('dir');
   }, 2500);
  }
-
- $("input#id").focus(function(){
-  if ( jQuery("input#id").val() == '' ) {
-   $(this).css("background","#ffcccc");
-  }
- }).blur(function(){
-  if ( jQuery("input#id").val()!='' ) {
-   $(this).css("background","#ccffcc");
-  }
- });
-
- $("input#pw").focus(function(){
-  if ( jQuery("input#pw").val() == '' ) {
-   $(this).css("background","#ffcccc");
-  }
- }).blur(function(){
-  if ( jQuery("input#pw").val()!='' ) {
-   $(this).css("background","#ccffcc");
-  }
- });
-
- $("input#pw2").focus(function(){
-  if ( jQuery("input#pw2").val() == '' ) {
-   $(this).css("background","#ffcccc");
-  }
- }).blur(function(){
-  if ( jQuery("input#pw2").val()!='' ) {
-   $(this).css("background","#ccffcc");
-   setTimeout(function(){
-    pullname('fav');
-   }, 2000);
-   setTimeout(function(){
-    pullname('dir');
-   }, 2500);
-  }
- });
 
  jQuery(document).keydown(function(e) {
   var unicode = e.charCode ? e.charCode : e.keyCode;

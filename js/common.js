@@ -32,6 +32,65 @@ $(function () {
   }
  });
 
+ if ( jQuery("input#id").val()=='' ) {
+  $("input#id").css("background","#ffeeee");
+ } else {
+  $("input#id").css("background","#eeffee");
+ }
+ $("input#id").focus(function(){
+  if ( jQuery("input#id").val() == '' ) {
+   $(this).css("background","#ffeeee");
+  }
+ }).blur(function(){
+  if ( jQuery("input#id").val()!='' ) {
+   $(this).css("background","#eeffee");
+  }
+ });
+
+ if ( jQuery("input#pw").val()=='' ) {
+  $("input#pw").css("background","#ffeeee");
+ } else {
+  $("input#pw").css("background","#eeffee");
+ }
+ $("input#pw").focus(function(){
+  if ( jQuery("input#pw").val() == '' ) {
+   $(this).css("background","#ffeeee");
+  }
+ }).blur(function(){
+  if ( jQuery("input#pw").val()!='' ) {
+   $(this).css("background","#eeffee");
+
+   setTimeout(function(){
+    pullname('fav');
+   }, 2000);
+   setTimeout(function(){
+    pullname('dir');
+   }, 2500);
+  }
+ });
+
+ if ( jQuery("input#pw2").val()=='' ) {
+  $("input#pw2").css("background","#ffeeee");
+ } else {
+  $("input#pw2").css("background","#eeffee");
+ }
+ $("input#pw2").focus(function(){
+  if ( jQuery("input#pw2").val() == '' ) {
+   $(this).css("background","#ffeeee");
+  }
+ }).blur(function(){
+  if ( jQuery("input#pw2").val()!='' ) {
+   $(this).css("background","#eeffee");
+
+   setTimeout(function(){
+    pullname('fav');
+   }, 2000);
+   setTimeout(function(){
+    pullname('dir');
+   }, 2500);
+  }
+ });
+
  jQuery('#control_pullfavname').click(function(e) {
     pullname('fav');
  });
@@ -222,6 +281,7 @@ function setscreenname() {
 }
 
 function settweetstr(mode) {
+ var sns_format = jQuery('input#sns_format').val();
  var tstr = sns_format.replace('%a', jQuery('ol#sort_list li.playing .artist').text() );
  tstr = tstr.replace('%g', jQuery('ol#sort_list li.playing .genre').text() );
  tstr = tstr.replace('%l', jQuery('ol#sort_list li.playing .album').text() );
@@ -239,7 +299,7 @@ function settweetstr(mode) {
     if ( mode == 1 ) {
      jQuery('textarea#tweettext').val( tstr );
     } else if ( mode == 2 ) {
-     window.open('tweet/tweet.php?pass_autotweet='+pass_autotweet+'&tweettext='+encodeURIComponent(tstr), 'sns');
+     window.open('tweet/tweet.php?pass_autotweet='+jQuery('select#pass_autotweet').val()+'&tweettext='+encodeURIComponent(tstr), 'sns');
     }
    }
   });
@@ -247,7 +307,7 @@ function settweetstr(mode) {
   if ( mode == 1 ) {
    jQuery('textarea#tweettext').val( tstr );
   } else if ( mode == 2 ) {
-   window.open('tweet/tweet.php?pass_autotweet='+pass_autotweet+'&tweettext='+encodeURIComponent(tstr), 'sns');
+   window.open('tweet/tweet.php?pass_autotweet='+jQuery('select#pass_autotweet').val()+'&tweettext='+encodeURIComponent(tstr), 'sns');
   }
  }
 }

@@ -15,6 +15,7 @@ if ( (isset($_REQUEST['pw2'])) && ($_REQUEST['pw2'] != '') ) {
 if ( (isset($_REQUEST['otppwauthed'])) && ($_REQUEST['otppwauthed'] != '') ) {
  // force reset
  $_SESSION['otppwauthed'] = '';
+ $_COOKIE['otppwauthed'] = '';
 }
 
 $otpfile = 'pwd/'.$id.'_otp.cgi';
@@ -42,6 +43,7 @@ if ( file_exists($otpfile) ) {
   if ( ! $throughAuth ) { die('OTP認証できません auth_otp-03'); }
  }
 } else {
+  $_SESSION['otppwauthed'] = 'otppwdisabled';
  echo "<!-- OTP認証が有効ではありません -->";
 }
 echo "<!-- OTP End -->";

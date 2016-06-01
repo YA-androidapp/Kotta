@@ -111,7 +111,7 @@ flush();
     </tr>
     <tr>
      <td><a href='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?menu=1'>Menu</a></td>
-     <td><small><a target='sns' href='tweet/index.php'>Authentication in Twitter</a></small></td>
+     <td></td>
      <td><a href='<?php echo basename($_SERVER['SCRIPT_NAME']); ?>?logout=1'>Logout</a></td>
     </tr>
    </table>
@@ -142,6 +142,14 @@ flush();
     <input type='checkbox' accesskey='n' id='enable_notification'<?php if($arguments['enable_notification']==1){echo ' checked="checked"';} ?>>次に再生する曲を通知(<u title='Alt+Shift+N'>N</u>)<br>
     <input type='checkbox' accesskey='m' id='enable_muted'<?php if($arguments['enable_muted']==1){echo ' checked="checked"';} ?>>ミュート(<u title='Alt+Shift+M'>M</u>)<br>
     <input type='checkbox' accesskey='l' id='enable_lyric'<?php if($arguments['enable_lyric']==1){echo ' checked="checked"';} ?>>歌詞表示(<u title='Alt+Shift+L'>L</u>)
+    <select id='enable_autotweet' name='enable_autotweet'>
+     <option value='1'>再生完了時に自動的にツイートする</option>
+     <option value='0' selected='selected'>再生完了時に自動的にツイートしない</option>
+    </select><br>
+    <select id='pass_autotweet' name='pass_autotweet'>
+     <option value='0'>ツイート時に確認する</option>
+     <option value='1' selected='selected'>ツイート時に確認しない</option>
+    </select>
    </form>
    <div class='toggle' onclick='jQuery("#pagesearch").toggle()'>Filtering and Sorting</div>
    <form id='pagesearch'>
@@ -188,15 +196,22 @@ flush();
    <div id='tweet'>
     <table>
      <tr>
-      <td colspan='2'>
+      <td>
        Screenname:<span id='screen_name'><?php echo ($_SESSION['oa_screen_name']!='') ? '@'.$_SESSION['oa_screen_name'] : '---'; ?></span>
+      </td>
+      <td>
+       <small><a target='sns' href='tweet/index.php'>Authentication in Twitter</a></small>
+      </td>
+     </tr>
+     <tr class='nowplaying'>
+      <td>書式</td>
+      <td>
+       <input type='text' id='sns_format' name='sns_format' value='<?php echo $confs['sns_format']; ?>' title='書式： %a:アーティスト名, %g:ジャンル, %l:アルバム名, %m:再生時間(分), %n:トラック番号, %s:再生時間(秒), %t:曲名, %u:URI' />
       </td>
      </tr>
      <tr>
-      <td>
+      <td colspan='2'>
        <textarea id='tweettext'></textarea>
-      </td>
-      <td>
        <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfcBAgLLBS2oqjpAAACWklEQVQ4T6VUv2/TQBh9d86PpnaApkKIgdIJspUFsbEwM3ZgYEFILEiwsSIWxAD/AHP/DhYkSlVUVAmEBEIVQi1CSVOROKnt2Mf7znFxXAeE+qLns+7ue/e97z5HPd8emPOehjE4GRTwo59ArX0dmvjEaikUfzqkVpQojM1xzpovY2RHir78PDCJvExOESTkMAY0xxoflfziDIhH2a9T5fQEYSgjM3t42cWDtguv4iDgCdn6LGYaFEz48od+nOCS50BNslo546BDxSHnMwaFmDwpKDWUDFKG9B9JDSaYp99lHrA0r3GBvOg6tiOkJFlMnurpx76toUCSGsUGV09XcXNpLp2cgReffJutzqwQ8qbDJMF4wsjSgJr/RKuqWVtzFJvF20sJKCCUFgroJ+cYAdX3/Bg/6VHYHcV4vRfiTSe0KWWxGdWj7QNjeKuyKCn7bKbrrRpWlxtW8NVugGcfBlisy6rsUWjUFBZZz9y5R6BlyczYyxALkmH+w2kvVFBvKDRdDY90XYUaxWWvxBSp7m9JhoyUBCgU83HO0Xi8csoKCnZoebMXwuF7VSt8GYzx/lcEj/uKUPfe7Zt8RqK76ydYu9ZCc2KzDE9Yhp1RhGphS2o5Rylsq6FxZ72H3qGkXo5wLLc6HStUtze6aYaFk2Tu+0GCG2fruMI68tux8xW63OiO8dYPsEAHOXMW6tbGvmH7HBMUSM+GvPU++ykriwzNGjBH5aKYQK2ud6ZqWAbewxR4mTOh2af8MtRfGbJP8yzbI/82UnJ1d7Nnvh1GdFzi+T8gLtteFb8BfXnMH2QhvcwAAAAASUVORK5CYII=' alt='twitterに投稿する' id='tweet_img' title='twitterに投稿する' onClick='window.open("<?php echo str_replace(basename($_SERVER['SCRIPT_NAME']), 'tweet/tweet.php', $_SERVER['SCRIPT_NAME']); ?>?pass_autotweet=1&tweettext="+encodeURIComponent(jQuery("#tweettext").val()), "sns");return false;'>
       </td>
      </tr>
