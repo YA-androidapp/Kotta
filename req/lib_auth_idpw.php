@@ -33,8 +33,8 @@ if ( file_exists($pwdfile) ) {
  } else {
   $otpfile = 'pwd/'.$id.'_otp.cgi';
   if ( file_exists($otpfile) ) {
-   $pwsub = substr($pw, 0, strlen($pw) - 6);
-   if ( ( $pwsub !== '' ) && ( pwsub === $tpassword ) ) {
+   $pwsub = substr($pw, 0, strlen($pw) - 6);echo $pw."##".$pwsub."**".$tpassword;
+   if ( ( $pwsub !== '' ) && ( $pwsub === $tpassword ) ) {
     echo "<!-- 認証されました auth_idpw-02 -->";
    } else {
     if ( ! $throughAuth ) { die('認証できません auth_idpw-05'); }

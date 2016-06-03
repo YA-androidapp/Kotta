@@ -68,6 +68,7 @@ if ( $arguments['favname'] === '_recently_added' ) {
 <noscript><link rel='stylesheet' href='css/jQuery-File-Upload/jquery.fileupload-noscript.css'></noscript>
 <noscript><link rel='stylesheet' href='css/jQuery-File-Upload/jquery.fileupload-ui-noscript.css'></noscript>
 <link rel='stylesheet' type='text/css' href='css/kotta.css'>
+<link rel='stylesheet' type='text/css' href='css/tgl.css'>
 <!-- Style -->
 <?php
 require_once(realpath(__DIR__).'/req/lib_js.php');
@@ -135,21 +136,53 @@ flush();
    </form>
    <div class='toggle' onclick='jQuery("#checkbox_auto").toggle()'>Confs</div>
    <form id='checkbox_auto'>
-    <input type='checkbox' accesskey='o' id='enable_loop'<?php if($arguments['enable_loop']==1){echo ' checked="checked"';} ?>>１曲ループ(<u title='Alt+Shift+O'>O</u>)<br>
-    <input type='checkbox' accesskey='a' id='enable_allloop'<?php if($arguments['enable_allloop']!=0){echo ' checked="checked"';} ?>>全曲ループ(<u title='Alt+Shift+A'>A</u>)<br>
-    <input type='checkbox' accesskey='r' id='enable_recently_played'<?php if($arguments['enable_recently_played']!=0){echo ' checked="checked"';} ?>>「最近聞いた曲」を自動更新(<u title='Alt+Shift+R'>R</u>)<br>
-    <input type='checkbox' accesskey='p' id='enable_autotweet'<?php if($arguments['enable_autotweet']==1){echo ' checked="checked"';} ?>>#nowplayingを自動投稿(<u title='Alt+Shift+P'>P</u>)<br>
-    <input type='checkbox' accesskey='n' id='enable_notification'<?php if($arguments['enable_notification']==1){echo ' checked="checked"';} ?>>次に再生する曲を通知(<u title='Alt+Shift+N'>N</u>)<br>
-    <input type='checkbox' accesskey='m' id='enable_muted'<?php if($arguments['enable_muted']==1){echo ' checked="checked"';} ?>>ミュート(<u title='Alt+Shift+M'>M</u>)<br>
-    <input type='checkbox' accesskey='l' id='enable_lyric'<?php if($arguments['enable_lyric']==1){echo ' checked="checked"';} ?>>歌詞表示(<u title='Alt+Shift+L'>L</u>)
-    <select id='enable_autotweet' name='enable_autotweet'>
+    <div>
+    <span>１曲ループ(<u title='Alt+Shift+O'>O</u>)</span>
+    <input type='checkbox' accesskey='o' id='enable_loop' class='tgl tgli'<?php if($arguments['enable_loop']==1){echo ' checked="checked"';} ?>>
+    <label class='tgl-btn' for='enable_loop' />
+    </div>
+    <div>
+    <span>全曲ループ(<u title='Alt+Shift+A'>A</u>)</span>
+    <input type='checkbox' accesskey='a' id='enable_allloop' class='tgl tgli'<?php if($arguments['enable_allloop']!=0){echo ' checked="checked"';} ?>>
+    <label class='tgl-btn' for='enable_allloop' />
+    </div>
+    <div>
+    <span>「最近聞いた曲」を自動更新(<u title='Alt+Shift+R'>R</u>)</span>
+    <input type='checkbox' accesskey='r' id='enable_recently_played' class='tgl tgli'<?php if($arguments['enable_recently_played']!=0){echo ' checked="checked"';} ?>>
+    <label class='tgl-btn' for='enable_recently_played' />
+    </div>
+    <div>
+    <span>#nowplayingを自動投稿(<u title='Alt+Shift+P'>P</u>)</span>
+    <input type='checkbox' accesskey='p' id='enable_autotweet' class='tgl tgli'<?php if($arguments['enable_autotweet']==1){echo ' checked="checked"';} ?>>
+    <label class='tgl-btn' for='enable_autotweet' />
+    </div>
+    <div>
+    <span>次に再生する曲を通知(<u title='Alt+Shift+N'>N</u>)</span>
+    <input type='checkbox' accesskey='n' id='enable_notification' class='tgl tgli'<?php if($arguments['enable_notification']==1){echo ' checked="checked"';} ?>>
+    <label class='tgl-btn' for='enable_notification' />
+    </div>
+    <div>
+    <span>ミュート(<u title='Alt+Shift+M'>M</u>)</span>
+    <input type='checkbox' accesskey='m' id='enable_muted' class='tgl tgli'<?php if($arguments['enable_muted']==1){echo ' checked="checked"';} ?>>
+    <label class='tgl-btn' for='enable_muted' />
+    </div>
+    <div>
+    <span>歌詞表示(<u title='Alt+Shift+L'>L</u>)</span>
+    <input type='checkbox' accesskey='l' id='enable_lyric' class='tgl tgli'<?php if($arguments['enable_lyric']==1){echo ' checked="checked"';} ?>>
+    <label class='tgl-btn' for='enable_lyric' />
+    </div>
+    <div>
+    <select name='enable_autotweet' id='enable_autotweet'>
      <option value='1'>再生完了時に自動的にツイートする</option>
      <option value='0' selected='selected'>再生完了時に自動的にツイートしない</option>
-    </select><br>
-    <select id='pass_autotweet' name='pass_autotweet'>
+    </select>
+    </div>
+    <div>
+    <select name='pass_autotweet' id='pass_autotweet'>
      <option value='0'>ツイート時に確認する</option>
      <option value='1' selected='selected'>ツイート時に確認しない</option>
     </select>
+    </div>
    </form>
    <div class='toggle' onclick='jQuery("#pagesearch").toggle()'>Filtering and Sorting</div>
    <form id='pagesearch'>
