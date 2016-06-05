@@ -61,10 +61,14 @@ $(function () {
    $(this).css("background","#eeffee");
 
    setTimeout(function(){
-    pullname('fav');
+    if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') ) {
+     pullname('fav');
+    }
    }, 2000);
    setTimeout(function(){
-    pullname('dir');
+    if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') ) {
+     pullname('dir');
+    }
    }, 2500);
   }
  });
@@ -83,10 +87,14 @@ $(function () {
    $(this).css("background","#eeffee");
 
    setTimeout(function(){
-    pullname('fav');
+    if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') ) {
+     pullname('fav');
+    }
    }, 2000);
    setTimeout(function(){
-    pullname('dir');
+    if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') ) {
+     pullname('dir');
+    }
    }, 2500);
   }
  });
@@ -135,7 +143,7 @@ $(function () {
   jQuery.get('?id='+jQuery('#id').val()+'&pw='+jQuery('#pw').val()+'&mode=favfadd&favname='+jQuery('#favname').val(),
    function(data){
     var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
-    jQuery.notifyBar({ html: data, delay: 1000, cssClass: status });
+    jQuery.notifyBar({ html: data, delay: 10000, cssClass: status });
     pullname('fav');
    }
   );
@@ -146,7 +154,7 @@ $(function () {
    jQuery.get('?id='+jQuery('#id').val()+'&pw='+jQuery('#pw').val()+'&mode=favfdel&favname='+jQuery('#favname').val(),
     function(data){
      var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
-     jQuery.notifyBar({ html: data, delay: 1000, cssClass: status });
+     jQuery.notifyBar({ html: data, delay: 10000, cssClass: status });
      pullname('fav');
     }
    );

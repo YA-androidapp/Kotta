@@ -38,11 +38,11 @@ if ( file_exists($otpfile) ) {
   $_SESSION['otppwauthed'] = 'otppwauthed';
   // echo "<!-- 認証されました auth_otp-03 -->";
  } else {
-  if ( ! $throughAuth ) { die('OTP認証できません auth_otp-03'); }
+  if ( ! $throughAuth ) { die('OTP認証できません auth_otp-04'); }
  }
 } else {
   $_SESSION['otppwauthed'] = 'otppwdisabled';
- // echo "<!-- OTP認証が有効ではありません -->";
+ // echo "<!-- OTP認証が有効ではありません auth_otp-05 -->";
 }
 // echo "<!-- OTP End -->";
  $_SESSION['pw2'] = $pw2;

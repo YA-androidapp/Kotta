@@ -35,16 +35,16 @@ if ( file_exists($pwdfile) ) {
   if ( file_exists($otpfile) ) {
    $pwsub = substr($pw, 0, strlen($pw) - 6);
    if ( ( $pwsub !== '' ) && ( $pwsub === $tpassword ) ) {
-    // echo "<!-- 認証されました auth_idpw-02 -->";
+    // echo "<!-- PW認証されました auth_idpw-02 -->";
    } else {
-    if ( ! $throughAuth ) { die('認証できません auth_idpw-05'); }
+    if ( ! $throughAuth ) { die('PW認証できません auth_idpw-03'); }
    }
   } else {
-   if ( ! $throughAuth ) { die('認証できません auth_idpw-04'); }
+   if ( ! $throughAuth ) { die('PW認証できません auth_idpw-04'); }
   }
  }
 } else {
- if ( ! $throughAuth ) { die('認証できません auth_idpw-03'); }
+ if ( ! $throughAuth ) { die('PW認証できません auth_idpw-05'); }
 }
 // echo "<!-- IDPW End -->";
  $_SESSION['id'] = $id;

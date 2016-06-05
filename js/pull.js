@@ -52,25 +52,39 @@ function pullname(mode) {
         }, 100);
       }
     },
-    success: function() {
-     setTimeout(function(){
-      clearInterval(mytimer);
-     }, 100);
-     setTimeout(function(){
-      $('ul#'+mode+'slist').html(
-       $('ul#'+mode+'slist li').sort(function(a, b) {
-        return ($(a).text() > $(b).text())?1:-1;
-       })
-      );
-      $.notifyBar({ html: ((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧を読み込みました', delay: 1000, cls: 'success' });
-     }, 100);
+    success: function(msg) {
+     if (msg.indexOf('PW認証できません')>-1) {
+      $("input#id").css("background","#ffcccc");
+      $("input#pw").css("background","#ffcccc");
+      $.notifyBar({ html: msg+' : '+((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧の読み込みに失敗しました: ', delay: 10000, cls: 'error' });
+     } else if (msg.indexOf('OTP認証できません')>-1) {
+      $("input#id").css("background","#eeffee");
+      $("input#pw").css("background","#eeffee");
+      $("input#pw2").css("background","#ffcccc");
+      $.notifyBar({ html: msg+' : '+((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧の読み込みに失敗しました: ', delay: 10000, cls: 'error' });
+     } else {
+      $("input#id").css("background","#eeffee");
+      $("input#pw").css("background","#eeffee");
+      $("input#pw2").css("background","#eeffee");
+      setTimeout(function(){
+       clearInterval(mytimer);
+      }, 100);
+      setTimeout(function(){
+       $('ul#'+mode+'slist').html(
+        $('ul#'+mode+'slist li').sort(function(a, b) {
+         return ($(a).text() > $(b).text())?1:-1;
+        })
+       );
+       $.notifyBar({ html: ((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧を読み込みました', delay: 10000, cls: 'success' });
+      }, 100);
+     }
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
      console.log('error');
      console.log('textStatus: '+textStatus);
      console.log('errorThrown: '+errorThrown);
      clearInterval(mytimer);
-     $.notifyBar({ html: ((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧の読み込みに失敗しました: '+textStatus, delay: 1000, cls: 'error' });
+     $.notifyBar({ html: ((mode == 'fav')?'お気に入り':'ディレクトリ')+'一覧の読み込みに失敗しました: '+textStatus, delay: 10000, cls: 'error' });
     }
   });
 }
@@ -118,7 +132,7 @@ function pullls(url) {
 +(( typeof json.favname === 'undefined' )?'':('<span class=\'star\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\' onClick=\'if(window.confirm("'
 +htmlspecialcharsEntQuotes(json.title)+' ('+htmlspecialcharsEntQuotes(json.basename)+')をお気に入りから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); $.get("?id='
 +json.id+'&pw='+json.pw+'&mode=favdel&favname='+encodeURIComponent(json.favname)+'&linkdel='+json.favcheck
-+'", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 1000, cssClass: status }); });return false; }\'>'
++'", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); });return false; }\'>'
 +'★</span>'
 ))
 +'<span class=\'del\' id=\'delicon'+i+'\' alt=\'プレイビューから外します\' title=\'プレイビューから外します\' onClick=\'if(window.confirm("'+htmlspecialcharsEntQuotes(json.title)+' ('+htmlspecialcharsEntQuotes(json.basename)+')をプレイビューから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); return false; }\'>'
@@ -137,17 +151,31 @@ function pullls(url) {
         }, 100);
       }
     },
-    success: function() {
+    success: function(msg) {
+     if (msg.indexOf('PW認証できません')>-1) {
+      $("input#id").css("background","#ffcccc");
+      $("input#pw").css("background","#ffcccc");
+      $.notifyBar({ html: msg+' : '+((mode == 'fav')?'お気に入り':'ファイル')+'一覧の読み込みに失敗しました: ', delay: 10000, cls: 'error' });
+     } else if (msg.indexOf('OTP認証できません')>-1) {
+      $("input#id").css("background","#eeffee");
+      $("input#pw").css("background","#eeffee");
+      $("input#pw2").css("background","#ffcccc");
+      $.notifyBar({ html: msg+' : '+((mode == 'fav')?'お気に入り':'ファイル')+'一覧の読み込みに失敗しました: ', delay: 10000, cls: 'error' });
+     } else {
+      $("input#id").css("background","#eeffee");
+      $("input#pw").css("background","#eeffee");
+      $("input#pw2").css("background","#eeffee");
       setTimeout(function(){
         clearInterval(mytimer);
       }, 100);
+     }
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
      console.log('error');
      console.log('textStatus: '+textStatus);
      console.log('errorThrown: '+errorThrown);
      clearInterval(mytimer);
-     $.notifyBar({ html: textStatus, delay: 1000, cls: 'error' });
+     $.notifyBar({ html: textStatus, delay: 10000, cls: 'error' });
     }
   });
 }
