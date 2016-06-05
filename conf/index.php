@@ -1,9 +1,13 @@
 <?php
-// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2016 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 
 // 音楽ファイルが存在するディレクトリの指定
-$base_dir = '/path/to/musics/';
-$base_dirfav = 'fav/';
+$base_dir = '../musics/');
+$base_dirfav = 'fav'.DIRECTORY_SEPARATOR;
+// // Windows版PHPで動かす場合の設定
+// $base_dir = realpath('..'.DIRECTORY_SEPARATOR.'musics'.DIRECTORY_SEPARATOR);
+// $base_dirfav = 'fav'.DIRECTORY_SEPARATOR;
+
 $base_uri = '/musics/';
 
 $enable_autocomplete_dirname = 1;

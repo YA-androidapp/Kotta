@@ -1,7 +1,7 @@
 <?php
-// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2016 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
-require('../conf/tweet.php');
+require(arsep(__DIR__,'..').DSEP.'conf'.DSEP.'tweet.php');
 require('twitteroauth.php');
 
 $verifier = $_REQUEST['oauth_verifier'];

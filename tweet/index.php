@@ -1,13 +1,13 @@
 <?php
-// Copyright (c) 2014-2015 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
+// Copyright (c) 2014-2016 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
 
 if ($_REQUEST['short'] != '') {
- if ($_SESSION['oa_screen_name'] != '') {
-  die('@'.$_SESSION['oa_screen_name']);
- } else {
-  die('---');
- }
+   if ($_SESSION['oa_screen_name'] != '') {
+      die('@'.$_SESSION['oa_screen_name']);
+  } else {
+      die('---');
+  }
 }
 
 if ($_REQUEST['tweettext'] != '') { $_SESSION['tweettext'] = $_REQUEST['tweettext']; }
