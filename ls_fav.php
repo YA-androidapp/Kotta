@@ -16,6 +16,10 @@ if ( $_REQUEST['dirname'] != '' )       { $dirname = $_REQUEST['dirname'];
 } elseif ( $_SESSION['dirname'] != '' ) { $dirname = $_SESSION['dirname'];
 } else                                  { $dirname = ''; }
 
+if ( $_REQUEST['relapath'] != '' )       { $relapath = $_REQUEST['relapath'];
+} elseif ( $_SESSION['relapath'] != '' ) { $relapath = $_SESSION['relapath'];
+} else                                  { $relapath = ''; }
+
 if ( $_REQUEST['favname'] != '' )       { $favname = $_REQUEST['favname'];
 } elseif ( $_SESSION['favname'] != '' ) { $favname = $_SESSION['favname'];
 } else                                  { $favname = ''; }
@@ -59,14 +63,25 @@ flush();
 $i = 0;
 foreach ($line as $value) {
  if ( $onlyname == '1' ) {
-  $json = json_encode(
-   array(
-    'id' => $i,
-    'favname' => str_replace('.cgi', '', str_replace($id.'_', '', basename($value)))
-    )
-   );
-  output_chunk($json.str_repeat(' ', 8000)."\n");
-} else {
+   $getmp3info_parts = array();
+   $getmp3info_parts = getmp3info(arsep($base_dir,$relapath));
+   $json = json_encode(
+     array(
+      'id' => $i,
+      'favname' => str_replace('.cgi', '', str_replace($id.'_', '', basename($value))),
+      'hassong' => (($relapath == '') ? (false) :
+        (
+          (true == in_array(arsep($base_dir,$relapath), file($value, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES )))
+        ||
+          (true == in_array(str_replace('/','\\',arsep($base_dir,$relapath)), file($value, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES )))
+        )
+        ),
+      'relapath' => rawurlencode($relapath),
+      'title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
+      )
+     );
+   output_chunk($json.str_repeat(' ', 8000)."\n");
+ } else {
   if (!is_array($value)) {
    $getmp3info_parts = array();
    $getmp3info_parts = getmp3info(realpath($value));
@@ -79,7 +94,7 @@ foreach ($line as $value) {
       'track' => $i,
       'datasrc' => str_replace('\\','/',str_replace(arsep($base_dir,''), $base_uri, realpath($value))),
       'title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
-      'favcheck' => rawurlencode(str_replace(arsep($base_dir,''), '', realpath($value))),
+      'relapath' => rawurlencode(str_replace('\\','/',str_replace(arsep($base_dir,''), '', realpath($value)))),
       'basename' => basename($value),
       'id' => $id,
       'favname' => $favname,

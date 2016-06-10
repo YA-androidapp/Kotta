@@ -17,15 +17,37 @@
   <!-- Style -->
   <?php require_once(arsep(__DIR__,'lib_js.php')); ?>
   <?php require_once(arsep(__DIR__,'mp3tag_getid3.php')); ?>
+  <script type='text/javascript' src='js/favmenu.js'></script>
 </head>
-<body>
-  <table border='1' id='favmenu'>
+<body onload='pullfavmenu();'>
+  <table id='auth'>
+    <tr>
+      <td>User</td>
+      <td colspan='2'>
+        <input type='text' id='id' name='id' title='User' value='<?php echo $id; ?>'>
+      </td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td colspan='2'>
+        <input type='password' id='pw' name='pw' title='Password' value='<?php echo $pw; ?>'>
+      </td>
+    </tr>
+    <tr>
+      <td>OTP Password</td>
+      <td colspan='2'>
+        <input type='number' id='pw2' name='pw2' title='OTP Password' max='999999'>
+      </td>
+    </tr>
+  </table>
+  <input type='hidden' id='relapath' value='<?php echo rawurlencode($arguments['relapath']); ?>'>
+  <table border='1' id='mp3info'>
    <tr>
     <td colspan='3'>
-     <a href='<?php echo str_replace(arsep($base_dir,''), $base_uri, realpath(arsep($base_dir,$arguments['favcheck']))); ?>'>
+     <a href='<?php echo str_replace('\\','/',str_replace(arsep($base_dir,''), $base_uri, realpath(arsep($base_dir,$arguments['relapath'])))); ?>'>
       <?php
       $getmp3info_parts = array();
-      $getmp3info_parts = getmp3info(realpath(arsep($base_dir,$arguments['favcheck'])));
+      $getmp3info_parts = getmp3info(realpath(arsep($base_dir,$arguments['relapath'])));
       $title = $getmp3info_parts[0];
  echo $title; // title
  echo ' / ';
@@ -37,54 +59,13 @@
 </a>
 </td>
 </tr>
-<tr><td colspan='3'>　</td></tr>
-<tr><td>ブックマーク名</td><td class='favmenustar'>登録済</td><td class='favmenustar'>未登録</td></tr>
-<?php
-$favnamearr = array();
-$favnamearr2 = array();
-$favnamearr = glob($base_dirfav.$id.'_*.cgi');
-foreach ($favnamearr as $val) {
-  $val2 = basename($val);
-  $val2 = str_replace($id.'_', '', $val2);
-  $favname = str_replace('.cgi', '', $val2);
-  $favnamearr2[] = $favname;
-  echo '<tr><td><a href=\''.basename($_SERVER['SCRIPT_NAME']).'?mode=simple&favname='.htmlspecialchars($favname, ENT_QUOTES).'\'>'.$favname.'</a></td>';
-  $dirarr = array();
-  $dirarr = file($val, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
-  if ( !in_array(arsep($base_dir,$arguments['favcheck']), $dirarr) ) {
-   echo ' <td> </td><td><span class=\'starw\' id=\'bookmarkstar'.$i.'\' alt=\'ブックマーク: 「'.htmlspecialchars($favname, ENT_QUOTES).'」に追加します\' title=\'ブックマーク: 「'.htmlspecialchars($favname, ENT_QUOTES).'」に追加します\' onClick=\'if(window.confirm("'.htmlspecialchars($title, ENT_QUOTES).'をブックマーク: 「'.htmlspecialchars($favname, ENT_QUOTES).'」に追加してよろしいですか？")){ $(function(){ $.get("?id='.$id.'&mode=favadd&favname='.rawurlencode($favname).'&linkadd='.rawurlencode($arguments['favcheck']).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>';
-   echo ' ☆</span></td>';
- } else {
-   echo ' <td><span class=\'star\' id=\'bookmarkstar'.$i.'\' alt=\'ブックマーク: 「'.htmlspecialchars($favname, ENT_QUOTES).'」から解除します\' title=\'ブックマーク: 「'.htmlspecialchars($favname, ENT_QUOTES).'」から解除します\' onClick=\'if(window.confirm("'.htmlspecialchars($title, ENT_QUOTES).'をブックマーク: 「'.htmlspecialchars($favname, ENT_QUOTES).'」から解除してよろしいですか？")){ $(function(){ $.get("?id='.$id.'&mode=favdel&favname='.rawurlencode($favname).'&linkdel='.rawurlencode($arguments['favcheck']).'", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>';
-   echo ' ★</span></td><td> </td>';
- }
- echo ' </tr>';
-}
-?>
-<tr><td colspan='3'>　</td></tr>
-<tr>
-  <td colspan='2'>
-    <input type='text' id='favname' name='favname' pattern='^[a-zA-Z0-9][-_a-zA-Z0-9]*$' title='名前(半角英数)'>
-  </td>
-  <td>
-    <?php
-    echo '<a href=\'#\' onClick=\'$(function(){ $.get("?id='.$id.'&mode=favfadd&favname="+encodeURIComponent($("input#favname").val()), function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); });\'>作成</a>';
-    ?>
-  </td>
-</tr>
-<tr>
-  <td colspan='2'>
-   <select id='favname' name='favname'>
-    <option value=''>-</option>
-    <?php foreach ($favnamearr2 as $val) { echo '<option value=\''.htmlspecialchars($val, ENT_QUOTES).'\'>'.$val.'</option>'; } ?>
-  </select>
-</td>
-<td>
-  <?php
-  echo '<a href=\'#\' onClick=\'if(window.confirm(htmlspecialcharsEntQuotes($("select#favname").val())+"を削除してよろしいですか？")){ $(function(){ $.get("?id='.$id.'&mode=favfdel&favname="+encodeURIComponent($("select#favname").val()), function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'>削除</a>';
-  ?>
-</td>
-</tr>
+</table>
+<table border='1' id='favmenu'>
+  <thead>
+    <tr><td>ブックマーク名</td><td class='favmenustar'>登録済</td><td class='favmenustar'>未登録</td></tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
 </body>
 </html>

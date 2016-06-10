@@ -271,7 +271,7 @@ if ( $arguments['favname'] === '_recently_added' ) {
         <table id='header_favmenu'>
           <tr>
             <td>
-              <input type='text' id='favname' name='favname' title='名前'>
+              <input type='text' id='favname' name='favname' pattern='^[a-zA-Z0-9][-_a-zA-Z0-9]*$' title='名前(半角英数)'>
               <a href='#' id='favfadd'>Create</a>
               <span id="favresult"></span>
             </td>

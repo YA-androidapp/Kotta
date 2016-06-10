@@ -73,7 +73,7 @@ try {
       'track' => $line['i'],
       'datasrc' => $line['datasrc'],
       'title' => $line['title'],
-      'favcheck' => $line['favcheck'],
+      'relapath' => $line['relapath'],
       'basename' => $line['basename'],
       'id' => $id,
       'favname' => '',

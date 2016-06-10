@@ -127,11 +127,11 @@ function pullls(url) {
 
  '<li class=\'appended\' id=\'track'+i+'\'>'
 +'<a class=\'title\' href=\'#\' data-src=\''+json.datasrc+'\' title=\''+json.datasrc+'\'>'+json.title+'</a><br>'
-+'<span class=\'starw\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'window.open("?mode=favmenu&favcheck='+json.favcheck+'", "favmenu");return false;\'>'
++'<span class=\'starw\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'window.open("?mode=favmenu&relapath='+json.relapath+'", "favmenu");return false;\'>'
 +'☆</span>　'
 +(( typeof json.favname === 'undefined' )?'':('<span class=\'star\' id=\'bookmarkstar'+i+'\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\' onClick=\'if(window.confirm("'
 +htmlspecialcharsEntQuotes(json.title)+' ('+htmlspecialcharsEntQuotes(json.basename)+')をお気に入りから外してよろしいですか？")){ $(function(){$("#track'+i+'").remove()}); $.get("?id='
-+json.id+'&pw='+json.pw+'&mode=favdel&favname='+encodeURIComponent(json.favname)+'&linkdel='+json.favcheck
++json.id+'&pw='+json.pw+'&mode=favdel&favname='+encodeURIComponent(json.favname)+'&linkdel='+json.relapath
 +'", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); });return false; }\'>'
 +'★</span>'
 ))

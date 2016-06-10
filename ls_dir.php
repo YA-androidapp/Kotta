@@ -83,7 +83,7 @@ function getdirtree($path){
          'track' => $i,
          'datasrc' => str_replace('\\','/',str_replace(arsep($base_dir,''), $base_uri, realpath($rfile))),
          'title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
-         'favcheck' => rawurlencode(str_replace(arsep($base_dir,''), '', realpath($rfile))),
+         'relapath' => rawurlencode(str_replace('\\','/',str_replace(arsep($base_dir,''), '', realpath($rfile)))),
          'basename' => basename($rfile),
          'id' => $id,
          'favnum' => '',

@@ -26,7 +26,7 @@ try {
 }
 try {
  $db = new PDO('sqlite:'.asep('.','').asep('conf','').$confs['dbfilename']);
- $sql = 'CREATE TABLE IF NOT EXISTS musics(i integer primary key autoincrement, datasrc text, title text, favcheck text, basename text, artistdirtmp text, artist text, album text, number integer, genre text, time_m text, time_s text)';
+ $sql = 'CREATE TABLE IF NOT EXISTS musics(i integer primary key autoincrement, datasrc text, title text, relapath text, basename text, artistdirtmp text, artist text, album text, number integer, genre text, time_m text, time_s text)';
  $db->query($sql);
  $db = null;
 } catch (Exception $e) {
@@ -34,8 +34,8 @@ try {
 }
 try {
  $db = new PDO('sqlite:'.asep('.','').asep('conf','').$confs['dbfilename']);
- $sql = 'INSERT INTO musics( datasrc , title , favcheck , basename , artistdirtmp , artist , album , number , genre , time_m , time_s)'
- .' values (:datasrc, :title, :favcheck, :basename, :artistdirtmp, :artist, :album, :number, :genre, :time_m, :time_s)';
+ $sql = 'INSERT INTO musics( datasrc , title , relapath , basename , artistdirtmp , artist , album , number , genre , time_m , time_s)'
+ .' values (:datasrc, :title, :relapath, :basename, :artistdirtmp, :artist, :album, :number, :genre, :time_m, :time_s)';
  $sth = $db->prepare($sql);
  $db->beginTransaction();
  $i = 0;
@@ -74,7 +74,7 @@ function getdirtree2($path){
           array(
            ':datasrc' => str_replace('\\','/',str_replace(arsep($base_dir,''), $base_uri, realpath(arsep($path,$file)))),
            ':title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
-           ':favcheck' => rawurlencode(str_replace(arsep($base_dir,''), '', realpath(arsep($path,$file)))),
+           ':relapath' => rawurlencode(str_replace('\\','/',str_replace(arsep($base_dir,''), '', realpath(arsep($path,$file))))),
            ':basename' => basename(arsep($path,$file)),
            ':artistdirtmp' => str_replace(array(arsep($base_dir,''), DSEP.basename(arsep($path,$file))), array('', ''), realpath(arsep($path,$file))),
            ':artist' => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),
@@ -138,7 +138,7 @@ function getdirtree($path) {
           array(
            ':datasrc' => str_replace('\\','/',str_replace(arsep($base_dir,''), $base_uri, realpath(arsep($path,$file)))),
            ':title' => htmlspecialchars($getmp3info_parts[0], ENT_QUOTES),
-           ':favcheck' => rawurlencode(str_replace(arsep($base_dir,''), '', realpath(arsep($path,$file)))),
+           ':relapath' => rawurlencode(str_replace('\\','/',str_replace(arsep($base_dir,''), '', realpath(arsep($path,$file))))),
            ':basename' => basename(arsep($path,$file)),
            ':artistdirtmp' => str_replace(array(arsep($base_dir,''), DSEP.basename(arsep($path,$file))), array('', ''), realpath(arsep($path,$file))),
            ':artist' => htmlspecialchars($getmp3info_parts[1], ENT_QUOTES),
