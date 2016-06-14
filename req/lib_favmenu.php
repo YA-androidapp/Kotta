@@ -17,7 +17,15 @@
   <!-- Style -->
   <?php require_once(arsep(__DIR__,'lib_js.php')); ?>
   <?php require_once(arsep(__DIR__,'mp3tag_getid3.php')); ?>
-  <script type='text/javascript' src='js/favmenu.js'></script>
+  <script type='text/javascript'>
+jQuery(function() {
+ if ( (jQuery("input#id").val()!='') && (jQuery("input#pw").val()!='') && ( (Cookies.get('otppwauthed')=='otppwauthed') || (Cookies.get('otppwauthed')=='otppwdisabled') || (jQuery("input#pw2").val()!='') ) ) {
+  setTimeout(function(){
+   pullfavmenu();
+ }, 2000);
+}
+});
+  </script>
 </head>
 <body onload='pullfavmenu();'>
   <table id='auth'>

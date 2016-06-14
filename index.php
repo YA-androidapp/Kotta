@@ -364,8 +364,7 @@ if ( $arguments['favname'] === '_recently_added' ) {
               document.write('"' + '>');
               document.write(e.replace(/&/g, '&#'));
               document.write('<' + '/' + 'a' + '>');
-            -->
-
+            // -->
           </script>
           <noscript>
             YA
@@ -417,12 +416,33 @@ if ( $arguments['favname'] === '_recently_added' ) {
     <br />
     <?php  } ?>
     <!-- footer -->
-    <script type='text/javascript' src='js/pull.js'></script>
     <script type='text/javascript'>
-      var url = '<?php echo $url; ?>';
-      pullls(url);
-      <?php if ( ($arguments['sort'] != '') && ($arguments['sort'] != 'none') ) { echo 'setTimeout(function(){ '.$arguments['sort'].'(); }, 500);'; } ?>
+      jQuery( function() {
+        if ( ( jQuery( "input#id" ).val() != '' ) && ( jQuery( "input#pw" ).val() != '' ) && ( ( Cookies.get( 'otppwauthed' ) == 'otppwauthed' ) || ( Cookies.get( 'otppwauthed' ) == 'otppwdisabled' ) || ( jQuery( "input#pw2" ).val() != '' ) ) ) {
+            setTimeout( function() {
+                pullname( 'fav' );
+            }, 2000 );
+            setTimeout( function() {
+                pullname( 'dir' );
+            }, 2500 );
+        }
 
+        jQuery( document ).keydown( function( e ) {
+            var unicode = e.charCode ? e.charCode : e.keyCode;
+            if ( unicode == 70 ) {
+                pullname( 'fav' );
+            } else if ( unicode == 68 ) {
+                pullname( 'dir' );
+            }
+        } );
+
+        var url = '<?php echo $url; ?>';
+        if (url !== '') {
+          pullls(url);
+        }
+        <?php if ( ($arguments['sort'] != '') && ($arguments['sort'] != 'none') ) { echo 'setTimeout(function(){ '.$arguments['sort'].'(); }, 500);'; } ?>
+
+      } );
     </script>
   </body>
 

@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang='ja'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Kotta</title>
+</head>
+
+<body>
 <?php
 // Copyright (c) 2014-2016 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
@@ -171,3 +180,7 @@ flush();
   die('Exception: ' . $e->getMessage());
 }
 }
+?>
+</body>
+
+</html>

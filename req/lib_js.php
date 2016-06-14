@@ -9,8 +9,5 @@
 <script type='text/javascript'>
    var base_uri = '<?php echo $base_uri.((mb_substr($base_uri,-1)=='/')?'':'/'); ?>';
 </script>
-<script type='text/javascript' src='js/m.js'></script>
 <script type='text/javascript' src='js/audiojs/audio.js'></script>
 <script type='text/javascript' src='js/kirinlyric/kirinlyric.js'></script>
-<script type='text/javascript' src='js/ac_dir.js'></script>
-<script type='text/javascript' src='js/ac_fav.js'></script>
