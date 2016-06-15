@@ -6,6 +6,7 @@ $( function() {
     jQuery( '#pagesearch' ).hide();
     jQuery( '#tweet' ).hide();
     jQuery( '#favs' ).hide();
+    jQuery( '#favmanage' ).hide();
     jQuery( '#dirs' ).hide();
     jQuery( '#sql' ).hide();
     jQuery( '#copyrights_list' ).hide();
@@ -630,7 +631,25 @@ function pullname( mode ) {
     } );
 }
 
-function pullfavmenu() {
+var pre_pullfavmenu_id = 'track1';
+
+function pullfavmenu( id ) {
+    pre_pullfavmenu_id = id;
+
+    $( 'table#favmenu tbody' ).text( '' );
+
+    var d = jQuery( 'li#' + id + ' a' ).attr( 'data-src' );
+    var r = jQuery( 'li#' + id + ' a' ).attr( 'relapath' );
+    var t = jQuery( 'li#' + id + ' a' ).text();
+    jQuery( "a#mp3info" ).attr( "href", d );
+    jQuery( "a#mp3info" ).text( t );
+
+    jQuery( "#favmanage" ).show();
+    var target = jQuery( 'table#favmenu' ).scrollTop();
+    jQuery( "html,body" ).animate( {
+        scrollTop: target
+    } );
+
     var mytimer = null;
     var isJSON = function( arg ) {
         arg = ( typeof arg === 'function' ) ? arg() : arg;
@@ -648,7 +667,7 @@ function pullfavmenu() {
         type: 'post',
         url: 'ls_fav.php?id=' + jQuery( 'input#id' ).val() + '&pw=' + jQuery( 'input#pw' ).val() + '&pw2=' + jQuery( 'input#pw2' ).val(),
         cache: false,
-        data: 'onlyname=1&relapath=' + jQuery( 'input#relapath' ).val() + '&_=' + Math.random(),
+        data: 'onlyname=1&relapath=' + r + '&_=' + Math.random(),
         xhrFields: {
             onloadstart: function() {
                 var xhr = this;
@@ -667,8 +686,8 @@ function pullfavmenu() {
                                         '<tr><td><a href=\'?mode=simple&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '\'>' + htmlspecialcharsEntQuotes( json.favname ) + '</a></td>' +
                                         (
                                             ( json.hassong ) ?
-                                            ( ' <td><span class=\'star\' id=\'bookmarkstar' + json.id + '\' alt=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除します\' title=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + 'をブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除してよろしいですか？")){ $(function(){ $.get("?id=' + jQuery( "input#id" ).val() + '&mode=favdel&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkdel=' + htmlspecialcharsEntQuotes( json.relapath ) + '", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'> ★</span></td><td> </td>' ) :
-                                            ( ' <td> </td><td><span class=\'starw\' id=\'bookmarkstar' + json.id + '\' alt=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加します\' title=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + 'をブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加してよろしいですか？")){ $(function(){ $.get("?id=' + jQuery( "input#id" ).val() + '&mode=favadd&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkadd=' + htmlspecialcharsEntQuotes( json.relapath ) + '", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); location.reload(); }); }); return false; }\'> ☆</span></td>' )
+                                            ( ' <td><span class=\'star\' id=\'bookmarkstar' + json.id + '\' alt=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除します\' title=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + 'をブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除してよろしいですか？")){ $(function(){ $.get("?id=' + jQuery( "input#id" ).val() + '&mode=favdel&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkdel=' + htmlspecialcharsEntQuotes( json.relapath ) + '", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); }); jQuery("#favmanage").hide(); pullfavmenu(pre_pullfavmenu_id); }); return false; }\'> ★</span></td><td> </td>' ) :
+                                            ( ' <td> </td><td><span class=\'starw\' id=\'bookmarkstar' + json.id + '\' alt=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加します\' title=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + 'をブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加してよろしいですか？")){ $(function(){ $.get("?id=' + jQuery( "input#id" ).val() + '&mode=favadd&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkadd=' + htmlspecialcharsEntQuotes( json.relapath ) + '", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); }); jQuery("#favmanage").hide(); pullfavmenu(pre_pullfavmenu_id); }); return false; }\'> ☆</span></td>' )
                                         )
                                     );
                                 }
@@ -763,8 +782,8 @@ function pullls( url ) {
                                     $( 'ol#sort_list' ).append(
 
                                         '<li class=\'appended\' id=\'track' + i + '\'>' +
-                                        '<a class=\'title\' href=\'#\' data-src=\'' + json.datasrc + '\' title=\'' + json.datasrc + '\'>' + json.title + '</a><br>' +
-                                        '<span class=\'starw\' id=\'bookmarkstar' + i + '\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'window.open("?mode=favmenu&relapath=' + json.relapath + '", "favmenu");return false;\'>' +
+                                        '<a class=\'title\' href=\'#\' data-src=\'' + json.datasrc + '\' relapath=\'' + json.relapath + '\'>' + json.title + '</a><br>' +
+                                        '<span class=\'starw\' id=\'bookmarkstar' + i + '\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'pullfavmenu("track' + i + '");return false;\'>' +
                                         '☆</span>　' +
                                         ( ( typeof json.favname === 'undefined' ) ? '' : ( '<span class=\'star\' id=\'bookmarkstar' + i + '\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\' onClick=\'if(window.confirm("' +
                                             htmlspecialcharsEntQuotes( json.title ) + ' (' + htmlspecialcharsEntQuotes( json.basename ) + ')をお気に入りから外してよろしいですか？")){ $(function(){$("#track' + i + '").remove()}); $.get("?id=' +

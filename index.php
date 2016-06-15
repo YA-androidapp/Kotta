@@ -25,9 +25,7 @@ require_once(arsep(__DIR__,'req').DSEP.'lib_get_new_files.php');
 $folders = '';
 
 require_once(arsep(__DIR__,'req').DSEP.'lib_getarg.php');
-if ( $arguments['mode'] == 'favmenu' ) {
- require_once(arsep(__DIR__,'req').DSEP.'lib_favmenu.php');die('');
-} elseif ( $arguments['mode'] == 'favadd' ) {
+if ( $arguments['mode'] == 'favadd' ) {
  require_once(arsep(__DIR__,'req').DSEP.'lib_favadd.php');die('');
 } elseif ( $arguments['mode'] == 'favdel' ) {
  require_once(arsep(__DIR__,'req').DSEP.'lib_favdel.php');die('');
@@ -268,7 +266,7 @@ if ( $arguments['favname'] === '_recently_added' ) {
       <div id='favs'>
         <input type='button' id='control_pullfavname' class='rightbutton' value='reload:fav' title='Reload Favorites list'>
         <ul id='favslist'></ul>
-        <table id='header_favmenu'>
+        <table>
           <tr>
             <td>
               <input type='text' id='favname' name='favname' pattern='^[a-zA-Z0-9][-_a-zA-Z0-9]*$' title='名前(半角英数)'>
@@ -278,18 +276,34 @@ if ( $arguments['favname'] === '_recently_added' ) {
             <td>
               <select id='favname' name='favname'>
                 <option value=''>-</option>
-                <?php if (count($favnamearr2)>0) { foreach ($favnamearr2 as $val3) { echo '<option value="'.htmlspecialchars($val3, ENT_QUOTES).'" id="favmenu_'.htmlspecialchars($val3, ENT_QUOTES).'">'.$val3.'</option>'; } } ?>
               </select>
               <a href='#' id='favfdel'>Delete</a>
             </td>
           </tr>
         </table>
       </div>
+      <div class='toggle' onclick='jQuery("#favmanage").toggle()'>Manage favorites</div>
+      <div id='favmanage'>
+        <table border='1'>
+         <tr>
+          <td colspan='3'>
+           <a href='' id='mp3info'></a>
+          </td>
+        </tr>
+      </table>
+      <table border='1' id='favmenu'>
+        <thead>
+          <tr><td>ブックマーク名</td><td class='star'>登録済</td><td class='star'>未登録</td></tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      </div>
       <div class='toggle' onclick='jQuery("#dirs").toggle();'>Directories</div>
       <div id='dirs'>
         <input type='button' id='control_pulldirname' class='rightbutton' value='reload:dir' title='Reload Directories list'>
         <ul id='dirslist'></ul>
-        <table id='header_dirmenu'>
+        <table>
           <tr>
             <td class='dir'>
               <input type='text' id='dirname' name='dirname' title='ディレクトリ名'>

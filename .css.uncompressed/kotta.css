@@ -28,10 +28,15 @@ table{width:95%;}
 
 #copyrights_list{margin:10px;padding:5px;width:95%;}
 
+#dirs .dir{width:75%;}
+
 #dbwrite{height:30px;margin:10px;overflow-y:scroll;width:95%;}
 
-#header_favmenu #favname{ime-mode:inactive;width:85%;}
-#header_dirmenu .dir{width:75%;}
+#favmenu tbody .del{color:red;cursor:pointer;}
+#favmenu tbody .star{color:yellow;cursor:pointer;}
+#favmenu tbody .starw{color:orange;cursor:pointer;}
+
+#favs #favname{ime-mode:inactive;width:85%;}
 
 #hlist{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;float:right;font-size:x-small;height:300px;margin:10px;overflow-y:scroll;padding:5px;width:95%;}
 
@@ -54,6 +59,10 @@ table{width:95%;}
 
 #slider{margin:0px 0px auto 10px;width:80%;}
 
+#sort_list .del{color:red;cursor:pointer;}
+#sort_list .star{color:yellow;cursor:pointer;}
+#sort_list .starw{color:orange;cursor:pointer;}
+
 #tweettext{height:10%;font-size:large;width:95%;}
 
 #wrapper{clear:both;margin:30px auto;width:95%;}
@@ -64,10 +73,7 @@ table{width:95%;}
 #wrapper_list ol{border:1px solid #333;border-radius:5px;box-shadow:0 0 8px #333;color:#666;font-size:medium;list-style:decimal-leading-zero inside;margin:10px auto;padding:5px;width:95%;}
 
 .clearboth{clear:both;}
-.del{color:red;cursor:pointer;}
-.favmenustar{width:10%;}
+.star{width:10%;}
 .rightbutton{float:right;}
-.star{color:yellow;cursor:pointer;}
-.starw{color:orange;cursor:pointer;}
 .toggle{border:1px solid #666;}
 .xxsmall{font-size:xx-small;}
