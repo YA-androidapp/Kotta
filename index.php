@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+  <meta charset='utf-8'>
+  <title>Kotta</title>
 <?php
 // Copyright (c) 2014-2016 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
@@ -51,12 +56,6 @@ if ( $arguments['favname'] === '_recently_added' ) {
  $url = 'ls_dir.php?dirname='.rawurlencode($arguments['dirname']);
 }
 ?>
-<!DOCTYPE html>
-<html lang='ja'>
-
-<head>
-  <meta charset='utf-8'>
-  <title>Kotta</title>
   <!-- style -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel='stylesheet' type='text/css' href='https://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css' />

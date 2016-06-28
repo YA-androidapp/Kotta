@@ -487,7 +487,7 @@ function favadd(json) {
           jQuery.post('index.php',
             'id=' + jQuery( "input#id" ).val() + '&mode=favadd&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkadd=' + htmlspecialcharsEntQuotes( json.relapath ),
             function(data){
-              var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
+              var status = (data.indexOf('(!) ')===0) ? 'error' : 'success';
               $.notifyBar({ html: data, delay: 10000, cssClass: status });
           });
           jQuery('#favmanage').hide();
@@ -504,7 +504,7 @@ function favdel(json) {
           jQuery.post('index.php',
             'id=' + jQuery( 'input#id' ).val() + '&mode=favdel&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkdel=' + htmlspecialcharsEntQuotes( json.relapath ),
             function(data){
-              var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
+              var status = (data.indexOf('(!) ')===0) ? 'error' : 'success';
               $.notifyBar({ html: data, delay: 10000, cssClass: status }); });
           jQuery('#favmanage').hide();
           pullfavmenu(pre_pullfavmenu_id);
