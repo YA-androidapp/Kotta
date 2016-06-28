@@ -293,7 +293,7 @@ if ( $arguments['favname'] === '_recently_added' ) {
       </table>
       <table border='1' id='favmenu'>
         <thead>
-          <tr><td>ブックマーク名</td><td class='star'>登録済</td><td class='star'>未登録</td></tr>
+          <tr><td>お気に入り</td><td class='star'>登録済</td><td class='star'>未登録</td></tr>
         </thead>
         <tbody>
         </tbody>
@@ -310,10 +310,10 @@ if ( $arguments['favname'] === '_recently_added' ) {
               <span id="dirresult"></span>
             </td>
             <td>
-              <a href='#' onClick='var url="ls_dir.php?dirname="+encodeURIComponent(jQuery("input#dirname").val());pullls(url);'>[Add]</a>
+              <a href='#' onClick='pullls(\"" + htmlspecialcharsEntQuotes( mode ) +"\",\"" + htmlspecialcharsEntQuotes( name ) + "\");'>[Add]</a>
             </td>
             <td>
-              <a href='#' onClick='var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val();window.open(url,"db");'>[AddDB]</a>
+              <a href='#' onClick='var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val();window.open(url,"db");'>[AddDB]</a>
             </td>
           </tr>
         </table>

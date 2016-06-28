@@ -11,26 +11,44 @@ $( function() {
     jQuery( '#sql' ).hide();
     jQuery( '#copyrights_list' ).hide();
 
-    $( 'input#dirname' ).autocomplete( {
-        source: 'autocomplete_name.php?mode=dir&id=' + $( '#id' ).val() + '&pw=' + $( '#pw' ).val(),
+    jQuery( 'input#dirname' ).autocomplete( {
+        source: function (request, response) {
+            jQuery.ajax({
+                type: "POST",
+                url:"autocomplete_name.php",
+                data: 'mode=dir&id=' + jQuery( '#id' ).val() + '&pw=' + jQuery( '#pw' ).val(),
+                success: response,
+                dataType: 'json',
+                beforeSend: function( xhr ) {
+                    var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
+                    xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
+                }
+            });
+        },
         delay: 100,
         minLength: 2
-            // select: function (e, ui) { if (ui.item) { $('#dirresult').html(ui.item.id); } }
     } );
 
     $( 'input#favname' ).autocomplete( {
-        source: 'autocomplete_name.php?mode=fav&id=' + $( '#id' ).val() + '&pw=' + $( '#pw' ).val(),
+        source: function (request, response) {
+            jQuery.ajax({
+                type: "POST",
+                url:"autocomplete_name.php",
+                data: 'mode=fav&id=' + jQuery( '#id' ).val() + '&pw=' + jQuery( '#pw' ).val(),
+                success: response,
+                dataType: 'json',
+                beforeSend: function( xhr ) {
+                    var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
+                    xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
+                }
+            });
+        },
         delay: 100,
         minLength: 1
-            // select: function (e, ui) { if (ui.item) { $('#favresult').html(ui.item.id); } }
     } );
 
     if ( jQuery( 'input#id' ).val() !== '' ) {
         Cookies.set( 'id', jQuery( 'input#id' ).val() );
-    }
-
-    if ( jQuery( 'input#pw' ).val() !== '' ) {
-        Cookies.set( 'pw', jQuery( 'input#pw' ).val() );
     }
 
     jQuery( 'a' ).not( '[href="#"]' ).attr( {
@@ -40,12 +58,6 @@ $( function() {
     jQuery( '#id' ).blur( function( e ) {
         if ( jQuery( '#id' ).val() !== '' ) {
             Cookies.set( 'id', jQuery( 'input#id' ).val() );
-        }
-    } );
-
-    jQuery( '#pw' ).blur( function( e ) {
-        if ( jQuery( '#pw' ).val() !== '' ) {
-            Cookies.set( 'pw', jQuery( 'input#pw' ).val() );
         }
     } );
 
@@ -116,6 +128,19 @@ $( function() {
         }
     } );
 
+    if (( jQuery( "input#id" ).val() !== '' ) && ( jQuery( "input#pw" ).val() !== '' )) {
+        setTimeout( function() {
+            if ( ( jQuery( "input#id" ).val() !== '' ) && ( jQuery( "input#pw" ).val() !== '' ) ) {
+                pullname( 'fav' );
+            }
+        }, 2000 );
+        setTimeout( function() {
+            if ( ( jQuery( "input#id" ).val() !== '' ) && ( jQuery( "input#pw" ).val() !== '' ) ) {
+                pullname( 'dir' );
+            }
+        }, 2500 );
+    }
+
     jQuery( '#control_pullfavname' ).click( function( e ) {
         pullname( 'fav' );
     } );
@@ -157,8 +182,15 @@ $( function() {
     } );
 
     jQuery( '#favfadd' ).click( function( e ) {
-        jQuery.get( '?id=' + jQuery( '#id' ).val() + '&pw=' + jQuery( '#pw' ).val() + '&mode=favfadd&favname=' + jQuery( '#favname' ).val(),
-            function( data ) {
+        jQuery.ajax( {
+            type: 'POST',
+            url: 'index.php',
+            data: 'id=' + jQuery( '#id' ).val() + '&pw=' + jQuery( '#pw' ).val() + '&mode=favfadd&favname=' + jQuery( '#favname' ).val(),
+            beforeSend: function( xhr ) {
+                var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
+            },
+            success: function( data ) {
                 var status = ( data.indexOf( '(!) ' ) === 0 ) ? 'error' : 'success';
                 jQuery.notifyBar( {
                     html: data,
@@ -167,13 +199,20 @@ $( function() {
                 } );
                 pullname( 'fav' );
             }
-        );
+        } );
     } );
 
     jQuery( '#favfdel' ).click( function( e ) {
         if ( window.confirm( $( '#favname' ).val() + 'を削除してよろしいですか？' ) ) {
-            jQuery.get( '?id=' + jQuery( '#id' ).val() + '&pw=' + jQuery( '#pw' ).val() + '&mode=favfdel&favname=' + jQuery( '#favname' ).val(),
-                function( data ) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'index.php',
+                data: 'id=' + jQuery( '#id' ).val() + '&pw=' + jQuery( '#pw' ).val() + '&mode=favfdel&favname=' + jQuery( '#favname' ).val(),
+                beforeSend: function( xhr ) {
+                    var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
+                    xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
+                },
+                success: function( data ) {
                     var status = ( data.indexOf( '(!) ' ) === 0 ) ? 'error' : 'success';
                     jQuery.notifyBar( {
                         html: data,
@@ -182,8 +221,7 @@ $( function() {
                     } );
                     pullname( 'fav' );
                 }
-            );
-            return false;
+            });
         }
     } );
 
@@ -204,17 +242,17 @@ $( function() {
 
     jQuery( '#enable_lyric' ).change( function() {
         if ( jQuery( '#enable_lyric' ).prop( 'checked' ) ) {
-            // jQuery('#lyrics').show();
-        } else {
-            jQuery( '#lyrics' ).text( '' );
-            jQuery( '#lyrics' ).hide();
-        }
-    } );
+                // jQuery('#lyrics').show();
+            } else {
+                jQuery( '#lyrics' ).text( '' );
+                jQuery( '#lyrics' ).hide();
+            }
+        } );
 
     jQuery( '#pagesort' ).change( function( e ) {
-        //                .mouseup(function(e) {
-        sortevent();
-    } );
+            // .mouseup(function(e) {
+                sortevent();
+            } );
 
     jQuery( '#pageq' ).keyup( function( e ) {
         jQuery( '#wrapper_list ol li' ).each( function() {
@@ -238,6 +276,7 @@ $( function() {
             if ( jQuery( '#checkbox_auto #enable_recently_played' ).prop( 'checked' ) ) {
                 jQuery.ajax( {
                     type: 'POST',
+                    url: 'index.php',
                     data: 'id=' + jQuery( '#id' ).val() + '&pw=' + jQuery( '#pw' ).val() + '&mode=rpadd&linkadd=' + jQuery( 'ol#sort_list li.playing a[data-src]' ).attr( 'data-src' ).replace( base_uri, '' ),
                     beforeSend: function( xhr ) {
                         var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
@@ -272,12 +311,12 @@ $( function() {
             if ( jQuery( '#checkbox_auto #enable_notification' ).prop( 'checked' ) ) {
                 if ( window.webkitNotifications ) {
                     var message =
-                        jQuery( '.artist', next ).text() + ' > ' +
-                        jQuery( '.trackinfo', next ).text();
+                    jQuery( '.artist', next ).text() + ' > ' +
+                    jQuery( '.trackinfo', next ).text();
                     if ( window.webkitNotifications.checkPermission() === 0 ) {
                         var notification = window.webkitNotifications.createNotification(
                             'icon/kotta_s.png', jQuery( 'a[data-src]', next ).text(), message
-                        );
+                            );
                         notification.ondisplay = function() {
                             setTimeout( function() {
                                 notification.cancel();
@@ -339,7 +378,7 @@ $( function() {
     // Shortcut keys
     jQuery( document ).keydown( function( e ) {
         var next = '',
-            prev = '';
+        prev = '';
         var unicode = e.charCode ? e.charCode : e.keyCode;
         if ( e.shiftKey + e.ctrlKey !== 0 ) {
             if ( unicode == 39 ) {
@@ -441,6 +480,39 @@ function basename( path, suffix ) {
     return b;
 }
 
+// TODO
+function favadd(json) {
+    if(window.confirm(htmlspecialcharsEntQuotes( json.title ) + 'をお気に入り「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加してよろしいですか？')){
+       $(function(){
+          jQuery.post('index.php',
+            'id=' + jQuery( "input#id" ).val() + '&mode=favadd&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkadd=' + htmlspecialcharsEntQuotes( json.relapath ),
+            function(data){
+              var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
+              $.notifyBar({ html: data, delay: 10000, cssClass: status });
+          });
+          jQuery('#favmanage').hide();
+          pullfavmenu(pre_pullfavmenu_id);
+      });
+       return false;
+   }
+}
+
+// TODO
+function favdel(json) {
+    if(window.confirm(htmlspecialcharsEntQuotes( json.title ) + 'をお気に入り「' + htmlspecialcharsEntQuotes( json.favname ) + '」を解除してよろしいですか？')){
+       $(function(){
+          jQuery.post('index.php',
+            'id=' + jQuery( 'input#id' ).val() + '&mode=favdel&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkdel=' + htmlspecialcharsEntQuotes( json.relapath ),
+            function(data){
+              var status = (data.indexOf('(!) ')==0) ? 'error' : 'success';
+              $.notifyBar({ html: data, delay: 10000, cssClass: status }); });
+          jQuery('#favmanage').hide();
+          pullfavmenu(pre_pullfavmenu_id);
+      });
+       return false;
+   }
+}
+
 function htmlspecialchars( str ) {
     str = str.replace( /&/g, "&amp;" );
     str = str.replace( /"/g, "&quot;" );
@@ -473,6 +545,10 @@ function kirinload() {
                 jQuery.ajax( {
                     type: 'POST',
                     url: ( jQuery( 'ol#sort_list li.playing a[data-src]' ).attr( 'data-src' ) ).replace( '.mp3', '.lrc' ),
+                    beforeSend: function( xhr ) {
+                        var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
+                        xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
+                    },
                     success: function( result ) {
                         jQuery( '#lyrics' ).text( '' );
                         jQuery( '#lyrics' ).show();
@@ -488,10 +564,6 @@ function kirinload() {
                     error: function( XMLHttpRequest, textStatus, errorThrown ) {
                         jQuery( '#lyrics' ).text( '' );
                         jQuery( '#lyrics' ).hide();
-                    },
-                    beforeSend: function( xhr ) {
-                        var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
-                        xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
                     }
                 } );
             } );
@@ -510,6 +582,10 @@ function setscreenname() {
         type: 'POST',
         url: 'tweet/index.php',
         data: 'short=1',
+        beforeSend: function( xhr ) {
+            var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
+            xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
+        },
         success: function( data, dataType ) {
             if ( data !== '' ) {
                 jQuery( 'span#screen_name' ).text( data );
@@ -538,9 +614,9 @@ function pullname( mode ) {
     };
     $.ajax( {
         type: 'post',
-        url: 'ls_' + mode + '.php?id=' + jQuery( 'input#id' ).val() + '&pw=' + jQuery( 'input#pw' ).val() + '&pw2=' + jQuery( 'input#pw2' ).val(),
+        url: 'ls_' + mode + '.php',
         cache: false,
-        data: 'onlyname=1&_=' + Math.random(),
+        data: 'onlyname=1&id=' + jQuery( 'input#id' ).val() + '&pw=' + jQuery( 'input#pw' ).val() + '&pw2=' + jQuery( 'input#pw2' ).val()+'&_=' + Math.random(),
         xhrFields: {
             onloadstart: function() {
                 $( 'ul#' + mode + 'slist' ).text( '' );
@@ -560,14 +636,13 @@ function pullname( mode ) {
                                 var json = JSON.parse( line );
                                 var nam = ( mode == 'fav' ) ? json.favname : json.dirname;
                                 if ( typeof nam !== 'undefined' ) {
-                                    var url = 'ls_' + mode + '.php?id=' + jQuery( 'input#id' ).val() + '&pw=' + jQuery( 'input#pw' ).val() + '&pw2=' + jQuery( 'input#pw2' ).val() + '&' + mode + 'name=' + nam;
                                     $( 'ul#' + mode + 'slist' ).append(
                                         '<li id=\'' + mode + 'menu_' + htmlspecialcharsEntQuotes( nam ) + '\'><a href=\'?mode=simple&' + mode + 'name=' + htmlspecialcharsEntQuotes( nam ) + '\'>' + nam + '</a>' +
                                         '<a href=\'?mode=music&' + mode + 'name=' + htmlspecialcharsEntQuotes( nam ) + '\'>[music]</a>' +
-                                        '<a href=\'#\' onClick=\'pullls("' + htmlspecialcharsEntQuotes( url ) + '");\'>[Add]</a>' +
-                                        '<a href=\'#\' onClick=\'var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val()+"&pw="+jQuery("input#pw").val()+"&pw2="+jQuery("input#pw2").val();window.open(url,"db");\'>[AddDB]</a>' +
+                                        '<a href=\'#\' onClick=\'pullls("' + htmlspecialcharsEntQuotes( mode ) +'","' + htmlspecialcharsEntQuotes( nam ) + '");\'>[Add]</a>' +
+                                        '<a href=\'#\' onClick=\'var url="db_write.php?dirname="+encodeURIComponent(jQuery("input#dirname").val())+"&id="+jQuery("input#id").val();window.open(url,"db");\'>[AddDB]</a>' +
                                         '<a href=\'ls_' + mode + '.php?makem3u=1&' + mode + 'name=' + htmlspecialcharsEntQuotes( nam ) + '\'>[m3u]</a></li>'
-                                    );
+                                        );
                                     if ( mode == 'fav' ) {
                                         $( 'select#favname' ).append( $( '<option>' ).html( nam ).val( nam ) );
                                     }
@@ -608,7 +683,7 @@ function pullname( mode ) {
                         $( 'ul#' + mode + 'slist li' ).sort( function( a, b ) {
                             return ( $( a ).text() > $( b ).text() ) ? 1 : -1;
                         } )
-                    );
+                        );
                     $.notifyBar( {
                         html: ( ( mode == 'fav' ) ? 'お気に入り' : 'ディレクトリ' ) + '一覧を読み込みました',
                         delay: 10000,
@@ -665,9 +740,9 @@ function pullfavmenu( id ) {
     };
     $.ajax( {
         type: 'post',
-        url: 'ls_fav.php?id=' + jQuery( 'input#id' ).val() + '&pw=' + jQuery( 'input#pw' ).val() + '&pw2=' + jQuery( 'input#pw2' ).val(),
+        url: 'ls_fav.php',
         cache: false,
-        data: 'onlyname=1&relapath=' + r + '&_=' + Math.random(),
+        data: 'onlyname=1&id=' + jQuery( 'input#id' ).val() + '&pw=' + jQuery( 'input#pw' ).val() + '&pw2=' + jQuery( 'input#pw2' ).val() + '&relapath=' + r + '&_=' + Math.random(),
         xhrFields: {
             onloadstart: function() {
                 var xhr = this;
@@ -686,10 +761,10 @@ function pullfavmenu( id ) {
                                         '<tr><td><a href=\'?mode=simple&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '\'>' + htmlspecialcharsEntQuotes( json.favname ) + '</a></td>' +
                                         (
                                             ( json.hassong ) ?
-                                            ( ' <td><span class=\'star\' id=\'bookmarkstar' + json.id + '\' alt=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除します\' title=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + 'をブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」から解除してよろしいですか？")){ $(function(){ $.get("?id=' + jQuery( "input#id" ).val() + '&mode=favdel&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkdel=' + htmlspecialcharsEntQuotes( json.relapath ) + '", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); }); jQuery("#favmanage").hide(); pullfavmenu(pre_pullfavmenu_id); }); return false; }\'> ★</span></td><td> </td>' ) :
-                                            ( ' <td> </td><td><span class=\'starw\' id=\'bookmarkstar' + json.id + '\' alt=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加します\' title=\'ブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + 'をブックマーク: 「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加してよろしいですか？")){ $(function(){ $.get("?id=' + jQuery( "input#id" ).val() + '&mode=favadd&favname=' + htmlspecialcharsEntQuotes( json.favname ) + '&linkadd=' + htmlspecialcharsEntQuotes( json.relapath ) + '", function(data){ var status = (data.indexOf("(!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); }); jQuery("#favmanage").hide(); pullfavmenu(pre_pullfavmenu_id); }); return false; }\'> ☆</span></td>' )
-                                        )
-                                    );
+                                            ( ' <td><span class=\'star\' id=\'bookmarkstar' + json.id + '\' title=\'お気に入り「' + htmlspecialcharsEntQuotes( json.favname ) + '」を解除します\' onClick=\'favdel(json);\'> ★</span></td><td> </td>' ) :
+                                            ( ' <td> </td><td><span class=\'starw\' id=\'bookmarkstar' + json.id + '\' title=\'お気に入り「' + htmlspecialcharsEntQuotes( json.favname ) + '」に追加します\' onClick=\'favadd(json);\'> ☆</span></td>' )
+                                            )
+                                        );
                                 }
                             }
                         } );
@@ -745,7 +820,7 @@ function pullfavmenu( id ) {
     } );
 }
 
-function pullls( url ) {
+function pullls( mode , name ) {
     var i = jQuery( '#sort_list li' ).length;
     var mytimer = null;
     var isJSON = function( arg ) {
@@ -762,9 +837,9 @@ function pullls( url ) {
     };
     $.ajax( {
         type: 'post',
-        url: url,
+        url: 'ls_' + ((mode=='fav')?'fav':'dir') + '.php',
         cache: false,
-        data: '_=' + Math.random(),
+        data: ((mode=='fav')?'fav':'dir') + 'name=' + name + '&id=' + jQuery( 'input#id' ).val() + '&pw=' + jQuery( 'input#pw' ).val() + '&pw2=' + jQuery( 'input#pw2' ).val() + '_=' + Math.random(),
         xhrFields: {
             onloadstart: function() {
                 var xhr = this;
@@ -783,15 +858,13 @@ function pullls( url ) {
 
                                         '<li class=\'appended\' id=\'track' + i + '\'>' +
                                         '<a class=\'title\' href=\'#\' data-src=\'' + json.datasrc + '\' relapath=\'' + json.relapath + '\'>' + json.title + '</a><br>' +
-                                        '<span class=\'starw\' id=\'bookmarkstar' + i + '\' alt=\'お気に入りの管理\' title=\'お気に入りの管理\' onClick=\'pullfavmenu("track' + i + '");return false;\'>' +
+                                        '<span class=\'starw\' id=\'bookmarkstar' + i + '\' title=\'お気に入りの管理\' onClick=\'pullfavmenu("track' + i + '");return false;\'>' +
                                         '☆</span>　' +
-                                        ( ( typeof json.favname === 'undefined' ) ? '' : ( '<span class=\'star\' id=\'bookmarkstar' + i + '\' alt=\'お気に入りから外します\' title=\'お気に入りから外します\' onClick=\'if(window.confirm("' +
-                                            htmlspecialcharsEntQuotes( json.title ) + ' (' + htmlspecialcharsEntQuotes( json.basename ) + ')をお気に入りから外してよろしいですか？")){ $(function(){$("#track' + i + '").remove()}); $.get("?id=' +
-                                            json.id + '&pw=' + json.pw + '&mode=favdel&favname=' + encodeURIComponent( json.favname ) + '&linkdel=' + json.relapath +
-                                            '", function(data){ var status = (data.indexOf("!) ")==0) ? "error" : "success"; $.notifyBar({ html: data, delay: 10000, cssClass: status }); });return false; }\'>' +
-                                            '★</span>'
-                                        ) ) +
-                                        '<span class=\'del\' id=\'delicon' + i + '\' alt=\'プレイビューから外します\' title=\'プレイビューから外します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + ' (' + htmlspecialcharsEntQuotes( json.basename ) + ')をプレイビューから外してよろしいですか？")){ $(function(){$("#track' + i + '").remove()}); return false; }\'>' +
+                                        ( ( typeof json.favname === 'undefined' ) ? ''
+                                           : ( '<span class=\'star\' id=\'bookmarkstar' + i + '\' title=\'お気に入り「' + htmlspecialcharsEntQuotes( json.favname ) + '」を解除します\'' +
+                                            ' onClick=\'favdel(json);\'>★</span>'
+                                            ) ) +
+                                        '<span class=\'del\' id=\'delicon' + i + '\' title=\'プレイビューから外します\' onClick=\'if(window.confirm("' + htmlspecialcharsEntQuotes( json.title ) + ' (' + htmlspecialcharsEntQuotes( json.basename ) + ')をプレイビューから外してよろしいですか？")){ $(function(){$("#track' + i + '").remove()}); return false; }\'>' +
                                         '×</span>' +
                                         '<br>　<a class=\'artist\' href=\'?favname=&mode=music&dirname=' + encodeURIComponent( json.artistdirtmp ) + '\'>' + json.artist + '</a> &gt; ' +
                                         '<span class=\'trackinfo\'><a class=\'album\' href=\'?favname=&mode=music&dirname=' + encodeURIComponent( json.artistdirtmp ) + '&filter_album=' + encodeURIComponent( json.album ) + '\'>' + json.album +
@@ -862,6 +935,10 @@ function settweetstr( mode ) {
             type: 'POST',
             url: 'req/shortenuri.php',
             data: 'uri=' + jQuery( 'ol#sort_list li.playing .title' ).attr( 'data-src' ),
+            beforeSend: function( xhr ) {
+                var credentials = $.base64.encode( jQuery( '#id' ).val() + ':' + jQuery( '#pw' ).val() );
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + credentials );
+            },
             success: function( data, dataType ) {
                 tstr = tstr.replace( '%u', data );
                 if ( mode == 1 ) {
@@ -883,32 +960,32 @@ function settweetstr( mode ) {
 function sortevent() {
     switch ( jQuery( '#pagesort' ).val() ) {
         case 'filename_u':
-            filename_u();
-            break;
+        filename_u();
+        break;
         case 'filename_d':
-            filename_d();
-            break;
+        filename_d();
+        break;
         case 'title_u':
-            title_u();
-            break;
+        title_u();
+        break;
         case 'title_d':
-            title_d();
-            break;
+        title_d();
+        break;
         case 'artist_u':
-            artist_u();
-            break;
+        artist_u();
+        break;
         case 'artist_d':
-            artist_d();
-            break;
+        artist_d();
+        break;
         case 'trackinfo_u':
-            trackinfo_u();
-            break;
+        trackinfo_u();
+        break;
         case 'trackinfo_d':
-            trackinfo_d();
-            break;
+        trackinfo_d();
+        break;
         case 'random':
-            random();
-            break;
+        random();
+        break;
     }
 }
 

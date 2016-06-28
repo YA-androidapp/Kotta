@@ -11,11 +11,16 @@
 // Copyright (c) 2014-2016 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
 session_start();
 
+function endsWith($str, $suffix) {
+ $len = strlen($suffix);
+ return $len == 0 || substr($str,  strlen($str) - $len, $len) === $suffix;
+}
+
 if ( (isset($_REQUEST['check']) == false) || ($_REQUEST['check'] == '0') ) { die('<small><small><ul><li><a href="db_write.php?check=1">DB-Rebuilding</a></li><li><a href="db_write.php?check=1&reset=1">DB-Rebuilding(Reset)</a></li></ul></small></small>'); }
 
 ignore_user_abort(true);
 set_time_limit(0);
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once(realpath(__DIR__).DIRECTORY_SEPARATOR.'req'.DIRECTORY_SEPARATOR.'lib_io.php');
 require_once(arsep(__DIR__,'req').DSEP.'lib_auth_idpw.php');
